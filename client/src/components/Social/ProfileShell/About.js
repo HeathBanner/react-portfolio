@@ -230,7 +230,7 @@ function About(props) {
     function saveInfo() {
         setEditInfo(false);
         const data = {
-            id: props.auth._id,
+            id: props.auth.info._id,
             education: education,
             selfTaught: selfTaught,
             skills: skills,

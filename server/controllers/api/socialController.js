@@ -114,11 +114,13 @@ socialController.post('/getProfile', (req, res) => {
 
 socialController.post('/saveInfo', (req, res) => {
     const { id, education, selfTaught, skills, email, phone, linkedIn } = req.body;
-    infoDB.findOneAndUpdate({_id: id}, {
+    console.log(id)
+    infoDB.findOneAndUpdate({_id: new ObjectID(id)}, {
         education:{education: education, selfTaught: selfTaught, skills: skills},
         contact:{email: email, phone: phone, linkedIn: linkedIn}
     }, {useFindAndModify: false, new: true}, (err, result) => {
-
+        if(err) throw err;
+        console.log(result);
     });
 });
 

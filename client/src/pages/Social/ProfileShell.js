@@ -41,10 +41,8 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 0px 0px 0px'
     },
     conceptContainer: {
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        height: '100%'
+        height: '100%',
+        margin: '50px 0px',
     },
     socialMedia: {
         [theme.breakpoints.down('md')]: {
@@ -64,12 +62,17 @@ const useStyles = makeStyles(theme => ({
         },
         height: 150,
         width: 600,
-        margin: '10px auto',
+        margin: '10px auto 30px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     },
     description: {
+        [theme.breakpoints.down('lg')]: {
+            width: '60%',
+            margin: '10px auto',
+            padding: '20px',
+        },
         [theme.breakpoints.down('md')]: {
             width: '70%',
             margin: '10px auto',
