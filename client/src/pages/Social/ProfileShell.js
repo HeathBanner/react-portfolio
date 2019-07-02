@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import {  Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip } from '@material-ui/core';
+import {  Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Parallax } from 'react-parallax';
 
@@ -41,22 +41,52 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 0px 0px 0px'
     },
     conceptContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         height: '100%'
     },
     socialMedia: {
+        [theme.breakpoints.down('md')]: {
+            height: 150,
+            width: '70%',
+            margin: '10px auto',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: 150,
+            width: '80%',
+            margin: '10px auto',
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: 150,
+            width: '80%',
+            margin: '10px auto 10px auto',
+        },
         height: 150,
         width: 600,
-        margin: '30px auto',
+        margin: '10px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     },
     description: {
+        [theme.breakpoints.down('md')]: {
+            width: '70%',
+            margin: '10px auto',
+            padding: '20px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '80%',
+            margin: '10px auto',
+            padding: '20px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '80%',
+            margin: '10px auto',
+            padding: '20px',
+        },
         width: '70%',
-        margin: '30px auto',
+        margin: '10px auto',
         padding: '20px',
     },
 }))
@@ -105,7 +135,6 @@ function Profile() {
     }
 
     function handleTabChange(tab) {
-        console.log(tab)
         switch (tab) {
             case 'Timeline':
                 setProfileTimeline(true);
@@ -137,24 +166,24 @@ function Profile() {
     };
 
     function renderTabs() {
-        if(profileTimeline){return <TimelineTab page={{handle: 'HeathBanner'}} />}
-        if(About){return <AboutTab handle={{handle: 'HeathBanner'}} auth={auth.user} info={user.info} />}
-        if(Friends){return <FriendsTab user={user} />}
-        if(Photos){return <PhotosTab info={user.info} />}
+        if(user) {
+            if(profileTimeline){return <TimelineTab page={{handle: 'HeathBanner'}} />}
+            if(About){return <AboutTab handle={{handle: 'HeathBanner'}} auth={auth.user} info={user.info} />}
+            if(Friends){return <FriendsTab user={user} />}
+            if(Photos){return <PhotosTab info={user.info} />}
+        }
     }
 
     useEffect(() => {
         const username = 'HeathBanner'
         if(!onLoad){
             setOnLoad(true)
-            console.log('FIREEEEE')
             fetch('/api/social/getProfile', {
                 method: 'POST',
                 body: JSON.stringify({username: username}),
                 headers: {'Content-Type': 'application/json'}
             }).then(res => res.json())
             .then((result) => {
-                console.log(result);
                 setUser(result)
             });
         }
@@ -168,17 +197,13 @@ function Profile() {
                 strength={200}
             >
                 <div className="row marg colp">
-                        <div className="col-6 marg colp">
+                        <Grid md={12} sm={12} xs={12}>
                             <div className={classes.conceptContainer}>
                                 <Paper className={classes.socialMedia}>
                                     <Typography variant="h3" align="center" color="textSecondary">
                                         Social Media Concept
                                     </Typography>
                                 </Paper>
-                            </div>
-                        </div>
-                        <div className="col-6 marg colp">
-                            <div className={classes.conceptContainer}>
                                 <Paper className={classes.description}>
                                     <Typography>
                                         A concept truly to be reckoned with. The amount of thinking, and quite frequently over-thinking, is astounding.
@@ -191,7 +216,7 @@ function Profile() {
                                     </Typography>
                                 </Paper>
                             </div>
-                        </div>
+                        </Grid>
                 </div>
             </Parallax>
             <div className="row marg">
@@ -204,11 +229,11 @@ function Profile() {
                     <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
                 </div>
             </div>
-            <div className="row marg">
-                <div className="col-12">
+            <Grid container>
+                <Grid style={{zIndex: 1500}} xs={12}>
                     <ProfileNav  tabChange={tabFunc} />
-                </div>
-            </div>
+                </Grid>
+            </Grid>
             <div className="row marg">
                     {renderTabs()}
             </div>

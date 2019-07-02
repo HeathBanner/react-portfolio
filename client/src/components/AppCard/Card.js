@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardContent, Typography, Paper, Button } from '@material-ui/core';
@@ -9,24 +8,19 @@ import Tilt from "react-tilt";
 const useStyles = makeStyles(theme => ({
   card: {
     [theme.breakpoints.up('md')]: {
-      width: 400,
-      height: 300,
-      backgroundColor: 'green',
-      margin: '50px auto',
+      width: 300,
+      height: 320,
     },
     [theme.breakpoints.down('sm')]: {
       width: 300,
       height: 300,  
-      backgroundColor: 'red',
-      margin: '50px auto',
     },
     [theme.breakpoints.down('xs')]: {
-      width: 200,
-      height: 300,  
-      backgroundColor: 'blue',
-      margin: '20px 0px 10px 0px',
+      height: 280,  
+      margin: '20px auto 0px auto',
     },
-    // backgroundColor: 'rgb(235, 235, 235)',
+    margin: '20px 0px 0px 0px',
+    backgroundColor: 'rgb(235, 235, 235)',
     position: 'relative',
   },
   tilt: {
@@ -101,7 +95,7 @@ export default function RecipeReviewCard(props) {
               Website
             </Button>
           </a>
-          <a href={props.repo} target="_blank">
+          <a href={props.app.repo} target="_blank">
             <Button>
               Repo
             </Button>

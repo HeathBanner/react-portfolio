@@ -5,10 +5,13 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
-        // flexGrow: 1,
-        // height: '100%',
-        // overflow: 'hidden'
+        flexGrow: 1,
+        height: '100%',
+        overflow: 'hidden',
     },
+    label: {
+        fontSize: '0.9rem'
+    }
 });
 
 const tabIndex = ['Timeline', 'About', 'Friends', 'Photos'];
@@ -36,10 +39,10 @@ function ProfileNav(props) {
                     centered
                     variant="fullWidth"
                 >
-                    <Tab wrapped={true} label="Timeline" />
-                    <Tab wrapped={true} label="About" />
-                    <Tab wrapped={true} label="Friends" />
-                    <Tab wrapped={true} label="Photos" />
+                    <Tab wrapped={true} className={classes.label} label="Timeline" />
+                    <Tab wrapped={true} className={classes.label} label="About" />
+                    <Tab wrapped={true} className={classes.label} label="Friends" />
+                    <Tab wrapped={true} className={classes.label} label="Photos" />
                 </Tabs>
             </Paper>
     );

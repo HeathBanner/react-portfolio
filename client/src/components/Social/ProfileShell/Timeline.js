@@ -3,12 +3,15 @@ import AuthContext from '../../../context/AuthContext';
 import Moment from 'react-moment';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, TextField, Collapse, List, ListItem, ListItemText, ListItemAvatar, Divider, Typography, Avatar, Icon, IconButton} from '@material-ui/core';
+import { Grid, Paper, TextField, Collapse, List, ListItem, ListItemText, ListItemAvatar, Divider, Typography, Avatar, Icon, IconButton} from '@material-ui/core';
 
 import GetMoment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        [theme.breakpoints.down('xs')]: {
+            width: '90%',
+        },
         paddingTop: '10px',
         paddingBottom: '10px',
         width: '80%',
@@ -35,15 +38,24 @@ function Timeline(props) {
     const [commentInput, setCommentInput] = useState('');
 
     const [storyIDs, setStoryIDs] = useState({});
+    const [stories, setStories] = useState('')
     const [onLoad, setOnLoad] = useState(false);
 
     if((!onLoad) && (auth.user)){
         console.log('RESET')
-        var storyIDList = {};
-        auth.user.info.authored_stories.map((story, index) => {
-            storyIDList[story._id] = false
-        })
-        setStoryIDs(storyIDList)
+            var storyStorage = [];
+            var storyIDList = {};
+            var test = [];
+            auth.user.info.authored_stories.map((story, index) => {
+                storyIDList[story._id] = false
+                storyStorage.push(story);
+            });
+            test = storyStorage.sort((a, b) => {
+                return new Date(b.time) - new Date(a.time);
+            })
+            console.log(test);
+        setStoryIDs(storyIDList);
+        setStories(storyStorage);
         setOnLoad(true);
     }   
 
@@ -88,9 +100,9 @@ function Timeline(props) {
 
     function renderTimeline() {
         console.log(auth.user)
-        if((auth.user)&&(auth.user.username === props.page.handle)){
+        if(stories){
             return (
-                auth.user.info.authored_stories.map((story, index) => (
+                stories.map((story, index) => (
                     <Fragment key={story._id}>
                     <Paper>
                         <ListItem className={classes.listItem}>

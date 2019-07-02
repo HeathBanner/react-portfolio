@@ -16,7 +16,38 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         width: '60%',
-        padding: '20px 40px'
+        padding: '20px 40px',
+        [theme.breakpoints.down('lg')]: {
+            width: '60%',
+            padding: '20px 40px',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '60%',
+            padding: '20px 40px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '60%',
+            padding: '20px 40px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '80%',
+            padding: '20px 20px',    
+        }
+    },
+    header: {
+        [theme.breakpoints.down('lg')]: {
+            fontSize: '3.2rem',  
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '3rem',  
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '2.7rem',  
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.3rem',  
+        }
+
     },
     textFields: {
         marginTop: '20px',
@@ -88,7 +119,7 @@ function ContactForm() {
     return (
         <div className={classes.form}>
             <Paper  className={classes.paper}>
-                <Typography align="center" color="textSecondary" variant="h2">
+                <Typography className={classes.header} align="center" color="textSecondary" variant="h2">
                     Contact Me
                 </Typography>
                 <form onSubmit={handleSubmit}>

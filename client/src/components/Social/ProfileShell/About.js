@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemIcon, ListItemText, Divider, Icon, Typography, TextField } from '@material-ui/core';
+import { Grid, List, ListItem, ListItemIcon, ListItemText, Divider, Icon, Typography, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,6 +10,11 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     list: {
+        [theme.breakpoints.down('xs')]: {
+            width: '80%',
+            margin: '20px auto',
+            borderRadius: '5px',
+        },
         marginTop: '20px',
     },  
     listItem: {
@@ -26,7 +31,17 @@ const useStyles = makeStyles(theme => ({
     inputPadding: {
         padding: '0px 0px !important'
     },
+    listItemLeft: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'flex',
+            justifyContent: 'center !important',
+            alignItems: 'center',
+        },
+    },
     edit: {
+        [theme.breakpoints.down('xs')]: {
+
+        },
         background: 'rgb(255, 111, 15)',
         '&:hover': {
             background: 'rgb(255, 145, 71)',
@@ -248,29 +263,29 @@ function About(props) {
 
     return (
         <Fragment>
-            <div className="col-4">
+            <Grid md={4} xs={12}>
                 <List  className={classes.list} component="nav">
                     
                     {renderEditor()}
                     
-                    <ListItem button onClick={() => handleClick('contact')}>
+                    <ListItem className={{classes:{root: classes.listItemLeft}}} button onClick={() => handleClick('contact')}>
                         <ListItemIcon>
                             <Icon>contacts</Icon>
                         </ListItemIcon>
                         <ListItemText primary="Contact Info" />
                     </ListItem>
                     <Divider />
-                    <ListItem button onClick={() => handleClick('education')}>
+                    <ListItem className={classes.listItemLeft} button onClick={() => handleClick('education')}>
                         <ListItemIcon>
                             <Icon>school</Icon>
                         </ListItemIcon>
                         <ListItemText primary="Work and Education" />
                     </ListItem> 
                 </List>
-            </div>
-            <div className="col-8">
+            </Grid>
+            <Grid md={8} xs={12}>
                 {renderList()}
-            </div>
+            </Grid>
         </Fragment>
     );
 }

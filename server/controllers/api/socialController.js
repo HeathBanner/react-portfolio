@@ -105,6 +105,7 @@ socialController.post('/getProfile', (req, res) => {
             path: 'friendList',
         }
     })
+    .sort({'info.authored_stories.time': -1})
     .exec((err, user) => {
         if(err)throw err;
         res.json(user);

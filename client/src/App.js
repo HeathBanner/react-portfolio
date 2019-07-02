@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import withWidth from '@material-ui/core/withWidth';
+
 import Home from './pages/Home/home';
 import Social from './pages/Social/Social';
 import Login from './pages/Login/Login';
@@ -46,7 +48,6 @@ function App() {
   }
 
   function updateLoaded(user, isLoaded) {
-    console.log(user)
     setAuth({...auth, user, isLoaded})
   }
 
@@ -60,15 +61,12 @@ function App() {
 
   useEffect(() => {
     // const { authToken } = auth;
-    console.log(auth)
     // if(!authToken){return setValidated(false)};
     if(!didMount) {
-      console.log('PASS')
       setDidMount(true)
       fetch('/api/users/portfolio')
       .then(res => res.json())
       .then((user) => {
-        console.log(user);
         if(!user._id){return setValidated(false)}
         const isLoaded = true;
         setAuth({...auth, user, isLoaded})
@@ -100,4 +98,4 @@ function App() {
   );
 }
 
-export default App;
+export default withWidth({initialWidth: 'lg'})(App);

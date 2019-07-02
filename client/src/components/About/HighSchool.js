@@ -17,10 +17,38 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: '20px',
         width: '60%',
-        padding: '40px'
+        padding: '40px',
+        [theme.breakpoints.down('lg')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '80%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+            padding: '20px',
+        },
     },
     typo: {
-        fontSize: '1.3rem'
+        fontSize: '1.3rem',
+        [theme.breakpoints.down('lg')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1rem'
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.2rem'
+        },
     }
 }))
 

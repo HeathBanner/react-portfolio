@@ -1,30 +1,20 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { useMediaQuery, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+
 import Moment from 'react-moment';
 import FormatDate from 'moment';
-import AuthContext from '../../../context/AuthContext';
-import { Redirect } from 'react-router-dom';
 
-const drawerWidth = 240;
+import AuthContext from '../../../context/AuthContext';
+
 
 
 export default function PersistentDrawerLeft(props) {
+  
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -36,12 +26,30 @@ export default function PersistentDrawerLeft(props) {
       }),
     },
     appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+      [theme.breakpoints.down('md')]: {
+        width: `calc(100% - 240px)`,
+        marginLeft: '240px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: `calc(100% - 180px)`,
+        marginLeft: '180px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: `calc(100% - 140px)`,
+        marginLeft: '140px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      }
     },
     toolBar: {
       display: 'flex',
@@ -59,6 +67,20 @@ export default function PersistentDrawerLeft(props) {
         color: props.mood ? `${props.mood.menuButton}` : 'white',
     },
     barTitle: {
+      [theme.breakpoints.down('md')]: {
+
+      },
+      [theme.breakpoints.down('sm')]: {
+
+      },
+      [theme.breakpoints.down('xs')]: {
+        top: '50%',
+        right: '0%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'rgb(255, 145, 71)',
+        zIndex: '10',
+        padding: '0px 5px',
+      },
       position: 'absolute',
       top: '50%',
       left: '50%',
@@ -82,7 +104,15 @@ export default function PersistentDrawerLeft(props) {
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      [theme.breakpoints.down('md')]:{
+        width: 240,
+      },
+      [theme.breakpoints.down('sm')]:{
+        width: 180,
+      },
+      [theme.breakpoints.down('xs')]:{
+        width: 140,
+      },
     },
     drawerHeader: {
       display: 'flex',
@@ -98,7 +128,15 @@ export default function PersistentDrawerLeft(props) {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: -drawerWidth,
+      [theme.breakpoints.down('md')]:{
+        marginLeft: -240,
+      },
+      [theme.breakpoints.down('sm')]:{
+        marginLeft: -180,
+      },
+      [theme.breakpoints.down('xs')]:{
+        marginLeft: -140
+      },
     },
     contentShift: {
       transition: theme.transitions.create('margin', {
@@ -108,6 +146,9 @@ export default function PersistentDrawerLeft(props) {
       marginLeft: 0,
     },
     moment: {
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
+      },
       position: 'absolute',
       right: '3%',
       marginRight: theme.spacing(2),
@@ -124,18 +165,36 @@ export default function PersistentDrawerLeft(props) {
         color: 'black',
       }
     },
-
+    listItemIcon: {
+      minWidth: '0px !important',
+      marginRight: '10px',
+    },
   }));
 
+  
   const links = ['/', '/', '/'];
   
   const classes = useStyles();
   const theme = useTheme();
+  
+  const xs = useMediaQuery(theme.breakpoints.down('xs'));
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
+  const md = useMediaQuery(theme.breakpoints.down('md'));
+  
+  var drawerWidth = 240;
+  const drawerWidthDynam = () => {
+      if(xs) {return drawerWidth = 120}
+      if(sm) {return drawerWidth = 180}
+      if(md) {return drawerWidth = 240}
+  }
+
+  drawerWidthDynam()
+
   const value = useContext(AuthContext);
 
-  const [open, setOpen] = React.useState(false);
-  const [inbox, setInbox] = React.useState(false); 
-  const [settings, setSettings] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [inbox, setInbox] = useState(false); 
+  const [settings, setSettings] = useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -172,6 +231,7 @@ export default function PersistentDrawerLeft(props) {
             })}
           >
             <Toolbar className={classes.toolBar}>
+
               <IconButton
                 color="inherit"
                 aria-label="Open drawer"
@@ -181,18 +241,19 @@ export default function PersistentDrawerLeft(props) {
               >
                 <Icon>menu</Icon>
               </IconButton>
-              {/* <div className={classes.barTitle}> */}
+
                 <Link className={classes.barTitle} to='/'>
-                  <Avatar alt={value.user ? value.user.username : console.log('NOPE')} src='/imgs/avatar.jpg' />
+                  <Avatar alt={value.user ? value.user.username : ''} src='/imgs/avatar.jpg' />
                   <Typography className={classes.typo} variant="h6">
                     {value.user ? value.user.username : 'Anon'}
                   </Typography>
                 </Link>
-              {/* </div> */}
+
               <div className={classes.moment}>
                 <Icon className={classes.clock}>access_time</Icon>
                 <Moment interval={30000} date={date} format={'dddd h:mm a'} />
               </div>
+
             </Toolbar>
           </AppBar>
           <Drawer
@@ -214,13 +275,13 @@ export default function PersistentDrawerLeft(props) {
               {['Inbox', 'Settings', 'Find Friends'].map((text, index) => (
                 <Link key={index} style={{color: 'black', textDecoration: 'none'}} to={links[index]}>
                   <ListItem button key={text}>
-                    <ListItemIcon >{index % 2 === 0 ? <Icon>inbox</Icon> : <Icon>mail</Icon>}</ListItemIcon>
+                    <ListItemIcon className={classes.listItemIcon} >{index % 2 === 0 ? <Icon>inbox</Icon> : <Icon>mail</Icon>}</ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
                 </Link>
               ))}
                 <ListItem onClick={handleMenuItem} button key='Logout'>
-                  <ListItemIcon><Icon>mail</Icon></ListItemIcon>
+                  <ListItemIcon className={classes.listItemIcon}><Icon>mail</Icon></ListItemIcon>
                   <ListItemText primary='Logout' />
                 </ListItem>
             </List>

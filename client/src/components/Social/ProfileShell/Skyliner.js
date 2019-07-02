@@ -8,33 +8,67 @@ import { Avatar, Typography, Fab, Icon } from '@material-ui/core';
 
 import { Parallax } from 'react-parallax';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     skyliner: {
         width: '100%',
         height: '40vh',
-        overflow: 'visible'
+        // overflow: 'visible'
     },
     skylinerRow: {
+        [theme.breakpoints.down('xs')]: {
+            height: '40vh',
+            display: 'flex',
+            alignItems: 'flex-end',    
+            justifyContent: 'center',
+        },
         height: '40vh',
         display: 'flex',
         alignItems: 'flex-end',
     },
     skylinerContent: {
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center',
+        },
         display: 'flex',
         alignItems: 'flex-end',
         flexDirection: 'row',
         flexWrap: 'none',
     },
     profileAvatar: {
+        [theme.breakpoints.down('md')]: {
+            width: 120,
+            height: 120,
+            margin: '0px 20px 0px 10px',    
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: 120,
+            height: 120,
+            margin: '0px 20px 0px 10px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: 90,
+            height: 90,
+            margin: '0px 10px 0px 10px',
+        },
         width: 120,
         height: 120,
         margin: '0px 20px 0px 10px',
-        zIndex: 50,
+        zIndex: 1800,
     },
     username: {
+        [theme.breakpoints.down('md')]: {
+        },
+        [theme.breakpoints.down('sm')]: {
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.7rem'
+        },
         color: 'white',
     },
     skylinerDivLeft: {
+        [theme.breakpoints.down('xs')]: {
+            bottom:  -7,
+        },
         display: 'flex',
         alignItems: 'flex-end',
         position: 'absolute',
@@ -51,7 +85,7 @@ const useStyles = makeStyles({
     Fab: {
         margin: '10px 20px',
     },
-})
+}))
 
 function Skyliner(props) {
 

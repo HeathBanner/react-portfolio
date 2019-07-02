@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+
+import { Grid } from '@material-ui/core';
+
 import AppCard from '../../components/AppCard/Card';
 import Drawer from '../../components/Navigation/Drawer';
 
-import Grid from '../../components/AppCard/Grid';
+import AppGrid from '../../components/AppCard/Grid';
 import Weather from '../../components/Weather/Weather';
 import ProfileShell from '../Social/ProfileShell';
 import Jumbotron from '../../components/Jumbotron/Jumbotron';
-
 
 import './home.css';
 
@@ -67,37 +69,39 @@ function Home() {
     }
 
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-12 colp">
+        <Grid container>
+            {/* <div className="row">
+                <div className="col-12 colp"> */}
+                <Grid xs={12}>
                     <Drawer mood={mood.Drawer} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 colp">
+                </Grid>
+                {/* </div>
+            </div> */}
+            {/* <div className="row">
+                <div className="col-12 colp"> */}
+                <Grid xs={12}>
                     <Jumbotron />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 colp">
-                    <Grid />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 colp">
-                    <Weather grabWeather={grabWeather} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 colp">
+                </Grid>
+                {/* </div>
+            </div> */}
+                <Grid xs={12}>
+                    <AppGrid />
+                </Grid>
+            {/* <div className="row">
+                <div className="col-12 colp"> */}
+                    <Grid xs={12}>
+                        <Weather grabWeather={grabWeather} />
+                    </Grid>
+                {/* </div>
+            </div> */}
+            {/* <div className="row">
+                <div className="col-12 colp"> */}
+                <Grid xs={12}>
                     <ProfileShell />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12">
-                </div>
-            </div>
-        </div>
+                </Grid>
+                {/* </div>
+            </div> */}
+        </Grid>
     );
 }
 

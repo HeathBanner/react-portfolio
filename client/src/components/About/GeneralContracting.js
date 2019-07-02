@@ -15,13 +15,54 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 40px'
     },
     paper: {
-        padding: '20px',
         width: '60%',
-        padding: '40px'
+        padding: '40px',
+        [theme.breakpoints.down('lg')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '80%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+            padding: '20px',
+        },
     },
     typo: {
-        fontSize: '1.3rem'
-    }
+        fontSize: '1.3rem',
+        [theme.breakpoints.down('lg')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1rem'
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.2rem'
+        },
+    },
+    construction: {
+        [theme.breakpoints.down('lg')]: {
+            fontSize: '4rem'
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '4rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.6rem'
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.6rem'
+        },
+    },
 }));
 
 function GeneralContracting() {
@@ -38,8 +79,8 @@ function GeneralContracting() {
                 <div className={classes.parallax}>
                     <Paper className={classes.paper}>
 
-                        <Typography style={{marginBottom: '10px'}}  variant="h2">
-                            General Contracting
+                        <Typography className={classes.construction} style={{marginBottom: '10px'}} variant="h2">
+                            Construction
                         </Typography>
 
                         <Divider style={{marginBottom: '30px'}} />

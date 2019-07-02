@@ -7,6 +7,19 @@ import { Parallax } from 'react-parallax';
 
 const useStyles = makeStyles(theme => ({
     parallax: {
+        [theme.breakpoints.down('lg')]: {
+            marginTop: '80px',
+            marginLeft: '40px',
+        },
+        [theme.breakpoints.down('md')]: {
+            marginTop: '20px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '20px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginTop: '30px',
+        },
         marginTop: '30px',
         height: 500,
         display: 'flex',
@@ -19,8 +32,10 @@ const useStyles = makeStyles(theme => ({
         padding: '20px'
     },
     typo: {
-        // fontSize: 'rem'
         color: 'white',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '4rem'
+        },
     }
 }));
 

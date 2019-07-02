@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
+import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon, Typography, Avatar } from '@material-ui/core';
+import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon, Typography, Avatar } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -11,6 +12,9 @@ const useStyles = makeStyles(theme => ({
         // overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
     },
+    listContainer: {
+
+    },
     gridList: {
         width: '100%',
         // height: 450,
@@ -19,14 +23,16 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         overflow: 'hidden',
         // backgroundColor: theme.palette.background.paper,
-        margin: '0 auto',
+        margin: '0px auto 40px auto !important',
     },
     subheader: {
         textAlign: 'center',
         margin: '20px 0px',
     },
     tile: {
-        marginRight: '10px',
+        [theme.breakpoints.down('xs')]: {
+            width: 400,
+        },
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
@@ -41,6 +47,26 @@ const useStyles = makeStyles(theme => ({
 function Friends(props) {
 
     const classes = useStyles();
+    const theme = useTheme();
+    
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const mdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+    const gridHeight = () => {
+        if(xs) {return 120}
+        if(sm) {return 160}
+        if(md) {return 300}
+        if(mdUp) {return 300}
+    }
+
+    const gridCols = () => {
+        if(xs) {return 1}
+        if(sm) {return 1}
+        if(md) {return 0.7}
+        if(mdUp) {return 0.7}
+    }
 
     const [loaded, setLoaded] = useState(false);
     const [friendList, setFriendList] = useState([])
@@ -67,7 +93,7 @@ function Friends(props) {
             return (
                 friendList.map((friend, index) => {
                     return (
-                        <GridListTile cols={0.5} className={classes.tile} key={friend._id} >
+                        <GridListTile cols={gridCols()}  className={classes.tile} key={friend._id} >
                             <img src={friend.info.skyline} />
                             <GridListTileBar 
                                 title={friend.username}
@@ -92,17 +118,17 @@ function Friends(props) {
     }
 
     return (
-        <div className="col-12">
-                <GridList cellHeight={180} col={2.5} className={classes.gridList}>
-                    <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
-                        <ListSubheader component="div">
-                            <Typography variant="h3" color="textSecondary" className={classes.subheader}>Friends</Typography>
-                        </ListSubheader>
-                    </GridListTile>
-                    {renderFriends()}
-                </GridList>
-        </div>
+        <Grid className={classes.listContainer} xs={12}>
+            <GridList cellHeight={gridHeight()} spacing={18} col={2.5} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
+                    <ListSubheader component="div">
+                        <Typography variant="h3" color="textSecondary" className={classes.subheader}>Friends</Typography>
+                    </ListSubheader>
+                </GridListTile>
+                {renderFriends()}
+            </GridList>
+        </Grid>
     );
 }
 
-export default Friends;
+export default (Friends);

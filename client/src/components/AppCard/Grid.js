@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, GridListTile } from '@material-ui/core';
+import { useMediaQuery, GridList, GridListTile } from '@material-ui/core';
 
 import Card from './Card';
 
@@ -12,14 +13,25 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: '100px',
+    },
+    [theme.breakpoints.down('lg')]: {
+      paddingLeft: '100px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: '80px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: '0px',
+    }
   },
   gridList: {
     flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+    transform: 'translateZ(0)'
   },
   tile: {
-    overflow: 'visible !important'
+    // width: '400px !important',
   },  
   title: {
     color: theme.palette.primary.light,
@@ -55,11 +67,32 @@ const apps = [
 ]
 
 export default function SingleLineGridList() {
+  
   const classes = useStyles();
+  const theme = useTheme();
+
+  const xs = useMediaQuery(theme.breakpoints.down('xs'));
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
+  const md = useMediaQuery(theme.breakpoints.down('md'));
+  const mdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  const gridHeight = () => {
+      if(xs) {return 310}
+      if(sm) {return 330}
+      if(md) {return 350}
+      if(mdUp) {return 350}
+  }
+
+  const gridCols = () => {
+    if(xs) {return 1}
+    if(sm) {return 2}
+    if(md) {return 2}
+    if(mdUp) {return 2}
+  }
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={'auto'} className={classes.gridList} cols={2}>
+      <GridList cellHeight={gridHeight()} spacing={8} className={classes.gridList} cols={gridCols()}>
 
         {
           apps.map((app, index) => {

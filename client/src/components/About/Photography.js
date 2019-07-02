@@ -12,15 +12,50 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        padding: '0px 40px'
+        padding: '0px 40px',
+        [theme.breakpoints.down('xs')]: {
+            height: '140vh'
+        },
     },
     paper: {
-        padding: '20px',
         width: '60%',
-        padding: '40px'
+        padding: '40px',
+        [theme.breakpoints.down('lg')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '60%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '80%',
+            padding: '40px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+            padding: '20px',
+        },
     },
     typo: {
-        fontSize: '1.3rem'
+        fontSize: '1.3rem',
+        [theme.breakpoints.down('lg')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.3rem'
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1rem'
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '1.2rem'
+        },
+    },
+    photo: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2.7rem'
+        }, 
     }
 }));
 
@@ -38,7 +73,7 @@ function Photography() {
                 <div className={classes.parallax}>
                     <Paper className={classes.paper}>
 
-                        <Typography style={{marginBottom: '10px'}}  variant="h2">
+                        <Typography style={{marginBottom: '10px'}} className={classes.photo}  variant="h2">
                             Photography
                         </Typography>
 

@@ -75,7 +75,8 @@ function Weather(props) {
     useEffect(() => {
         if (!sentRequest) {
             setSentRequest(true)
-            fetch('https://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&APPID=4216d1350fe31af9bf5100bb34fa72e2')
+            setParsedForecast('')
+            fetch('https://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2')
             .then(res => res.json())
             .then((result) => { 
                 var test = result.list[0].main.temp
@@ -109,8 +110,8 @@ function Weather(props) {
                 <WeatherModule 
                     weather={object.weather[0].description}
                     image={object.weather[0].icon}
-                    temp_max={Math.round(object.main.temp_max*9/5-459.67)}
-                    temp_min={Math.round(object.main.temp_min*9/5-459.673)}
+                    temp_max={Math.round(object.main.temp_max)}
+                    temp_min={Math.round(object.main.temp_min)}
                     city={weather.city.name}
                     country={weather.city.country}
                     date={object.dt_txt}
@@ -121,10 +122,11 @@ function Weather(props) {
     } 
 
     function updateModule(coords) {
+        setParsedForecast('');
         console.log(coords)
         fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${coords[0].coord.lat}&lon=${coords[0].coord.lon}&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2`)
         .then(res => res.json())
-        .then((result) => {console.log(result); setWeather(result); setIsLoaded(true) });
+        .then((result) => {console.log(result); setWeather(result); setIsLoaded(true); });
     }
 
 

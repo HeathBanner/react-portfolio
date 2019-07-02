@@ -25,12 +25,38 @@ export default function PersistentDrawerLeft(props) {
       }),
     },
     appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+      [theme.breakpoints.down('lg')]:{
+        width: `calc(100% - 240px)`,
+        marginLeft: '240px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+      [theme.breakpoints.down('md')]: {
+        width: `calc(100% - 240px)`,
+        marginLeft: '240px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+      [theme.breakpoints.down('sm')]: {
+        width: `calc(100% - 180px)`,
+        marginLeft: '180px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
+      [theme.breakpoints.down('xs')]: {
+        width: `calc(100% - 140px)`,
+        marginLeft: '140px',
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      }
     },
     toolBar: {
       display: 'flex',
@@ -46,7 +72,7 @@ export default function PersistentDrawerLeft(props) {
     },
     barTitle: {
       display: 'inline-block',
-      color: props.mood ? `${props.mood.barTitle}` : 'white'
+      color: props.mood ? `${props.mood.barTitle}` : 'white',
     },
     homeLink: {
       position: 'absolute',
@@ -62,7 +88,18 @@ export default function PersistentDrawerLeft(props) {
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      [theme.breakpoints.down('lg')]:{
+        width: 240,
+      },
+      [theme.breakpoints.down('md')]:{
+        width: 240,
+      },
+      [theme.breakpoints.down('sm')]:{
+        width: 180,
+      },
+      [theme.breakpoints.down('xs')]:{
+        width: 140,
+      },
     },
     drawerHeader: {
       display: 'flex',
@@ -78,7 +115,18 @@ export default function PersistentDrawerLeft(props) {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: -drawerWidth,
+      [theme.breakpoints.down('lg')]:{
+        marginLeft: -240,
+      },
+      [theme.breakpoints.down('md')]:{
+        marginLeft: -240,
+      },
+      [theme.breakpoints.down('sm')]:{
+        marginLeft: -180,
+      },
+      [theme.breakpoints.down('xs')]:{
+        marginLeft: -140
+      },
     },
     contentShift: {
       transition: theme.transitions.create('margin', {
@@ -93,6 +141,9 @@ export default function PersistentDrawerLeft(props) {
       marginRight: theme.spacing(2),
       display: 'flex',
       alignItems: 'center',
+      [theme.breakpoints.down('xs')]: {
+        display: 'none'
+      }
     },
     clock: {
       marginRight: '5px'
@@ -113,11 +164,9 @@ export default function PersistentDrawerLeft(props) {
 
   function getTime() {
     date = FormatDate()
-    console.log(date)
   }
   var date = ''
   setInterval(getTime, 30000);
-  console.log(date)
 
   return (
       <div className={classes.root}>

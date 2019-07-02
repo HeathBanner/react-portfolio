@@ -381,7 +381,17 @@ export default function IntegrationReactSelect(props) {
     if(value.nativeEvent){
       const query = value.target.value
       setQueriedState(query);
-    } else {setSelectedState(value)}
+      
+    } else {
+      setSelectedState(value)
+      fetch('/api/cities/search', {
+        method: 'POST',
+        body: JSON.stringify({city: 'a', state: value}),
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(res => res.json())
+      .then((result) => {setIsLoaded(true); setQueriedCities(result);})
+    }
   }
 
   function handleSubmit(event) {
@@ -394,7 +404,6 @@ export default function IntegrationReactSelect(props) {
       .then(res => res.json())
       .then((result) => {props.updateModule(result)})
   }
-
 
   const selectStyles = {
     input: base => ({

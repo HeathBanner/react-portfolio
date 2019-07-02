@@ -1,24 +1,29 @@
 import React, { Fragment } from 'react';
 
+import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon } from '@material-ui/core';
+import { useMediaQuery, Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        // overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,    
+        backgroundColor: theme.palette.background.paper, 
+        // width: '70%',
+   
     },
     header: {
         margin: '20px 0px',
         textAlign: 'center',
     },
     gridList: {
-        width: 500,
-        height: '100%',
-        transform: 'translateZ(0)',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        width: '80%',
+        margin: '0 auto !important',
+    },
+    tile: {
+        width: 800
     },
     titleBar: {
         background: 
@@ -36,6 +41,27 @@ const useStyles = makeStyles(theme => ({
 function Photos(props) {
 
     const classes = useStyles();
+    const theme = useTheme();
+    
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const mdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+    const gridHeight = () => {
+        if(xs) {return 120}
+        if(sm) {return 240}
+        if(md) {return 300}
+        if(mdUp) {return 300}
+    }
+
+    const gridCols = () => {
+        if(xs) {return 2}
+        if(sm) {return 2}
+        if(md) {return 2}
+        if(mdUp) {return 2}
+    }
+
 
     function renderPhotos() {
 
@@ -43,9 +69,7 @@ function Photos(props) {
             return (
                 props.info.gallery.map((photo, index) => {
                     return (
-                        <div style={{zIndex: 1500}} className={classes.root}>
-                            <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-                                <GridListTile key={index}>
+                                <GridListTile cols={1} key={index} className={classes.tile}>
                                     <img src={photo.img} alt={photo.title} />
                                     <GridListTileBar 
                                         title={photo.title}
@@ -59,14 +83,12 @@ function Photos(props) {
                                         className={classes.titleBar}
                                     />
                                 </GridListTile>
-                            </GridList>
-                        </div>
                     );
                 })
             );
         } else {
             return (
-                <div style={{zIndex: 1500}} className={classes.sorry}>
+                <div className={classes.sorry}>
                     <Typography variant="h4" align="center" color="textSecondary" >
                         Sorry, no photos to show
                     </Typography>
@@ -79,15 +101,20 @@ function Photos(props) {
     }
 
     return (
-        <div style={{margin: '0 auto'}}>
+        <Fragment>
 
+        <Grid xs={12}>
             <Typography variant="h3" color="textSecondary" className={classes.header}>
                 Gallery
             </Typography>
-
+        </Grid>
+        <Grid xs={12}>
+        <GridList cols={gridCols()} cellHeight={gridHeight()} spacing={12} className={classes.gridList}>
             {renderPhotos()}
+        </GridList>
+        </Grid>
 
-        </div>
+        </Fragment>
     );
 }
 
