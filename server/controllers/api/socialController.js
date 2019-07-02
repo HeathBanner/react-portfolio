@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 
 const MONGOD_URI = 'mongodb://HeathBanner:testing123@ds137631.mlab.com:37631/heroku_g0b41nhx'
+// const MONGOD_URI = 'mongodb://localhost/portfolio'
 mongoose.connect(MONGOD_URI);
 
 socialController.post('/newStory', (req, res) => {

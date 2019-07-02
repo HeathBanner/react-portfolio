@@ -59,13 +59,13 @@ function App() {
   }
 
   useEffect(() => {
-    const { authToken } = auth;
+    // const { authToken } = auth;
     console.log(auth)
-    if(!authToken){return setValidated(false)};
+    // if(!authToken){return setValidated(false)};
     if(!didMount) {
       console.log('PASS')
       setDidMount(true)
-      fetch('/api/users/me', {headers:{'Authorization': `Bearer ${authToken}`}})
+      fetch('/api/users/portfolio')
       .then(res => res.json())
       .then((user) => {
         console.log(user);

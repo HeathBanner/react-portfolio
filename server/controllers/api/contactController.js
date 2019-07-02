@@ -3,6 +3,7 @@ const db = require('../../models/contact');
 const mongoose = require('mongoose');
 
 const MONGOD_URI = 'mongodb://HeathBanner:testing123@ds137631.mlab.com:37631/heroku_g0b41nhx'
+// const MONGOD_URI = 'mongodb://localhost/portfolio'
 mongoose.connect(MONGOD_URI);
 
 contactController.post('/newContact', (req, res) => {

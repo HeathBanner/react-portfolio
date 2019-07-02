@@ -2,16 +2,46 @@ const usersController = require('express').Router();
 const db = require('../../models/users');
 const infoDB = require('../../models/userInfo');
 const mongoose = require('mongoose');
+const ObjectID = require('mongodb').ObjectID;
 
 const { JWTVerifier } = require('../../lib/passport');
 const jwt = require('jsonwebtoken');
 
 const MONGOD_URI = 'mongodb://HeathBanner:testing123@ds137631.mlab.com:37631/heroku_g0b41nhx'
+// const MONGOD_URI = 'mongodb://localhost/portfolio'
 mongoose.connect(MONGOD_URI);
 
 usersController.get('/me', JWTVerifier, (req, res) => {
     res.json(req.user);
 });
+
+usersController.get('/portfolio', (req, res) => {
+    db.findOne({_id: ObjectID('5d12638abb93d2a54d7c37a0')})
+    .populate({
+        path: 'info',
+        populate: {
+            path: 'authored_stories',
+            populate: [{
+                path: 'authored_by',
+            }, 
+            {
+                path: 'comments.authored_by',
+                model:'Users'
+            }]
+        }
+    })
+    .populate({
+        path: 'info',
+        populate:
+            {
+                path: 'friendList',
+            }
+    })
+    .exec((err, user) => {
+        if(err) throw err;
+        res.json(user);
+    })
+})
 
 usersController.post('/login', (req, res) => {
     const { email, password} = req.body;

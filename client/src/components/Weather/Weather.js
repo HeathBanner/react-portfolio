@@ -75,7 +75,7 @@ function Weather(props) {
     useEffect(() => {
         if (!sentRequest) {
             setSentRequest(true)
-            fetch('http://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&APPID=4216d1350fe31af9bf5100bb34fa72e2')
+            fetch('https://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&APPID=4216d1350fe31af9bf5100bb34fa72e2')
             .then(res => res.json())
             .then((result) => { 
                 var test = result.list[0].main.temp
