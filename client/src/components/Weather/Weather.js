@@ -124,7 +124,7 @@ function Weather(props) {
     function updateModule(coords) {
         setParsedForecast('');
         console.log(coords)
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${coords[0].coord.lat}&lon=${coords[0].coord.lon}&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0].coord.lat}&lon=${coords[0].coord.lon}&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2`)
         .then(res => res.json())
         .then((result) => {console.log(result); setWeather(result); setIsLoaded(true); });
     }
