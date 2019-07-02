@@ -1,16 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.2cce8147.chunk.css",
-    "main.js": "/static/js/main.d9647a81.chunk.js",
-    "main.js.map": "/static/js/main.d9647a81.chunk.js.map",
+    "main.css": "/static/css/main.a9bc933f.chunk.css",
+    "main.js": "/static/js/main.55768782.chunk.js",
+    "main.js.map": "/static/js/main.55768782.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.718814b0.chunk.js": "/static/js/2.718814b0.chunk.js",
-    "static/js/2.718814b0.chunk.js.map": "/static/js/2.718814b0.chunk.js.map",
+    "static/css/2.94155858.chunk.css": "/static/css/2.94155858.chunk.css",
+    "static/js/2.990d9268.chunk.js": "/static/js/2.990d9268.chunk.js",
+    "static/js/2.990d9268.chunk.js.map": "/static/js/2.990d9268.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.32b94ba655e2a509981c4f8a29a618ba.js": "/precache-manifest.32b94ba655e2a509981c4f8a29a618ba.js",
+    "precache-manifest.c1e2925dd6b78dba0ba0c8597d999f82.js": "/precache-manifest.c1e2925dd6b78dba0ba0c8597d999f82.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg"
+    "static/css/2.94155858.chunk.css.map": "/static/css/2.94155858.chunk.css.map",
+    "static/css/main.a9bc933f.chunk.css.map": "/static/css/main.a9bc933f.chunk.css.map",
+    "static/media/alexander-andrews.png": "/static/media/alexander-andrews.d5d2b44a.png",
+    "static/media/alexandre-debieve.png": "/static/media/alexandre-debieve.7c443444.png",
+    "static/media/efe-kurnaz.png": "/static/media/efe-kurnaz.97bd0eb8.png",
+    "static/media/gabriele-diwald.png": "/static/media/gabriele-diwald.d2df9a35.png",
+    "static/media/henry-co.png": "/static/media/henry-co.c6171116.png",
+    "static/media/luke-chesser.jpg": "/static/media/luke-chesser.459cc390.jpg",
+    "static/media/luke-chesser.png": "/static/media/luke-chesser.9e1b59ff.png",
+    "static/media/mohammad-alizade.jpg": "/static/media/mohammad-alizade.f7df5fb2.jpg",
+    "static/media/index.css": "/static/media/roboto-latin-900italic.bc833e72.woff",
+    "static/media/rohit-tandon.png": "/static/media/rohit-tandon.79d19763.png",
+    "static/media/shahadat-shemul.png": "/static/media/shahadat-shemul.8aede9ce.png",
+    "static/media/xander-ashwell.png": "/static/media/xander-ashwell.4b645cc1.png"
   }
 }
