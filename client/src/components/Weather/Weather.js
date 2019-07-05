@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Parallax } from 'react-parallax';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, GridList, GridListTile, Typography, Paper } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, GridList, GridListTile, Typography, Paper } from '@material-ui/core';
 
 import Search from './Search';
 import WeatherModule from './WeatherModule';
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'space-around',
-      height: '300px',
+    //   height: '300px',
       overflow: 'hidden',
       width: '100%',
     },
@@ -70,7 +70,33 @@ function Weather(props) {
     const [parsedForecast, setParsedForecast] = useState(null);
 
     const classes = useStyles();
+    const theme = useTheme();
 
+    const lg = useMediaQuery(theme.breakpoints.up('md'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    function getHeight() {
+        if(xs){return 200};
+        if(sm){return 250};
+        if(md){return 300};
+        if(lg){return 300}
+    };
+
+    function getListCols() {
+        if(xs){return 1.8};
+        if(sm){return 2.2};
+        if(md){return 2.8};
+        if(lg){return 2.8};
+    }
+
+    function getTileRows() {
+        if(xs){return 1.5};
+        if(sm){return 1.2};
+        if(md){return 1};
+        if(lg){return 1};
+    }
 
     useEffect(() => {
         if (!sentRequest) {
@@ -106,7 +132,7 @@ function Weather(props) {
         console.log('PARSE')
         weatherInfo = parsedForecast.map(object => {
             return (
-            <GridListTile >
+            <GridListTile rows={getTileRows()} >
                 <WeatherModule 
                     weather={object.weather[0].description}
                     image={object.weather[0].icon}
@@ -145,7 +171,7 @@ function Weather(props) {
                            </Typography>
                         <div className={classes.root}>
                             
-                            <GridList cellHeight={'auto'} className={classes.gridList} cols={2} spacing={8}>
+                            <GridList cellHeight={getHeight()} className={classes.gridList} cols={getListCols()} spacing={8}>
                                 {weatherInfo}
                             </GridList>
                         </div>
@@ -173,7 +199,6 @@ function Weather(props) {
                                     </Typography>
                                 </Paper>
                             </Grid>
-
                         </Grid>
                 </div>
             </Parallax>

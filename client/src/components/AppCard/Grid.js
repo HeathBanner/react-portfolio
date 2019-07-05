@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { useMediaQuery, GridList, GridListTile } from '@material-ui/core';
 
 import Card from './Card';

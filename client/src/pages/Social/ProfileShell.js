@@ -209,6 +209,7 @@ function Profile() {
                                 </Paper>
                                 <Paper className={classes.description}>
                                     <Typography>
+                                        ***Still under development***
                                         A concept truly to be reckoned with. The amount of thinking, and quite frequently over-thinking, is astounding.
                                         The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
                                         as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.

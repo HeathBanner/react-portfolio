@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon, Typography, Avatar } from '@material-ui/core';
+import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon, Typography, Avatar, LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -106,7 +106,16 @@ function Friends(props) {
                     )
                 })  
             );
-        } else {
+        } else if(!loaded) {
+            return (
+                <GridListTile cols={1} className={classes.tile} >
+                    <LinearProgress />
+                </GridListTile>
+            )
+        } 
+        
+        
+        else {
             return (
                 <GridListTile cols={1} className={classes.tile} >
                     <Typography variant="h4" align="center" color="textSecondary" >

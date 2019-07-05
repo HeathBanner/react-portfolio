@@ -11,7 +11,11 @@ import FormatDate from 'moment';
 
 const drawerWidth = 240;
 
-const links = ['/', '/about', '/contact'];
+const links = [
+  {link: '/', text: 'Home', icon: 'home'}, 
+  {link: '/about', text: 'About', icon: 'face'}, 
+  {link: '/contact', text: 'Contact', icon: 'contact_phone'}
+];
 
 export default function PersistentDrawerLeft(props) {
   const useStyles = makeStyles(theme => ({
@@ -218,11 +222,11 @@ export default function PersistentDrawerLeft(props) {
           </div>
           <Divider />
           <List>
-            {['Home', 'About', 'Contact'].map((text, index) => (
-              <Link key={index} style={{color: 'black', textDecoration: 'none'}} to={links[index]}>
+            {links.map((link, index) => (
+              <Link key={index} style={{color: 'black', textDecoration: 'none'}} to={link.link}>
                 <ListItem button>
-                  <ListItemIcon>{index % 2 === 0 ? <Icon>inbox</Icon> : <Icon>mail</Icon>}</ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemIcon><Icon>{link.icon}</Icon></ListItemIcon>
+                  <ListItemText primary={link.text} />
                 </ListItem>
               </Link>
             ))}

@@ -1,32 +1,27 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { Paper, Typography } from '@material-ui/core';
+
 import Tilt from 'react-tilt';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import FormatDate from 'moment';
-import { textAlign } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
     root: {
         [theme.breakpoints.up('md')]: {
-            height: 450,
             width: '70%',
             margin: '50px auto',  
         },
         [theme.breakpoints.down('md')]: {
-            height: 450,
             width: '70%',
             margin: '50px auto',  
         },
         [theme.breakpoints.down('sm')]: {
-            height: 225,
             width: '80%',
             margin: '50px auto',  
         },
         [theme.breakpoints.down('xs')]: {
-            height: 275,
             width:  '95%',
             margin: '20px 10px',  
         },
@@ -73,10 +68,11 @@ const useStyles = makeStyles(theme => ({
 
 
 function WeatherModule(props) {
+    
     const classes = useStyles();
+
     const image =  `https://openweathermap.org/img/w/${props.image}.png`
     var date = FormatDate(props.date)
-
 
     return (
         <div>
