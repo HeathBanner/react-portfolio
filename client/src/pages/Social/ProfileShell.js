@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import {  Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip, Grid } from '@material-ui/core';
+import {  Divider, Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Parallax } from 'react-parallax';
 
@@ -41,31 +41,32 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 0px 0px 0px'
     },
     conceptContainer: {
-        height: '100%',
+        height: '80vh',
         margin: '50px 0px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     socialMedia: {
         [theme.breakpoints.down('md')]: {
-            height: 150,
+            // height: '100%',
             width: '70%',
             margin: '10px auto',
         },
         [theme.breakpoints.down('sm')]: {
-            height: 150,
+            // height: '100%',
             width: '80%',
             margin: '10px auto',
         },
         [theme.breakpoints.down('xs')]: {
-            height: 150,
+            // height: '100%',
             width: '80%',
             margin: '10px auto 10px auto',
         },
-        height: 150,
+        // height: '100%',
         width: 600,
         margin: '10px auto 30px auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 40
     },
     description: {
         [theme.breakpoints.down('lg')]: {
@@ -91,6 +92,16 @@ const useStyles = makeStyles(theme => ({
         width: '70%',
         margin: '10px auto',
         padding: '20px',
+    },
+    title: {
+        marginBottom: 10
+    },
+    warning: {
+        marginTop: 20,
+        fontWeight: 'bold',
+    },
+    body: {
+        marginTop: 20,
     },
 }))
 
@@ -200,27 +211,32 @@ function Profile() {
                 strength={200}
             >
                 <div className="row marg colp">
-                        <Grid md={12} sm={12} xs={12}>
-                            <div className={classes.conceptContainer}>
-                                <Paper className={classes.socialMedia}>
-                                    <Typography variant="h3" align="center" color="textSecondary">
-                                        Social Media Concept
-                                    </Typography>
-                                </Paper>
-                                <Paper className={classes.description}>
-                                    <Typography>
-                                        ***Still under development***
-                                        A concept truly to be reckoned with. The amount of thinking, and quite frequently over-thinking, is astounding.
-                                        The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
-                                        as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
-                                        This concept uses Mongo DB to stores and use the information.
-                                        Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
-                                        There's no need for "Mem-Caching" at this level nor do I know where to begin with implementing that quite yet.
-                                        A private messaging feature will soon be implemented in the near future. It's very close to being finished.
-                                    </Typography>
-                                </Paper>
-                            </div>
-                        </Grid>
+                    <Grid md={12} sm={12} xs={12}>
+                        <div className={classes.conceptContainer}>
+
+                            <Paper className={classes.socialMedia}>
+                                <Typography className={classes.title} variant="h3" align="center" color="textSecondary">
+                                    Social Media Concept
+                                </Typography>
+                                    <Divider />
+                                <Typography color="secondary" align="center" className={classes.warning}>
+                                    ***Still under development***
+                                </Typography>
+                                <Typography className={classes.body}>
+                                    A concept truly to be reckoned with. The amount of thinking, and quite frequently over-thinking, is astounding.
+                                    The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
+                                    as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
+                                </Typography>
+                                <Typography className={classes.body}>
+                                    This concept uses Mongo DB to stores and use the information.
+                                    Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
+                                    There's no need for "Mem-Caching" at this level nor do I know where to begin with implementing that quite yet.
+                                    A private messaging feature will soon be implemented in the near future. It's very close to being finished.
+                                </Typography>
+                            </Paper>
+                            
+                        </div>
+                    </Grid>
                 </div>
             </Parallax>
             <div className="row marg">

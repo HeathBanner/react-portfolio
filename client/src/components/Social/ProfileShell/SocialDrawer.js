@@ -11,8 +11,6 @@ import FormatDate from 'moment';
 
 import AuthContext from '../../../context/AuthContext';
 
-
-
 export default function PersistentDrawerLeft(props) {
   
   const useStyles = makeStyles(theme => ({
@@ -171,8 +169,23 @@ export default function PersistentDrawerLeft(props) {
     },
   }));
 
-  
-  const links = ['/', '/', '/'];
+  const drawerList = [
+    {
+      text: 'Inbox',
+      icon: 'inbox',
+      link: '/'
+    },
+    {
+      text: 'Settings',
+      icon: 'settings',
+      link: '/',
+    },
+    {
+      text: 'Find Friends',
+      icon: 'people',
+      link: '/',
+    }
+  ];
   
   const classes = useStyles();
   const theme = useTheme();
@@ -272,16 +285,18 @@ export default function PersistentDrawerLeft(props) {
             </div>
             <Divider />
             <List>
-              {['Inbox', 'Settings', 'Find Friends'].map((text, index) => (
-                <Link key={index} style={{color: 'black', textDecoration: 'none'}} to={links[index]}>
-                  <ListItem button key={text}>
-                    <ListItemIcon className={classes.listItemIcon} >{index % 2 === 0 ? <Icon>inbox</Icon> : <Icon>mail</Icon>}</ListItemIcon>
-                    <ListItemText primary={text} />
+              {drawerList.map((item, index) => (
+
+                <Link key={item.text} style={{color: 'black', textDecoration: 'none'}} to={item.link}>
+                  <ListItem button>
+                    <ListItemIcon className={classes.listItemIcon} ><Icon>{item.icon}</Icon></ListItemIcon>
+                    <ListItemText primary={item.text} />
                   </ListItem>
                 </Link>
+
               ))}
                 <ListItem onClick={handleMenuItem} button key='Logout'>
-                  <ListItemIcon className={classes.listItemIcon}><Icon>mail</Icon></ListItemIcon>
+                  <ListItemIcon className={classes.listItemIcon}><Icon>power_settings_new</Icon></ListItemIcon>
                   <ListItemText primary='Logout' />
                 </ListItem>
             </List>

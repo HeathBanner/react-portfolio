@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { Parallax } from 'react-parallax';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, GridList, GridListTile, Typography, Paper } from '@material-ui/core';
+import { Divider, useMediaQuery, Grid, GridList, GridListTile, Typography, Paper } from '@material-ui/core';
 
 import Search from './Search';
 import WeatherModule from './WeatherModule';
+
+import weatherBG from './imgs/1x/weatherBG.png'
 
 import 'typeface-roboto';
 
@@ -17,10 +19,28 @@ const useStyles = makeStyles(theme => ({
     //   height: '300px',
       overflow: 'hidden',
       width: '100%',
+      marginTop: 180
     },
     gridList: {
       flexWrap: 'nowrap',
       transform: 'translateZ(0)',
+    },
+    weatherSection: {
+        [theme.breakpoints.up('md')]: {
+            height: '160vh',
+        },
+        [theme.breakpoints.up('sm')]: {
+            height: '170vh',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: '185vh',
+        },
+        [theme.breakpoints.down('xs')]: {
+            height: '180vh',
+        },
+        backgroundImage: `url(${weatherBG})`,
+        backgroundSize: 'cover',
+        height: '160vh',
     },
     weatherInfo: {
         [theme.breakpoints.up('md')]: {
@@ -46,18 +66,26 @@ const useStyles = makeStyles(theme => ({
     },
     concept: {
         [theme.breakpoints.up('md')]: {
-            fontSize: '5rem'
+            fontSize: '5rem',
+            marginLeft: '180px',
         },
         [theme.breakpoints.down('sm')]: {
-            fontSize: '3rem'
+            fontSize: '3.4rem',
+            marginLeft: '180px',
         },
         [theme.breakpoints.down('xs')]: {
-            fontSize: '2rem'
+            fontSize: '2rem',
+            marginLeft: '120px',
         },
         marginTop: '30px',
+        marginLeft: '80px',
+    },
+    title: {
+        marginBottom: 10,
     },
     description: {
-    }
+        marginTop: 20
+    },
   }));
   
 
@@ -157,52 +185,66 @@ function Weather(props) {
 
 
     return (
-        <div>
-            <Parallax
-                bgImage={require('./imgs/gabriele-diwald.png')}
-                bgImageAlt="Weather"
-                strength={400}
-            >
-                <div className="weather-section">
-                    <div className="row">
-                        <div className="col-12">
-                           <Typography className={classes.concept} align="center" variant="h2">
-                                Weather Concept
-                           </Typography>
+        <Fragment>
+            <div className={classes.weatherSection}>
+
+                    <Grid xs={12}>
+
+                        <Typography className={classes.concept} align="center" color="primary" variant="h2">
+                            Weather Concept
+                        </Typography>
+
+                    </Grid>
+
+                    <Grid xs={12}>
+
                         <div className={classes.root}>
                             
                             <GridList cellHeight={getHeight()} className={classes.gridList} cols={getListCols()} spacing={8}>
                                 {weatherInfo}
                             </GridList>
+
                         </div>
-                        </div>
-                    </div>
-                        <Grid container>
-                            <Grid md={6} sm={12} xs={12}>
-                                    <div >
-                                        <Search updateModule={updateModule} />
-                                    </div>
-                            </Grid>
-                            <Grid md={6} sm={12} xs={12}>
-                                <Paper className={classes.weatherInfo}>
-                                    <Typography className={classes.description} align="center" variant="h3">
-                                        Description
-                                    </Typography>
-                                    <Typography variant="body1" align="center" className={classes.description}>
-                                        This concept uses Open Weather Map's 5 day forecast API to render the widgets above.
-                                        It grabs the weather data from Charlotte, NC by default. The color or mood of the 
-                                        navigation bar at the top of the screen is based upon the weather of the currently selected city.
-                                        If the user chooses to change the city, they may do so by selecting the State then City of their choice.
-                                        It'll search a DB of cities from around the world provided by Open Weather Map. The list
-                                        isn't specific so it's been narrowed down to a few cities per state within the US. I'm currently
-                                        searching for a better Database with Coordinates as well as Cities/Provinces and States.
-                                    </Typography>
-                                </Paper>
-                            </Grid>
+
+                    </Grid>
+
+                    <Grid container>
+
+                        <Grid md={6} sm={12} xs={12}>
+                                <div >
+                                    <Search updateModule={updateModule} />
+                                </div>
                         </Grid>
-                </div>
-            </Parallax>
-        </div>
+
+                        <Grid md={6} sm={12} xs={12}>
+
+                            <Paper className={classes.weatherInfo}>
+                                <Typography className={classes.title} align="center" color="textSecondary" variant="h3">
+                                    Description
+                                </Typography>
+
+                                    <Divider />
+
+                                <Typography variant="body1" align="center" className={classes.description}>
+                                    This concept uses Open Weather Map's 5 day forecast API to render the widgets above.
+                                    It grabs the weather data from Charlotte, NC by default. The color or mood of the 
+                                    navigation bar at the top of the screen is based upon the weather of the currently selected city.
+                                    
+                                </Typography>
+
+                                <Typography variant="body1" align="center" className={classes.description}>
+                                    If the user chooses to change the city, they may do so by selecting the State then City of their choice.
+                                    It'll search a DB of cities from around the world provided by Open Weather Map. The list
+                                    isn't specific so it's been narrowed down to a few cities per state within the US. I'm currently
+                                    searching for a better Database with Coordinates as well as Cities/Provinces and States.
+                                </Typography>
+                            </Paper>
+
+                        </Grid>
+
+                    </Grid>
+            </div>
+        </Fragment>
     );
 }
  

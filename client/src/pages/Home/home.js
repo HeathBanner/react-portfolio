@@ -18,39 +18,39 @@ const rain = ['Rain', 'Drizzle']
 const styles = {
     Clouds: {
         Drawer: {
-            toolbar: 'rgb(168, 168, 168)',
+            toolbar: 'linear-gradient(45deg, #c7c7c7 30%, #a8a8a8 90%)',
             barTitle: 'white',
             menuButton: 'white',
         }
     },
     Rain: {
         Drawer: {
-            toolbar: 'rgb(54, 118, 170)',
+            toolbar: 'linear-gradient(45deg, #539ad4 30%, #3676aa 90%)',
             barTitle: 'white',
             menuButton: 'white',
         }
     },
     Clear: {
         Drawer: {
-            toolbar: 'rgb(37, 237, 217)',
+            toolbar: 'linear-gradient(45deg, #3cfae7 30%, #21d9c6 90%)',
             barTitle: 'white',
             menuButton: 'white',
         }
     },
     ThunderStorm: {
         Drawer: {
-            toolbar: 'rgb(219, 214, 57)',
+            toolbar: 'linear-gradient(45deg, #f7f379 30%, #dbd623 90%)',
             barTitle: 'white',
             menuButton: 'white',
         }
     },
     Snow: {
-        toolbar: 'rgb(229, 229, 229)',
+        toolbar: 'linear-gradient(45deg, #f7f7f7 30%, #e5e5e5 90%)',
         barTitle: 'rgb(0, 0, 0, 0.8)',
         menuButton: 'rgb(0, 0, 0, 0.8)',
     },
     Atmosphere: {
-        toolbar: 'rgb(255, 162, 56)',
+        toolbar: 'linear-gradient(45deg, #fc694c 30%, #ff5938 90%)',
         barTitle: 'white',
         menuButton: 'white',
     },
