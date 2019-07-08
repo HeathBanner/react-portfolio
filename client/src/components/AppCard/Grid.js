@@ -11,7 +11,8 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    paddingTop: 120,
+    paddingBottom: 180,
     [theme.breakpoints.down('md')]: {
       paddingLeft: '100px',
     },

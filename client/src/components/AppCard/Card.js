@@ -23,6 +23,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'rgb(235, 235, 235)',
     position: 'relative',
   },
+  cardHeader: {
+    padding: '0px 0px',
+    marginBottom: '10px',
+  },
   tilt: {
     display: 'flex',
     justifyContent: 'center',
@@ -43,7 +47,8 @@ const useStyles = makeStyles(theme => ({
     color: 'white'
   },
   paper: {
-    backgroundColor: 'rgb(255, 140, 0)',
+    background: 'linear-gradient(45deg, #ffa333 30%, #ff8c00 90%)',
+    borderRadius: '4px 4px 0px 0px',
     padding: '10px'
   },
   button: {
@@ -70,6 +75,7 @@ export default function RecipeReviewCard(props) {
     <Card className={classes.card}>
 
       <CardHeader
+        className={classes.cardHeader}
         title={
           <Paper className={classes.paper}>
             <Typography className={classes.title} variant="h5" align="center" >

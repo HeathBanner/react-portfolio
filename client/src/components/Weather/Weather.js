@@ -7,7 +7,7 @@ import { Divider, useMediaQuery, Grid, GridList, GridListTile, Typography, Paper
 import Search from './Search';
 import WeatherModule from './WeatherModule';
 
-import weatherBG from './imgs/1x/weatherBG.png'
+import weatherBG from './imgs/1x/weatherBGNew.png'
 
 import 'typeface-roboto';
 

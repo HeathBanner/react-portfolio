@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, Fragment } from 'react';
 
 import {  Divider, Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Parallax } from 'react-parallax';
 
 import AuthContext from '../../context/AuthContext';
 
@@ -13,6 +12,8 @@ import TimelineTab from '../../components/Social/ProfileShell/TimelineTab';
 import AboutTab from '../../components/Social/ProfileShell/About';
 import FriendsTab from '../../components/Social/ProfileShell/Friends';
 import PhotosTab from '../../components/Social/ProfileShell/Photos';
+
+import BGImage from './imgs/1x/background.png';
 
 const useStyles = makeStyles(theme => ({
     chatMenu: {
@@ -40,12 +41,12 @@ const useStyles = makeStyles(theme => ({
     listItem: {
         padding: '0px 0px 0px 0px'
     },
+    wip: {
+        marginTop: 20,
+    },
     conceptContainer: {
-        height: '80vh',
-        margin: '50px 0px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // height: '80vh',
+        // margin: '50px 0px',
     },
     socialMedia: {
         [theme.breakpoints.down('md')]: {
@@ -67,6 +68,17 @@ const useStyles = makeStyles(theme => ({
         width: 600,
         margin: '10px auto 30px auto',
         padding: 40
+    },
+    intro: {
+        // position: 'relative',
+        backgroundImage: `url(${BGImage})`,
+        backgroundSize: 'cover',
+        height: '160vh',
+        width: '100%',
+        margin: '100px 0px 100px 0px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     description: {
         [theme.breakpoints.down('lg')]: {
@@ -204,15 +216,17 @@ function Profile() {
     })
 
     return (
-        <div style={{height: '100vh', width: '100vw'}} className="container-fluid colp">
-            <Parallax
-                bgImage={require('./imgs/mohammad-alizade.jpg')}
-                bgImageAlt="Social Concept"
-                strength={200}
-            >
-                <div className="row marg colp">
-                    <Grid md={12} sm={12} xs={12}>
-                        <div className={classes.conceptContainer}>
+        <Fragment>
+
+            <Grid xs={12}>
+                <Typography className={classes.wip} variant="h2" align="center" color="primary">
+                    WORK IN PROGRESS
+                </Typography>
+            </Grid>
+
+            <Grid md={12} sm={12} xs={12}>
+             
+                <div className={classes.intro}>
 
                             <Paper className={classes.socialMedia}>
                                 <Typography className={classes.title} variant="h3" align="center" color="textSecondary">
@@ -235,29 +249,29 @@ function Profile() {
                                 </Typography>
                             </Paper>
                             
-                        </div>
-                    </Grid>
                 </div>
-            </Parallax>
-            <div className="row marg">
-                <div style={{zIndex: 1500}} className="col-12 colp">
-                    <SocialDrawer />
-                </div>
-            </div>
-            <div className="row marg">
-                <div style={{zIndex: 1400}} className="col-12 colp">
-                    <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
-                </div>
-            </div>
-            <Grid container>
-                <Grid style={{zIndex: 1500}} xs={12}>
-                    <ProfileNav  tabChange={tabFunc} />
-                </Grid>
             </Grid>
-            <div className="row marg">
-                    {renderTabs()}
+            <div style={{height: '100vh', width: '100vw', position: 'relative'}}>
+                <div className="row marg">
+                    <div style={{zIndex: 1500}} className="col-12 colp">
+                        <SocialDrawer />
+                    </div>
+                </div>
+                <div className="row marg">
+                    <div style={{zIndex: 1400}} className="col-12 colp">
+                        <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
+                    </div>
+                </div>
+                <Grid container>
+                    <Grid style={{zIndex: 1500}} xs={12}>
+                        <ProfileNav  tabChange={tabFunc} />
+                    </Grid>
+                </Grid>
+                <div className="row marg">
+                        {renderTabs()}
+                </div>
             </div>
-        </div>
+        </Fragment>
     );
 }
 
