@@ -1,19 +1,10 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
-import Select from 'react-select';
-import { ThemeProvider } from '@material-ui/styles';
+
 import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
-import Icon from '@material-ui/core/Icon';
+import { Typography, NoSsr, TextField, Paper, MenuItem, Button, Icon } from '@material-ui/core';
+
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import Button from '@material-ui/core/Button';
-import jssPluginPropsSort from 'jss-plugin-props-sort';
+import Select from 'react-select';
 
 
 const useStyles = makeStyles(theme => ({
@@ -49,15 +40,12 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '70%'
   },
-  label: {
-    color: 'white',
-  },
   input: {
     display: 'flex',
     padding: 0,
     height: 'auto',
     width: '100%',
-    fontColor: 'white !important',
+    color: 'white !important',
     '&:hover': {
       cursor: 'pointer',
     }
@@ -118,8 +106,30 @@ const useStyles = makeStyles(theme => ({
   },
   hover: {
     background: 'rgb(232, 240, 255, 0.8)',
+  },
+  underline: {
+    '&:before': {
+        borderBottom: '1px solid #fcdb0d !important',
+    },
+    '&:after': {
+        borderBottom: '2px solid #00d0ff !important',
+    },
+    '&:hover:before': {
+        borderBottom: '2px solid #fcdb0d !important',
+    },
+  },
+  label: {
+    '&.Mui-focused': {
+      color: '#ffbb19'
+    },
+    color: 'rgb(255, 255, 255, 0.6)'
+  },
+  icon: {
+    '&:hover': {
+      color: '#00d0ff'  
+    },
+    color: '#fcdb0d'
   }
-  
 }));
 
 function NoOptionsMessage(props) {
@@ -166,6 +176,7 @@ function Control(props) {
       onChange= {props.selectProps.onChange}
       InputProps={{
         inputComponent,
+        className: classes.underline,
         inputProps: {
           onChange: props.selectProps.onChange,
           className: classes.input,
@@ -242,6 +253,23 @@ SingleValue.propTypes = {
   selectProps: PropTypes.object.isRequired,
 };
 
+function DropdownIndicator(props) {
+  
+  const {
+    selectProps: { classes },
+  } = props;
+
+  return (
+    <Icon className={classes.icon}>keyboard_arrow_down</Icon>
+  );
+}
+
+SingleValue.propTypes = {
+  children: PropTypes.node,
+  innerProps: PropTypes.object,
+  selectProps: PropTypes.object.isRequired,
+};
+
 
 function ValueContainer(props) {
 
@@ -277,6 +305,7 @@ const components = {
   Placeholder,
   SingleValue,
   ValueContainer,
+  DropdownIndicator,
 };
 
 var suggestions = [];
@@ -412,6 +441,9 @@ export default function IntegrationReactSelect(props) {
       '& input': {
         font: 'inherit',
       },
+      '& indicatorContainer': {
+        color: 'white'
+      },
     }),
   };
 
@@ -428,6 +460,7 @@ export default function IntegrationReactSelect(props) {
             InputLabelProps: {
               htmlFor: 'react-select-country',
               shrink: true,
+              className: classes.label
             },
             placeholder: 'Search for a city',
           }}
@@ -435,7 +468,9 @@ export default function IntegrationReactSelect(props) {
             value: suggestion.label,
             label: suggestion.label,
           }))}
+          className={{classes:{icon: classes.icon}}}
           components={components}
+          className={{classes:{icon: classes.icon}}}
           value={selectedState}
           onChange={handleStateInputChange}
         />
@@ -449,6 +484,7 @@ export default function IntegrationReactSelect(props) {
               InputLabelProps: {
                 htmlFor: 'react-select-city',
                 shrink: true,
+                className: classes.label
               },
               placeholder: 'Search for a city',
             }}

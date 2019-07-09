@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { useMediaQuery, GridList, GridListTile } from '@material-ui/core';
+import { useMediaQuery, Typography, GridList, GridListTile } from '@material-ui/core';
 
 import Card from './Card';
 
@@ -11,8 +11,8 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    paddingTop: 120,
-    paddingBottom: 180,
+    paddingTop: 100,
+    paddingBottom: 170,
     [theme.breakpoints.down('md')]: {
       paddingLeft: '100px',
     },
@@ -91,20 +91,27 @@ export default function SingleLineGridList() {
   }
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={gridHeight()} spacing={8} className={classes.gridList} cols={gridCols()}>
+    <Fragment>
 
-        {
-          apps.map((app, index) => {
-          return (
-            <GridListTile classes={{tile: classes.tile}} key={index} >
-              <Card app={app} />
-            </GridListTile>
-          );
-        })
-        }
+      <Typography style={{marginTop: 100}} variant="h2" align="center" color="primary">
+        Previous Work
+      </Typography>
 
-      </GridList>
-    </div>
+      <div className={classes.root}>
+        <GridList cellHeight={gridHeight()} spacing={8} className={classes.gridList} cols={gridCols()}>
+
+          {
+            apps.map((app, index) => {
+            return (
+              <GridListTile classes={{tile: classes.tile}} key={index} >
+                <Card app={app} />
+              </GridListTile>
+            );
+          })
+          }
+
+        </GridList>
+      </div>
+    </Fragment>
   );
 }

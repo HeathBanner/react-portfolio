@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography } from '@material-ui/core';
 
 import Tilt from 'react-tilt';
 import Moment from 'react-moment';
@@ -11,31 +11,30 @@ const useStyles = makeStyles(theme => ({
     root: {
         [theme.breakpoints.up('md')]: {
             width: '70%',
-            margin: '50px auto',  
         },
         [theme.breakpoints.down('md')]: {
             width: '70%',
-            margin: '50px auto',  
         },
         [theme.breakpoints.down('sm')]: {
             width: '80%',
-            margin: '50px auto',  
         },
         [theme.breakpoints.down('xs')]: {
             width:  '95%',
-            margin: '20px 10px',  
         },
         width: '70%',
-        margin: '50px auto',
-        padding: '10px 20px 20px 20px',
+        paddingBottom: 10,
+        margin: '50px 20px',
+        background: 'linear-gradient(45deg, #ffffff 30%, #e3e3e3 90%)'
     },
     header: {
-        backgroundColor: 'rgb(94, 188, 255, 0.7)',
+        background: 'linear-gradient(45deg, #fcdb0d 30%, #fabf32 90%)',
         width: '100%',
         padding: '5px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: '4px 4px 0px 0px',
+        paddingLeft: 10,
     },
     weather: {
         textTransform: 'capitalize',
@@ -51,9 +50,9 @@ const useStyles = makeStyles(theme => ({
     },
     date: {
         display: 'flex',
-        flexWrap: 'wrap-reverse',
+        flexWrap: 'wrap',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     day: {
         margin: '0 10px'
@@ -75,53 +74,55 @@ function WeatherModule(props) {
     var date = FormatDate(props.date)
 
     return (
-        <div>
-            <Paper className={classes.root}>
-                <div className="row">
-                    <Paper className={classes.header}>
-                        <div className="col-6">
-                            <div className={classes.city}>
-                                <Typography variant="h6">
-                                    {props.city}
+        <Paper className={classes.root}>
+            <Grid container>
+                <Paper className={classes.header}>
+                    <Grid xs={9}>
+                        <div className={classes.city}>
+                            <Typography variant="h6">
+                                {props.city}
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid xs={5}>
+                        <div className={classes.date}>
+                                <Typography>
+                                    <Moment className={classes.day} date={date} format="dddd" />
                                 </Typography>
-                            </div>
+                                <Typography>
+                                    <Moment className={classes.monthYear} date={date} format="MMM YYYY" />
+                                </Typography>
                         </div>
-                        <div className="col-6">
-                            <div className={classes.date}>
-                                <Moment className={classes.day} date={date} format="dddd" />
-                                <Moment className={classes.monthYear} date={date} format="MMM YY" />
-                            </div>
-                        </div>
-                    </Paper>
-                </div>
-                <div className="row">
-                    <div className="col-12">
-                        <Typography variant="h6" align="center" className={classes.weather}>
-                            {props.weather}
+                    </Grid>
+                </Paper>
+            </Grid>
+            <Grid container>
+                <Grid xs={12}>
+                    <Typography variant="h6" align="center" className={classes.weather}>
+                        {props.weather}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid container>
+                <Grid xs={12}>
+                    <Tilt className={classes.img}>
+                        <img src={image} alt={props.weather} />
+                    </Tilt>
+                </Grid>
+            </Grid>
+            <Grid container>
+                <Grid xs={12}>
+                    <Paper style={{width: 180, margin: '0 auto'}}>
+                        <Typography align="center" variant="h6">
+                            High: {props.temp_max}&#8457; 
                         </Typography>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12">
-                        <Tilt className={classes.img}>
-                            <img src={image} alt={props.weather} />
-                        </Tilt>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12">
-                        <Paper className={classes.temp}>
-                            <Typography align="center" variant="h6">
-                                High: {props.temp_max}&#8457; 
-                            </Typography>
-                            <Typography align="center">
-                                Low: {props.temp_min}&#8457;
-                            </Typography>
-                        </Paper>
-                    </div>
-                </div>
-            </Paper>
-        </div>
+                        <Typography align="center">
+                            Low: {props.temp_min}&#8457;
+                        </Typography>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Paper>
     );
 }
 

@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 0px 0px 0px'
     },
     wip: {
-        marginTop: 20,
+        marginTop: 50,
     },
     conceptContainer: {
         // height: '80vh',
@@ -242,10 +242,10 @@ function Profile() {
                                     as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
                                 </Typography>
                                 <Typography className={classes.body}>
-                                    This concept uses Mongo DB to stores and use the information.
+                                    This concept uses MongoDB to store and use the information.
                                     Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
                                     There's no need for "Mem-Caching" at this level nor do I know where to begin with implementing that quite yet.
-                                    A private messaging feature will soon be implemented in the near future. It's very close to being finished.
+                                    A private messaging feature will be implemented in the near future. It is very close to being finished.
                                 </Typography>
                             </Paper>
                             

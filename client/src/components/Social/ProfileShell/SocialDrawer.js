@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Tooltip, Zoom, useMediaQuery, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 import Moment from 'react-moment';
 import FormatDate from 'moment';
@@ -56,7 +56,7 @@ export default function PersistentDrawerLeft(props) {
       // justifyContent: 'center',
       // display: 'block',
       // textAlign: 'center',
-      background: 'rgb(255, 145, 71)',
+      background: 'linear-gradient(45deg, #ff9147 30%, #ff7d26 90%)',
     },
     menuButton: {
         position: 'absolute',
@@ -173,17 +173,20 @@ export default function PersistentDrawerLeft(props) {
     {
       text: 'Inbox',
       icon: 'inbox',
-      link: '/'
+      link: '/',
+      tip: 'My inbox is empty. Not by choice :('
     },
     {
       text: 'Settings',
       icon: 'settings',
       link: '/',
+      tip: 'The user, theoretically, would be able to change their email, password, avatar and other settings'
     },
     {
       text: 'Find Friends',
       icon: 'people',
       link: '/',
+      tip: `The pub of the internet...or the cafe if you're bold enough`
     }
   ];
   
@@ -286,19 +289,22 @@ export default function PersistentDrawerLeft(props) {
             <Divider />
             <List>
               {drawerList.map((item, index) => (
-
-                <Link key={item.text} style={{color: 'black', textDecoration: 'none'}} to={item.link}>
-                  <ListItem button>
-                    <ListItemIcon className={classes.listItemIcon} ><Icon>{item.icon}</Icon></ListItemIcon>
-                    <ListItemText primary={item.text} />
-                  </ListItem>
-                </Link>
+                <Tooltip TransitionComponent={Zoom} title={item.tip}>
+                  <Link key={item.text} style={{color: 'black', textDecoration: 'none'}} to={item.link}>
+                    <ListItem button>
+                      <ListItemIcon className={classes.listItemIcon} ><Icon>{item.icon}</Icon></ListItemIcon>
+                      <ListItemText primary={item.text} />
+                    </ListItem>
+                  </Link>
+                </Tooltip>
 
               ))}
+              <Tooltip TransitionComponent={Zoom} title="This button should do what you'd think it would do...if only it were the real website">
                 <ListItem onClick={handleMenuItem} button key='Logout'>
                   <ListItemIcon className={classes.listItemIcon}><Icon>power_settings_new</Icon></ListItemIcon>
                   <ListItemText primary='Logout' />
                 </ListItem>
+              </Tooltip>
             </List>
             <Divider />
             </Drawer>

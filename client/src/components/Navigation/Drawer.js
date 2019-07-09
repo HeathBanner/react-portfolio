@@ -66,7 +66,7 @@ export default function PersistentDrawerLeft(props) {
       display: 'flex',
       alignItems: 'center',
       flexWrap: 'nowrap',
-      background: props.contact ? 'linear-gradient(45deg, #ff6a38 30%, #ff5938 90%)' : props.mood ? `${props.mood.toolbar}` : 'rgb(196, 196, 196)',
+      background: props.contact ? 'linear-gradient(45deg, #ff6a38 30%, #ff5938 90%)' : props.mood ? `${props.mood.toolbar}` : 'linear-gradient(45deg, #3cfae7 30%, #21d9c6 90%)',
     },
     menuButton: {
         position: 'absolute',
