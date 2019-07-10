@@ -9,7 +9,7 @@ function TimelineTab(props) {
 
     return (
         <Fragment>
-            <Grid xs={12}>
+            <Grid item xs={12}>
                 <Story />
                 <Timeline page={props.page} />
             </Grid>

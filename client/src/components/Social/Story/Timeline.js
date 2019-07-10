@@ -82,9 +82,9 @@ function Timeline() {
 
     useEffect(() => {
         if((auth.isLoaded)&&(auth.newStory)) {
-                getStories();
-                auth.updateLoaded(auth.user, false);
-                auth.updateNewStory(auth.user, false);
+            getStories();
+            auth.updateLoaded(auth.user, false);
+            auth.updateNewStory(auth.user, false);
         }
         if((!onLoad) && (auth.user)){
             getStories();

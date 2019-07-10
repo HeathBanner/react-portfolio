@@ -103,12 +103,12 @@ function Photos(props) {
     return (
         <Fragment>
 
-        <Grid xs={12}>
+        <Grid item xs={12}>
             <Typography variant="h3" color="textSecondary" className={classes.header}>
                 Gallery
             </Typography>
         </Grid>
-        <Grid xs={12}>
+        <Grid item xs={12}>
         <GridList cols={gridCols()} cellHeight={gridHeight()} spacing={12} className={classes.gridList}>
             {renderPhotos()}
         </GridList>

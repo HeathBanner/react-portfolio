@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import withWidth from '@material-ui/core/withWidth';
-
 import Home from './pages/Home/home';
 import Social from './pages/Social/Social';
 import Login from './pages/Login/Login';
@@ -30,13 +28,13 @@ function App() {
     updateDidMount: updateDidMount,
     updateNewStory: updateNewStory,
   })
-  const [validated, setValidated] = React.useState(true);
+  // const [validated, setValidated] = React.useState(true);
   const [didMount, setDidMount] = React.useState(false);
 
   function handleLogin(user, authToken) {
     TokenStore.setToken(authToken);
     setAuth({...auth, user, authToken});
-    setValidated(true);
+    // setValidated(true);
   }
   
   function handleLogout() {
@@ -47,30 +45,46 @@ function App() {
     return <Redirect to="/login" />;
   }
 
-  function updateLoaded(user, isLoaded) {
-    setAuth({...auth, user, isLoaded})
+  function updateLoaded(user, isLoaded, newStory) {
+    setAuth({...auth, user, isLoaded, newStory})
   }
 
   function updateDidMount() {
+    console.log('UPDATING DID MOUNT TO FALSE')
     setDidMount(false);
   }
   
   function updateNewStory(user, newStory) {
-    setAuth(...auth, user, newStory);
+    console.log('UPDATING NEW STORY')
+    setAuth({...auth, user, newStory});
   }
 
   useEffect(() => {
     // const { authToken } = auth;
     // if(!authToken){return setValidated(false)};
     if(!didMount) {
-      setDidMount(true)
+        console.log('DID NOT MOUNT')
+        setDidMount(true)
+        fetch('/api/users/portfolio')
+        .then(res => res.json())
+        .then((user) => {
+          // if(!user._id){console.log('NOT USER'); return setValidated(false)}
+          const isLoaded = true;
+          setAuth({...auth, user, isLoaded})
+        })
+        .catch(err => console.log(err));
+        return
+    }
+
+    if((auth.newStory)&&(!auth.isLoaded)) {
+      console.log('REFRESHING AUTH')
       fetch('/api/users/portfolio')
       .then(res => res.json())
       .then((user) => {
-        if(!user._id){return setValidated(false)}
+        // if(!user._id){console.log('NOT USER'); return setValidated(false)}
         const isLoaded = true;
-        setAuth({...auth, user, isLoaded})
-        setValidated(true)
+        console.log('IS LOADED');
+        return setAuth({...auth, user, isLoaded})
       })
       .catch(err => console.log(err));
     }
@@ -98,4 +112,4 @@ function App() {
   );
 }
 
-export default withWidth({initialWidth: 'lg'})(App);
+export default App;

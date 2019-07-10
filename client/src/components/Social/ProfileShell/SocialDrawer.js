@@ -1,6 +1,5 @@
 import React, { useContext, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -190,6 +189,8 @@ export default function PersistentDrawerLeft(props) {
     }
   ];
   
+  var drawerWidth;
+
   const classes = useStyles();
   const theme = useTheme();
   
@@ -197,7 +198,6 @@ export default function PersistentDrawerLeft(props) {
   const sm = useMediaQuery(theme.breakpoints.down('sm'));
   const md = useMediaQuery(theme.breakpoints.down('md'));
   
-  var drawerWidth = 240;
   const drawerWidthDynam = () => {
       if(xs) {return drawerWidth = 120}
       if(sm) {return drawerWidth = 180}
@@ -209,8 +209,6 @@ export default function PersistentDrawerLeft(props) {
   const value = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
-  const [inbox, setInbox] = useState(false); 
-  const [settings, setSettings] = useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -224,11 +222,6 @@ export default function PersistentDrawerLeft(props) {
     // value.onLogout();
   }
 
-  function renderRedirect() {
-    if(inbox){return <Redirect to={'/inbox'} />}
-    if(settings){return <Redirect to={'/settings'} />}
-  }
-
   function getTime() {
     date = FormatDate()
   }
@@ -237,7 +230,6 @@ export default function PersistentDrawerLeft(props) {
 
   return (
       <Fragment>
-        {renderRedirect()}
         <div className={classes.root}>
           <CssBaseline />
           <AppBar
@@ -289,7 +281,7 @@ export default function PersistentDrawerLeft(props) {
             <Divider />
             <List>
               {drawerList.map((item, index) => (
-                <Tooltip TransitionComponent={Zoom} title={item.tip}>
+                <Tooltip TransitionComponent={Zoom} title={item.tip} key={item.text}>
                   <Link key={item.text} style={{color: 'black', textDecoration: 'none'}} to={item.link}>
                     <ListItem button>
                       <ListItemIcon className={classes.listItemIcon} ><Icon>{item.icon}</Icon></ListItemIcon>

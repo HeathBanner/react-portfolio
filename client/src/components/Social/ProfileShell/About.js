@@ -263,12 +263,12 @@ function About(props) {
 
     return (
         <Fragment>
-            <Grid md={4} xs={12}>
+            <Grid item md={4} xs={12}>
                 <List  className={classes.list} component="nav">
                     
                     {renderEditor()}
                     
-                    <ListItem className={{classes:{root: classes.listItemLeft}}} button onClick={() => handleClick('contact')}>
+                    <ListItem className={classes.listItemLeft} button onClick={() => handleClick('contact')}>
                         <ListItemIcon>
                             <Icon>contacts</Icon>
                         </ListItemIcon>
@@ -283,7 +283,7 @@ function About(props) {
                     </ListItem> 
                 </List>
             </Grid>
-            <Grid md={8} xs={12}>
+            <Grid item md={8} xs={12}>
                 {renderList()}
             </Grid>
         </Fragment>

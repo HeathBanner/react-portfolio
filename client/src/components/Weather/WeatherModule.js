@@ -77,14 +77,14 @@ function WeatherModule(props) {
         <Paper className={classes.root}>
             <Grid container>
                 <Paper className={classes.header}>
-                    <Grid xs={9}>
+                    <Grid item xs={9}>
                         <div className={classes.city}>
                             <Typography variant="h6">
                                 {props.city}
                             </Typography>
                         </div>
                     </Grid>
-                    <Grid xs={5}>
+                    <Grid item xs={5}>
                         <div className={classes.date}>
                                 <Typography>
                                     <Moment className={classes.day} date={date} format="dddd" />
@@ -97,21 +97,21 @@ function WeatherModule(props) {
                 </Paper>
             </Grid>
             <Grid container>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <Typography variant="h6" align="center" className={classes.weather}>
                         {props.weather}
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <Tilt className={classes.img}>
                         <img src={image} alt={props.weather} />
                     </Tilt>
                 </Grid>
             </Grid>
             <Grid container>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <Paper style={{width: 180, margin: '0 auto'}}>
                         <Typography align="center" variant="h6">
                             High: {props.temp_max}&#8457; 

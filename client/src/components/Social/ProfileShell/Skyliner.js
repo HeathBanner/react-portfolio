@@ -96,25 +96,11 @@ function Skyliner(props) {
     const [friend, setFriend] = useState(false);
 
 
-    function renderPopper() {
-        return (
-            <Fragment>
-                <Fab aria-controls="simple-menu" aria-haspopup="true" onClick={props.handleClick} className={classes.Fab}>
-                    <Icon>message</Icon>
-                </Fab>
-            </Fragment>
-        );
-    }
-
-
     useEffect(() => {
         if((!loaded)&&(auth.user)&&(props.user)){
             setLoaded(true)
             var result = auth.user.info.friendList.filter(friend => props.user.username === friend.username)
-            console.log(result);
-            console.log(props.user.username);
-            console.log(auth.user.friendList)
-            if(result.length === 1){console.log('HA');setFriend(true)};
+            if(result.length === 1){setFriend(true)};
         }
     });
 

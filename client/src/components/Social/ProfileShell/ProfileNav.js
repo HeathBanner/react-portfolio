@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Tabs, Tab } from '@material-ui/core';
@@ -18,7 +18,7 @@ const tabIndex = ['Timeline', 'About', 'Friends', 'Photos'];
 
 function ProfileNav(props) {
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const classes = useStyles();
 
@@ -26,7 +26,7 @@ function ProfileNav(props) {
         setValue(newValue);
         const newTab = tabIndex[newValue];
         console.log(newTab);
-        props.tabChange.onChange(newTab);
+        props.tabChange(newTab);
     }
 
     return (

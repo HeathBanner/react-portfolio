@@ -65,11 +65,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  function handleExpandClick() {
-    setExpanded(!expanded);
-  }
 
   return (
     <Card className={classes.card}>
@@ -86,7 +81,7 @@ export default function RecipeReviewCard(props) {
       />
 
       <Tilt className={classes.tilt}>
-          <img src={props.app.image} className={classes.media} />
+          <img src={props.app.image} alt={props.app.title} className={classes.media} />
       </Tilt>
 
       <CardContent style={{padding: '0px 10px'}}>

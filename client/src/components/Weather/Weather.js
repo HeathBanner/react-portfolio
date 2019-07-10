@@ -1,5 +1,4 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Parallax } from 'react-parallax';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Divider, useMediaQuery, Grid, GridList, GridListTile, Typography, Paper } from '@material-ui/core';
@@ -92,7 +91,6 @@ const useStyles = makeStyles(theme => ({
 function Weather(props) {
 
     const [weather, setWeather] = useState('');
-    const [weatherToday, setWeatherToday] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
     const [sentRequest, setSentRequest] = useState(false);
     const [parsedForecast, setParsedForecast] = useState(null);
@@ -133,10 +131,9 @@ function Weather(props) {
             fetch('https://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2')
             .then(res => res.json())
             .then((result) => { 
-                var test = result.list[0].main.temp
-                console.log(test*9/5-459.67)
-        
-                console.log(result); setWeather(result); setSentRequest(true); setIsLoaded(true);});
+                setWeather(result);
+                setIsLoaded(true);
+            });
         }
     })
 
@@ -145,22 +142,20 @@ function Weather(props) {
         const filteredResult = weather.list.filter(object => {
             if(dt === '') {dt = object.dt_txt.split(' '); dt = dt[0]; return true}
             const sample = object.dt_txt.split(' ')
-            if (dt !== sample[0]) {dt = sample[0]; console.log(sample[0]); return true}
+            if (dt !== sample[0]) {dt = sample[0]; return true}
         })
         setParsedForecast(filteredResult);
         setIsLoaded(false);
-        setWeatherToday(filteredResult[0]);
         props.grabWeather(filteredResult[0]);
-        console.log(filteredResult[0]);
     }
 
     var weatherInfo = [];
 
     if (parsedForecast) {
-        console.log('PARSE')
-        weatherInfo = parsedForecast.map(object => {
+        console.log('PARSED FORECAST')
+        weatherInfo = parsedForecast.map((object, index) => {
             return (
-            <GridListTile rows={getTileRows()} >
+            <GridListTile rows={getTileRows()} key={index} >
                 <WeatherModule 
                     weather={object.weather[0].description}
                     image={object.weather[0].icon}
@@ -188,7 +183,7 @@ function Weather(props) {
         <Fragment>
             <div className={classes.weatherSection}>
 
-                    <Grid xs={12}>
+                    <Grid item xs={12}>
 
                         <Typography className={classes.concept} align="center" color="primary" variant="h2">
                             Weather Concept
@@ -196,7 +191,7 @@ function Weather(props) {
 
                     </Grid>
 
-                    <Grid xs={12}>
+                    <Grid item xs={12}>
 
                         <div className={classes.root}>
                             
@@ -210,13 +205,13 @@ function Weather(props) {
 
                     <Grid container>
 
-                        <Grid md={6} sm={12} xs={12}>
+                        <Grid item md={6} sm={12} xs={12}>
                                 <div >
                                     <Search updateModule={updateModule} />
                                 </div>
                         </Grid>
 
-                        <Grid md={6} sm={12} xs={12}>
+                        <Grid item md={6} sm={12} xs={12}>
 
                             <Paper className={classes.weatherInfo}>
                                 <Typography className={classes.title} align="center" color="textSecondary" variant="h3">

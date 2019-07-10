@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
+import { emphasize, makeStyles } from '@material-ui/core/styles';
 import { Typography, NoSsr, TextField, Paper, MenuItem, Button, Icon } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
@@ -364,9 +364,7 @@ const states = [
 
 export default function IntegrationReactSelect(props) {
   const classes = useStyles();
-  const theme = useTheme();
 
-  const [queriedState, setQueriedState] = React.useState('');
   const [selectedState, setSelectedState] = React.useState('');
 
   const [queriedCities, setQueriedCities] = React.useState(null);
@@ -407,11 +405,8 @@ export default function IntegrationReactSelect(props) {
   }
 
   function handleStateInputChange(value) {
-    if(value.nativeEvent){
-      const query = value.target.value
-      setQueriedState(query);
-      
-    } else {
+    if(value.nativeEvent){return} 
+    else {
       setSelectedState(value)
       fetch('/api/cities/search', {
         method: 'POST',

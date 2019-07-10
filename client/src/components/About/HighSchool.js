@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 40px'
     },
     paper: {
-        padding: '20px',
         width: '60%',
         padding: '40px',
         [theme.breakpoints.down('lg')]: {

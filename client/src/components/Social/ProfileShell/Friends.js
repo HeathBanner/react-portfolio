@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon, Typography, Avatar, LinearProgress } from '@material-ui/core';
+import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, Typography, Avatar, LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -94,7 +94,7 @@ function Friends(props) {
                 friendList.map((friend, index) => {
                     return (
                         <GridListTile cols={gridCols()}  className={classes.tile} key={friend._id} >
-                            <img src={friend.info.skyline} />
+                            <img src={friend.info.skyline} alt="skyline" />
                             <GridListTileBar 
                                 title={friend.username}
                                 actionIcon={
@@ -127,7 +127,7 @@ function Friends(props) {
     }
 
     return (
-        <Grid className={classes.listContainer} xs={12}>
+        <Grid item className={classes.listContainer} xs={12}>
             <GridList cellHeight={gridHeight()} spacing={18} col={2.5} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
                     <ListSubheader component="div">

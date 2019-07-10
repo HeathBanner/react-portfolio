@@ -1,12 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import AuthContext from '../../../context/AuthContext';
 
 
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
+import { TextField, Icon, Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Fab from '@material-ui/core/Fab';
 
 import Moment from 'moment';
 
@@ -50,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 
 function Story() {
     
-    const [story, setStory] = React.useState('')
+    const [story, setStory] = useState('')
 
     const classes = useStyles();
     const auth = useContext(AuthContext)
@@ -72,7 +69,7 @@ function Story() {
         }).then(res => res.json())
         .then((user) => {
             setStory('');
-            auth.updateDidMount()
+            auth.updateNewStory(auth.user, true);
         })
     }
 

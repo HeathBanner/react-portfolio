@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Grid } from '@material-ui/core';
 
-import AppCard from '../../components/AppCard/Card';
 import Drawer from '../../components/Navigation/Drawer';
 
 import AppGrid from '../../components/AppCard/Grid';
@@ -58,7 +57,7 @@ const styles = {
 
 function Home() {
 
-    const [mood, setMood] = React.useState('');
+    const [mood, setMood] = useState('');
 
     function grabWeather(weather) {
         const newMood = weather.weather[0].main
@@ -70,37 +69,27 @@ function Home() {
 
     return (
         <Grid container>
-            {/* <div className="row">
-                <div className="col-12 colp"> */}
-                <Grid xs={12}>
+
+                <Grid item xs={12}>
                     <Drawer mood={mood.Drawer} />
                 </Grid>
-                {/* </div>
-            </div> */}
-            {/* <div className="row">
-                <div className="col-12 colp"> */}
-                <Grid xs={12}>
+
+                <Grid item xs={12}>
                     <Jumbotron />
                 </Grid>
-                {/* </div>
-            </div> */}
-                <Grid xs={12}>
+
+                <Grid item xs={12}>
                     <AppGrid />
                 </Grid>
-            {/* <div className="row">
-                <div className="col-12 colp"> */}
-                    <Grid xs={12}>
-                        <Weather grabWeather={grabWeather} />
-                    </Grid>
-                {/* </div>
-            </div> */}
-            {/* <div className="row">
-                <div className="col-12 colp"> */}
-                <Grid xs={12}>
+
+                <Grid item xs={12}>
+                    <Weather grabWeather={grabWeather} />
+                </Grid>
+
+                <Grid item xs={12}>
                     <ProfileShell />
                 </Grid>
-                {/* </div>
-            </div> */}
+
         </Grid>
     );
 }

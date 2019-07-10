@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 
-import {  Divider, Popover, Paper, Typography, TextField, Button, List, ListItem, Icon, Chip, Grid } from '@material-ui/core';
+import {  Divider, Paper, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AuthContext from '../../context/AuthContext';
@@ -121,7 +121,6 @@ function Profile() {
 
     const [user, setUser] = useState();
     const [onLoad, setOnLoad] = useState(false);
-    const [tabFunc, setTabFunc] = useState({onChange: handleTabChange});
     const [profileTimeline, setProfileTimeline] = useState(true);
     const [About, setAbout] = useState(false);
     const [Friends, setFriends] = useState(false);
@@ -133,31 +132,6 @@ function Profile() {
 
     function handleClick(event) {
         setOpen(!open);
-    }
-
-    function handleClose() {
-        setOpen(false)
-    }
-
-    function renderMenu() {
-        return (
-            <Popover
-                anchorPosition="anchorPosition"
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                }}
-                className={classes.chatMenu}
-                anchorPosition={{bottom: 0, right: 0}}
-                id="simple-menu"
-                keepMounted
-                open={open}
-                onClose={handleClose}
-            >
-                {/* <Chat /> */}
-            </Popover>
-
-        );
     }
 
     function handleTabChange(tab) {
@@ -218,13 +192,13 @@ function Profile() {
     return (
         <Fragment>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
                 <Typography className={classes.wip} variant="h2" align="center" color="primary">
                     WORK IN PROGRESS
                 </Typography>
             </Grid>
 
-            <Grid md={12} sm={12} xs={12}>
+            <Grid item md={12} sm={12} xs={12}>
              
                 <div className={classes.intro}>
 
@@ -237,14 +211,12 @@ function Profile() {
                                     ***Still under development***
                                 </Typography>
                                 <Typography className={classes.body}>
-                                    A concept truly to be reckoned with. The amount of thinking, and quite frequently over-thinking, is astounding.
                                     The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
                                     as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
                                 </Typography>
                                 <Typography className={classes.body}>
                                     This concept uses MongoDB to store and use the information.
                                     Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
-                                    There's no need for "Mem-Caching" at this level nor do I know where to begin with implementing that quite yet.
                                     A private messaging feature will be implemented in the near future. It is very close to being finished.
                                 </Typography>
                             </Paper>
@@ -263,8 +235,8 @@ function Profile() {
                     </div>
                 </div>
                 <Grid container>
-                    <Grid style={{zIndex: 1500}} xs={12}>
-                        <ProfileNav  tabChange={tabFunc} />
+                    <Grid item style={{zIndex: 1500}} xs={12}>
+                        <ProfileNav  tabChange={handleTabChange} />
                     </Grid>
                 </Grid>
                 <div className="row marg">
