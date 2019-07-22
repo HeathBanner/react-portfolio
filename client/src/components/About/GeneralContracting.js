@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper, Divider } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography, Paper, Divider, useMediaQuery } from '@material-ui/core';
 
 import { Parallax } from 'react-parallax';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
             padding: '40px',
         },
         [theme.breakpoints.down('md')]: {
-            width: '60%',
+            width: '70%',
             padding: '40px',
         },
         [theme.breakpoints.down('sm')]: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
             fontSize: '1rem'
         },
         [theme.breakpoints.down('xs')]: {
-            fontSize: '1.2rem'
+            fontSize: '1rem'
         },
     },
     construction: {
@@ -68,6 +68,19 @@ const useStyles = makeStyles(theme => ({
 function GeneralContracting() {
 
     const classes = useStyles();
+    const theme = useTheme();
+
+    const lg = useMediaQuery(theme.breakpoints.up('md'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const getVariant = () => {
+        if(xs) { return 'h4' }
+        if(sm) { return 'h3' }
+        if(md) { return 'h2' }
+        if(lg) { return 'h2' }
+    };
 
     return (
         <Fragment>
@@ -79,7 +92,7 @@ function GeneralContracting() {
                 <div className={classes.parallax}>
                     <Paper className={classes.paper}>
 
-                        <Typography className={classes.construction} style={{marginBottom: '10px'}} variant="h2">
+                        <Typography style={{marginBottom: '10px'}} variant={getVariant()}>
                             Construction
                         </Typography>
 

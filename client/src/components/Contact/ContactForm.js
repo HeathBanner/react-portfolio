@@ -94,16 +94,18 @@ function ContactForm() {
     const classes = useStyles();
 
     function handleSubmit(e) {
+
         e.preventDefault();
-        console.log(name, email, phone, message);
+
         const data = {name: name, email: email, phone: phone, message: message};
+        
         fetch('/api/contact/newContact', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then((response) => {
-            console.log(response);
             setOpen(true)
             setName('');
             setEmail('');

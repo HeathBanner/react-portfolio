@@ -25,7 +25,6 @@ function ProfileNav(props) {
     function handleChange(event, newValue) {
         setValue(newValue);
         const newTab = tabIndex[newValue];
-        console.log(newTab);
         props.tabChange(newTab);
     }
 

@@ -60,11 +60,18 @@ function Home() {
     const [mood, setMood] = useState('');
 
     function grabWeather(weather) {
+
         const newMood = weather.weather[0].main
-        if(atmosphere.includes(newMood)){setMood(styles.Atmosphere)}
-        else if(rain.includes(newMood)){setMood(styles.Rain)}
-        else {setMood(styles[newMood])}
-        console.log(styles[newMood].Drawer);   
+
+        if(atmosphere.includes(newMood)) {
+            setMood(styles.Atmosphere);
+        }
+        else if(rain.includes(newMood)){
+            setMood(styles.Rain);
+        } 
+        else {
+            setMood(styles[newMood]);
+        }
     }
 
     return (

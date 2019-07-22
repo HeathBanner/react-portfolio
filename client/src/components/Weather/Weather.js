@@ -5,6 +5,7 @@ import { Divider, useMediaQuery, Grid, GridList, GridListTile, Typography, Paper
 
 import Search from './Search';
 import WeatherModule from './WeatherModule';
+import Description from './Description';
 
 import weatherBG from './imgs/1x/weatherBGNew.png'
 
@@ -15,7 +16,6 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'space-around',
-    //   height: '300px',
       overflow: 'hidden',
       width: '100%',
       marginTop: 180
@@ -41,28 +41,6 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: 'cover',
         height: '160vh',
     },
-    weatherInfo: {
-        [theme.breakpoints.up('md')]: {
-            width: '70%',
-            margin: '50px auto',
-            padding: '20px 40px',
-        },
-        [theme.breakpoints.up('sm')]: {
-            width: '90%',
-            margin: '50px auto',
-            padding: '20px 40px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '90%',
-            margin: '20px auto',
-            padding: '20px 40px',
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '90%',
-            margin: '20px auto',
-            padding: '10px 20px',
-        },
-    },
     concept: {
         [theme.breakpoints.up('md')]: {
             fontSize: '5rem',
@@ -78,12 +56,6 @@ const useStyles = makeStyles(theme => ({
         },
         marginTop: '30px',
         marginLeft: '80px',
-    },
-    title: {
-        marginBottom: 10,
-    },
-    description: {
-        marginTop: 20
     },
   }));
   
@@ -152,9 +124,11 @@ function Weather(props) {
     var weatherInfo = [];
 
     if (parsedForecast) {
-        console.log('PARSED FORECAST')
+
         weatherInfo = parsedForecast.map((object, index) => {
+            
             return (
+
             <GridListTile rows={getTileRows()} key={index} >
                 <WeatherModule 
                     weather={object.weather[0].description}
@@ -166,16 +140,20 @@ function Weather(props) {
                     date={object.dt_txt}
                 />
             </GridListTile>
+
             )
-        })
+        });
     } 
 
     function updateModule(coords) {
+
         setParsedForecast('');
-        console.log(coords)
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0].coord.lat}&lon=${coords[0].coord.lon}&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2`)
         .then(res => res.json())
-        .then((result) => {console.log(result); setWeather(result); setIsLoaded(true); });
+        .then((result) => {
+            setWeather(result); 
+            setIsLoaded(true); 
+        });
     }
 
 
@@ -205,35 +183,15 @@ function Weather(props) {
 
                     <Grid container>
 
-                        <Grid item md={6} sm={12} xs={12}>
+                        <Grid item md={12} sm={12} xs={12}>
                                 <div >
                                     <Search updateModule={updateModule} />
                                 </div>
                         </Grid>
 
-                        <Grid item md={6} sm={12} xs={12}>
+                        <Grid item md={12} sm={12} xs={12}>
 
-                            <Paper className={classes.weatherInfo}>
-                                <Typography className={classes.title} align="center" color="textSecondary" variant="h3">
-                                    Description
-                                </Typography>
-
-                                    <Divider />
-
-                                <Typography variant="body1" align="center" className={classes.description}>
-                                    This concept uses Open Weather Map's 5 day forecast API to render the widgets above.
-                                    It grabs the weather data from Charlotte, NC by default. The color or mood of the 
-                                    navigation bar at the top of the screen is based upon the weather of the currently selected city.
-                                    
-                                </Typography>
-
-                                <Typography variant="body1" align="center" className={classes.description}>
-                                    If the user chooses to change the city, they may do so by selecting the State then City of their choice.
-                                    It'll search a DB of cities from around the world provided by Open Weather Map. The list
-                                    isn't specific so it's been narrowed down to a few cities per state within the US. I'm currently
-                                    searching for a better Database with Coordinates as well as Cities/Provinces and States.
-                                </Typography>
-                            </Paper>
+                            <Description />
 
                         </Grid>
 

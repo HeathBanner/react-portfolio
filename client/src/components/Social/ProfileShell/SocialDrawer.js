@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Tooltip, Zoom, useMediaQuery, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { CircularProgress, Tooltip, Zoom, useMediaQuery, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 import Moment from 'react-moment';
 import FormatDate from 'moment';
@@ -52,9 +52,6 @@ export default function PersistentDrawerLeft(props) {
       display: 'flex',
       alignItems: 'center',
       flexWrap: 'nowrap',
-      // justifyContent: 'center',
-      // display: 'block',
-      // textAlign: 'center',
       background: 'linear-gradient(45deg, #ff9147 30%, #ff7d26 90%)',
     },
     menuButton: {
@@ -64,17 +61,10 @@ export default function PersistentDrawerLeft(props) {
         color: props.mood ? `${props.mood.menuButton}` : 'white',
     },
     barTitle: {
-      [theme.breakpoints.down('md')]: {
-
-      },
-      [theme.breakpoints.down('sm')]: {
-
-      },
       [theme.breakpoints.down('xs')]: {
         top: '50%',
         right: '0%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'rgb(255, 145, 71)',
         zIndex: '10',
         padding: '0px 5px',
       },
@@ -97,7 +87,6 @@ export default function PersistentDrawerLeft(props) {
     },
     drawer: {
       width: '0px',
-      // width: drawerWidth,
       flexShrink: 0,
     },
     drawerPaper: {
@@ -251,9 +240,9 @@ export default function PersistentDrawerLeft(props) {
               </IconButton>
 
                 <Link className={classes.barTitle} to='/'>
-                  <Avatar alt={value.user ? value.user.username : ''} src='/imgs/avatar.jpg' />
+                  <Avatar alt={value.user ? value.user.username : ''} src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8`} />
                   <Typography className={classes.typo} variant="h6">
-                    {value.user ? value.user.username : 'Anon'}
+                    {value.user ? value.user.username : <CircularProgress />}
                   </Typography>
                 </Link>
 

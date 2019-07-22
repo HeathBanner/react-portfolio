@@ -50,12 +50,10 @@ function App() {
   }
 
   function updateDidMount() {
-    console.log('UPDATING DID MOUNT TO FALSE')
     setDidMount(false);
   }
   
   function updateNewStory(user, newStory) {
-    console.log('UPDATING NEW STORY')
     setAuth({...auth, user, newStory});
   }
 
@@ -63,7 +61,6 @@ function App() {
     // const { authToken } = auth;
     // if(!authToken){return setValidated(false)};
     if(!didMount) {
-        console.log('DID NOT MOUNT')
         setDidMount(true)
         fetch('/api/users/portfolio')
         .then(res => res.json())
@@ -72,7 +69,7 @@ function App() {
           const isLoaded = true;
           setAuth({...auth, user, isLoaded})
         })
-        .catch(err => console.log(err));
+        .catch(err => { return });
         return
     }
 

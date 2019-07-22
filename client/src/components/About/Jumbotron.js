@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
 
 import { Parallax } from 'react-parallax';
 
@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
         },
         [theme.breakpoints.down('md')]: {
             marginTop: '20px',
+            marginLeft: '0px',
         },
         [theme.breakpoints.down('sm')]: {
             marginTop: '20px',
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        padding: '0px 40px'
+        // padding: '0px 40px'
     },
     paper: {
         padding: '20px'
@@ -42,6 +43,20 @@ const useStyles = makeStyles(theme => ({
 function Jumbotron() {
 
     const classes = useStyles();
+    const theme = useTheme();
+
+    const lg = useMediaQuery(theme.breakpoints.up('md'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const getVariant = () => {
+        if(xs) { return 'h5' }
+        if(sm) { return 'h3' }
+        if(md) { return 'h2' }
+        if(lg) { return 'h1' }
+    };
+
 
     return (
         <Fragment>

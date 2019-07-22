@@ -72,15 +72,16 @@ function Friends(props) {
     const [friendList, setFriendList] = useState([])
 
     useEffect(() => {
+
         if((!loaded) && (props.user)) {
-            console.log(props.user)
+            
             fetch('/api/social/getFriends', {
                 method: 'POST',
                 body: JSON.stringify({id: props.user._id}),
                 headers: {'Content-Type': 'application/json'}
-            }).then(res => res.json())
+            })
+            .then(res => res.json())
             .then((result) => {
-                console.log(result)
                 setFriendList([...result])
                 setLoaded(true);
             });

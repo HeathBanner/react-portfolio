@@ -486,7 +486,7 @@ export default function IntegrationReactSelect(props) {
             options={queriedCities ? queriedCities.map(suggestion => ({
               value: suggestion.name,
               label: suggestion.name,
-            })) : console.log('not yet')}
+            })) : ''}
             value={selectedCity}
             onChange={handleCityInputChange}
             components={components}

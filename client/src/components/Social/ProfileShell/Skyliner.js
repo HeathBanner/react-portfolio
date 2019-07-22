@@ -115,9 +115,9 @@ function Skyliner(props) {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then((result) => {
-            console.log(result);
             setFriend(true);
         });
     };
@@ -135,7 +135,7 @@ function Skyliner(props) {
                         <div className={`row ${classes.skylinerRow}`}>
                             <div className={`col-6 ${classes.skylinerContent}`}>
                                 <div className={classes.skylinerDivLeft}>
-                                <Avatar src={props.user.info.avatar} className={classes.profileAvatar}/>
+                                <Avatar src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8`} className={classes.profileAvatar}/>
                                     <Typography
                                         display="inline"
                                         variant="h2"

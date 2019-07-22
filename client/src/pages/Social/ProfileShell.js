@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 
-import {  Divider, Paper, Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {  useMediaQuery, Typography, Grid } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import AuthContext from '../../context/AuthContext';
 
+import DescPaper from '../../components/Social/ProfileShell/DescPaper';
+import DescPopover from '../../components/Social/ProfileShell/DescPopover';
 import SocialDrawer from '../../components/Social/ProfileShell/SocialDrawer';
 import Skyliner from '../../components/Social/ProfileShell/Skyliner';
 import ProfileNav from '../../components/Social/ProfileShell/ProfileNav';
@@ -80,41 +82,6 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    description: {
-        [theme.breakpoints.down('lg')]: {
-            width: '60%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('md')]: {
-            width: '70%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '80%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '80%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        width: '70%',
-        margin: '10px auto',
-        padding: '20px',
-    },
-    title: {
-        marginBottom: 10
-    },
-    warning: {
-        marginTop: 20,
-        fontWeight: 'bold',
-    },
-    body: {
-        marginTop: 20,
-    },
 }))
 
 function Profile() {
@@ -128,7 +95,14 @@ function Profile() {
     const [open, setOpen] = useState(true);
 
     const classes = useStyles();
+    const theme = useTheme();
+
     const auth = useContext(AuthContext);
+
+    const lg = useMediaQuery(theme.breakpoints.up('md'));
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
 
     function handleClick(event) {
         setOpen(!open);
@@ -165,6 +139,13 @@ function Profile() {
         }
     };
 
+    const renderDescription = () => {
+        if(xs) { return <DescPopover /> }
+        if(sm) { return <DescPaper /> }
+        if(md) { return <DescPaper /> }
+        if(lg) { return <DescPaper/> }
+    };
+
     function renderTabs() {
         if(user) {
             if(profileTimeline){return <TimelineTab page={{handle: 'HeathBanner'}} />}
@@ -199,29 +180,13 @@ function Profile() {
             </Grid>
 
             <Grid item md={12} sm={12} xs={12}>
-             
+
                 <div className={classes.intro}>
 
-                            <Paper className={classes.socialMedia}>
-                                <Typography className={classes.title} variant="h3" align="center" color="textSecondary">
-                                    Social Media Concept
-                                </Typography>
-                                    <Divider />
-                                <Typography color="secondary" align="center" className={classes.warning}>
-                                    ***Still under development***
-                                </Typography>
-                                <Typography className={classes.body}>
-                                    The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
-                                    as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
-                                </Typography>
-                                <Typography className={classes.body}>
-                                    This concept uses MongoDB to store and use the information.
-                                    Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
-                                    A private messaging feature will be implemented in the near future. It is very close to being finished.
-                                </Typography>
-                            </Paper>
-                            
+                    {renderDescription()}
+                    
                 </div>
+
             </Grid>
             <div style={{height: '100vh', width: '100vw', position: 'relative'}}>
                 <div className="row marg">

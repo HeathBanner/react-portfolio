@@ -46,18 +46,19 @@ function Timeline(props) {
     useEffect(() => {
         
         if((auth.isLoaded)&&(auth.newStory)) {
-            console.log('AUTH IS LOADED')
+
             auth.updateLoaded(auth.user, false, false);
             getStories();
             setSorted(false)
         }
 
         if((!onLoad) && (auth.user)){
+
             setOnLoad(true)
-            console.log('RESET')
-            var storyStorage = [];
+            let storyStorage = [];
             let storyIDList = {};
-            auth.user.info.authored_stories.map((story, index) => {
+            
+            auth.user.info.authored_stories.map((story) => {
                 storyIDList[story._id] = false
                 storyStorage.push(story);
             });
@@ -70,11 +71,13 @@ function Timeline(props) {
         }   
 
         if(newComment.open) {
-            console.log('NEW COMMENT')
+
             setNewComment({open: false, storyId: ''});
-            var storyStorage = [];
+            
+            let storyStorage = [];
             let storyIDList = {};
-            stories.map((story, index) => {
+            
+            stories.map((story) => {
                 
                 if(story._id === newComment.storyId){
                     storyStorage.push(story); 
@@ -99,18 +102,22 @@ function Timeline(props) {
             method: 'POST',
             body: JSON.stringify({id: auth.user.info}),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then((result) => {
-            var storyStorage = result;
-            var storyIDList = {};
+            
+            let storyStorage = result;
+            let storyIDList = {};
+            
             auth.user.info.authored_stories.map((story, index) => {
                 storyIDList[story._id] = false
                 storyStorage.push(story);
             });
+            
             storyStorage.sort((a, b) => {
                 return new Date(b.time) - new Date(a.time);
             })
-            console.log(storyStorage);
+
             setStories(storyStorage);
             setSorted(true);
             setStoryIDs(storyIDList);
@@ -118,16 +125,13 @@ function Timeline(props) {
     }
     
     function handleDelete(id) {
-        console.log(id);
+
         fetch('/api/social/deleteStory', {
             method: 'POST',
             body: JSON.stringify({id: id}),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-        .then((user) => {
-            console.log(user);
-            // auth.updateAuth(user);
         })
+        .then(res => {});
     }
 
     function handleCommentInput(e) {
@@ -137,13 +141,16 @@ function Timeline(props) {
 
     function handleCommentSubmit(id, username) {
         const time = GetMoment();
+        
         const data = {
             time: time,
             id: id,
             userId: auth.user._id,
             comment: commentInput,
         };
+
         var newStories = stories;
+
         newStories.map((item, index) => {
             
             if(item._id === id) {
@@ -155,15 +162,15 @@ function Timeline(props) {
                 });
             }
         })
-        console.log(newStories);
+
         setStories(newStories);
         setNewComment({open: true, storyId: id})
-        console.log(data);
         fetch('/api/social/newComment', {
             method: 'POST',
             body: JSON.stringify({data}),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then((user) => {
             setCommentInput('');
         });
@@ -171,50 +178,50 @@ function Timeline(props) {
 
     function renderTimeline() {
         if((sorted)&&(!auth.newStory)){
-            console.log('RENDER TIMELINE')
-        return (
-            stories.map((story, index) => (
-                <Fragment key={story._id}>
-                <Paper>
-                    <ListItem className={classes.listItem}>
-                        <ListItemAvatar><Avatar alt={story._id} src="/imgs/avatar.jpg" /></ListItemAvatar>
-                        <ListItemText 
-                            primary={`${story.authored_by.username}: ${story.text}`} 
-                            secondary={
-                                <Moment date={story.time} format={'dddd h:mm a'} />
-                            }
-                        >
-                        </ListItemText>
-                        <IconButton onClick={() => expandComment(story._id)}>
-                            <Icon>{storyIDs ? storyIDs[story._id] ? 'expand_less' : 'expand_more' : false}</Icon>
-                        </IconButton>
-                        <IconButton onClick={() => handleDelete(story._id)}>
-                            <Icon>delete_outline</Icon>
-                        </IconButton>
-                    </ListItem>
-                    <Collapse className={classes.collapse} in={storyIDs ? storyIDs[story._id] : false} timeout="auto" unmountOnExit>
-                        <List disablePadding>
-                            {renderComments(story.comments)}
-                        </List>
-                        <div className={classes.form}>
-                            <TextField
-                                name='123'
-                                value={commentInput}
-                                variant="outlined"
-                                label="Add a comment"
-                                onChange={handleCommentInput}
+
+            return (
+                stories.map((story, index) => (
+                    <Fragment key={story._id}>
+                    <Paper>
+                        <ListItem className={classes.listItem}>
+                            <ListItemAvatar><Avatar alt={story._id} src="/imgs/avatar.jpg" /></ListItemAvatar>
+                            <ListItemText 
+                                primary={`${story.authored_by.username}: ${story.text}`} 
+                                secondary={
+                                    <Moment date={story.time} format={'dddd h:mm a'} />
+                                }
                             >
-                            </TextField>
-                                <IconButton onClick={() => handleCommentSubmit(story._id, story.authored_by.username)}>
-                                    <Icon>add_circle</Icon>
-                                </IconButton>
-                        </div>
-                    </Collapse>
-                    </Paper>
-                </Fragment>
-            ))
-        );          
-        } else {return <CircularProgress size={100} color="secondary" thickness={2.6} style={{display: 'block', margin: '40px auto 0px auto'}}  />}
+                            </ListItemText>
+                            <IconButton onClick={() => expandComment(story._id)}>
+                                <Icon>{storyIDs ? storyIDs[story._id] ? 'expand_less' : 'expand_more' : false}</Icon>
+                            </IconButton>
+                            <IconButton onClick={() => handleDelete(story._id)}>
+                                <Icon>delete_outline</Icon>
+                            </IconButton>
+                        </ListItem>
+                        <Collapse className={classes.collapse} in={storyIDs ? storyIDs[story._id] : false} timeout="auto" unmountOnExit>
+                            <List disablePadding>
+                                {renderComments(story.comments)}
+                            </List>
+                            <div className={classes.form}>
+                                <TextField
+                                    name='123'
+                                    value={commentInput}
+                                    variant="outlined"
+                                    label="Add a comment"
+                                    onChange={handleCommentInput}
+                                >
+                                </TextField>
+                                    <IconButton onClick={() => handleCommentSubmit(story._id, story.authored_by.username)}>
+                                        <Icon>add_circle</Icon>
+                                    </IconButton>
+                            </div>
+                        </Collapse>
+                        </Paper>
+                    </Fragment>
+                ))
+            );          
+        } else { return <CircularProgress size={100} color="secondary" thickness={2.6} style={{display: 'block', margin: '40px auto 0px auto'}}  /> }
     }
 
     function renderComments(comments) {
@@ -237,8 +244,8 @@ function Timeline(props) {
     };
 
     function expandComment(id) {
+
         const newCommentState = !storyIDs[id];
-        console.log(newCommentState)
         setStoryIDs({...storyIDs, [id]: newCommentState});
     }
 
