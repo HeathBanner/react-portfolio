@@ -51,16 +51,16 @@ const apps = [
     repo: 'https://github.com/HeathBanner/FutureScaper'
   },
   {
-    title: 'Scraper Boy',
-    description: "Scraper Boy currently pulls articles from CNN's US and World sections and stores it with in the database. User are then allowed to comment or favorite each article.",
-    image: '/imgs/logo.png',
-    website: 'https://scrapeyboi.herokuapp.com/',
-    repo: 'https://github.com/HeathBanner/Scraper'
+    title: 'RPS',
+    description: "RPS is a Rock Paper Scissor real-time game. It uses Firestore and Firebase for messaging, authentication and in-game experience.",
+    image: '/imgs/rps.png',
+    website: 'https://heathbanner.github.io/RPS/',
+    repo: 'https://github.com/HeathBanner/RPS'
   },
   {
     title: 'Roam',
     description: 'ROAM is a travel app where the user can login and navigate around the world to different travel destinations.',
-    image: '/imgs/logo.png',
+    image: '/imgs/travel.png',
     website: 'https://snappytravelapp.herokuapp.com/',
     repo: 'https://github.com/Pawhurr/Roam'
   }

@@ -67,10 +67,9 @@ function App() {
         .then((user) => {
           // if(!user._id){console.log('NOT USER'); return setValidated(false)}
           const isLoaded = true;
-          setAuth({...auth, user, isLoaded})
+          return setAuth({...auth, user, isLoaded})
         })
         .catch(err => { return });
-        return
     }
 
     if((auth.newStory)&&(!auth.isLoaded)) {
