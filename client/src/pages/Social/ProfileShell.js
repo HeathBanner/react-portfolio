@@ -46,50 +46,49 @@ const useStyles = makeStyles(theme => ({
     wip: {
         marginTop: 50,
     },
-    conceptContainer: {
-        // height: '80vh',
-        // margin: '50px 0px',
-    },
+    conceptContainer: {},
     socialMedia: {
         [theme.breakpoints.down('md')]: {
-            // height: '100%',
             width: '70%',
             margin: '10px auto',
         },
         [theme.breakpoints.down('sm')]: {
-            // height: '100%',
             width: '80%',
             margin: '10px auto',
         },
         [theme.breakpoints.down('xs')]: {
-            // height: '100%',
             width: '80%',
             margin: '10px auto 10px auto',
         },
-        // height: '100%',
         width: 600,
         margin: '10px auto 30px auto',
         padding: 40
     },
     intro: {
-        // position: 'relative',
+        [theme.breakpoints.down('xs')]: {
+            height: '170vh',
+        },
         backgroundImage: `url(${BGImage})`,
         backgroundSize: 'cover',
-        height: '160vh',
+        height: '150vh',
         width: '100%',
-        margin: '100px 0px 100px 0px',
+        marginTop: '100px',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
-}))
+    whiteOut: {
+        backgroundColor: 'white',
+        zIndex: 1400,
+    },
+}));
 
 function Profile() {
 
     const [user, setUser] = useState();
     const [onLoad, setOnLoad] = useState(false);
-    const [profileTimeline, setProfileTimeline] = useState(true);
-    const [About, setAbout] = useState(false);
+    const [profileTimeline, setProfileTimeline] = useState(false);
+    const [About, setAbout] = useState(true);
     const [Friends, setFriends] = useState(false);
     const [Photos, setPhotos] = useState(false);
     const [open, setOpen] = useState(true);
@@ -173,43 +172,49 @@ function Profile() {
     return (
         <Fragment>
 
-            <Grid item xs={12}>
-                <Typography className={classes.wip} variant="h2" align="center" color="primary">
-                    WORK IN PROGRESS
-                </Typography>
-            </Grid>
+            <Grid container>
 
-            <Grid item md={12} sm={12} xs={12}>
-
-                <div className={classes.intro}>
-
-                    {renderDescription()}
-                    
-                </div>
-
-            </Grid>
-            <div style={{height: '100vh', width: '100vw', position: 'relative'}}>
-                <div className="row marg">
-                    <div style={{zIndex: 1500}} className="col-12 colp">
-                        <SocialDrawer />
-                    </div>
-                </div>
-                <div className="row marg">
-                    <div style={{zIndex: 1400}} className="col-12 colp">
-                        <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
-                    </div>
-                </div>
-                <Grid container>
-                    <Grid item style={{zIndex: 1500}} xs={12}>
-                        <ProfileNav  tabChange={handleTabChange} />
-                    </Grid>
+                <Grid item xs={12}>
+                    <Typography className={classes.wip} variant="h2" align="center" color="primary">
+                        WORK IN PROGRESS
+                    </Typography>
                 </Grid>
-                <div className="row marg">
-                        {renderTabs()}
-                </div>
-            </div>
+
+                <Grid item className={classes.intro} md={12} sm={12} xs={12}>
+
+                        {/* {renderDescription()} */}
+
+                    <Grid className={classes.whiteOut} container>
+
+                            <Grid item xs={12}>
+
+                                <SocialDrawer />
+
+                            </Grid>
+                            <Grid item xs={12}>
+
+                                <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
+                            
+                            </Grid>
+                            <Grid item style={{zIndex: 1500}} xs={12}>
+
+                                <ProfileNav  tabChange={handleTabChange} />
+
+                            </Grid>
+                            <Grid item xs={12}>
+
+                                {renderTabs()}
+
+                            </Grid>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+
         </Fragment>
     );
-}
+};
 
 export default Profile;

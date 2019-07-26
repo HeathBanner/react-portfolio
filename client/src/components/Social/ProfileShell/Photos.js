@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 
-import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: theme.palette.background.paper, 
-        // width: '70%',
-   
     },
     header: {
         margin: '20px 0px',
@@ -33,12 +30,11 @@ const useStyles = makeStyles(theme => ({
     icon: {
         color: 'white',
     },
-    sorry: {
-        
+    sorry: {  
     },
-}))
+}));
 
-function Photos(props) {
+const Photos = (props) => {
 
     const classes = useStyles();
     const theme = useTheme();
@@ -62,60 +58,76 @@ function Photos(props) {
         if(mdUp) {return 2}
     }
 
-
-    function renderPhotos() {
+    const renderPhotos = () => {
 
         if(props.info.gallery.length >= 1) {
+
             return (
+
                 props.info.gallery.map((photo, index) => {
+
                     return (
-                                <GridListTile cols={1} key={index} className={classes.tile}>
-                                    <img src={photo.img} alt={photo.title} />
-                                    <GridListTileBar 
-                                        title={photo.title}
-                                        titlePosition="top"
-                                        actionIcon={
-                                            <IconButton className={classes.icon}>
-                                                <Icon>star_border</Icon>
-                                            </IconButton>
-                                        }
-                                        actionPosition="left"
-                                        className={classes.titleBar}
-                                    />
-                                </GridListTile>
+                        <GridListTile cols={1} key={index} className={classes.tile}>
+                            
+                            <img src={photo.img} alt={photo.title} />
+                            
+                            <GridListTileBar 
+                                title={photo.title}
+                                titlePosition="top"
+                                actionIcon={
+                                    <IconButton className={classes.icon}>
+                                        <Icon>star_border</Icon>
+                                    </IconButton>
+                                }
+                                actionPosition="left"
+                                className={classes.titleBar}
+                            />
+                        </GridListTile>
                     );
                 })
             );
-        } else {
+        } 
+        else {
             return (
+
                 <div className={classes.sorry}>
+
                     <Typography variant="h4" align="center" color="textSecondary" >
                         Sorry, no photos to show
                     </Typography>
+
                     <Typography variant="h4" align="center" color="textSecondary" >
                         {`¯|_(ツ)_/¯`}
                     </Typography>
+
                 </div>
             );
         }
-    }
+    };
 
     return (
         <Fragment>
 
-        <Grid item xs={12}>
-            <Typography variant="h3" color="textSecondary" className={classes.header}>
-                Gallery
-            </Typography>
-        </Grid>
-        <Grid item xs={12}>
-        <GridList cols={gridCols()} cellHeight={gridHeight()} spacing={12} className={classes.gridList}>
-            {renderPhotos()}
-        </GridList>
-        </Grid>
+            <Grid item xs={12}>
+
+                <Typography variant="h3" color="textSecondary" className={classes.header}>
+                    Gallery
+                </Typography>
+
+            </Grid>
+
+            <Grid item xs={12}>
+
+                <GridList cols={gridCols()} cellHeight={gridHeight()} spacing={12} className={classes.gridList}>
+                    
+                    {renderPhotos()}
+                
+                </GridList>
+
+            </Grid>
 
         </Fragment>
     );
-}
+};
 
 export default Photos;

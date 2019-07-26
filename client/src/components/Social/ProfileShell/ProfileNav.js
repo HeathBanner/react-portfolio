@@ -16,35 +16,43 @@ const useStyles = makeStyles({
 
 const tabIndex = ['Timeline', 'About', 'Friends', 'Photos'];
 
-function ProfileNav(props) {
+const ProfileNav = (props) => {
 
     const [value, setValue] = useState(0);
 
     const classes = useStyles();
 
-    function handleChange(event, newValue) {
+    const handleChange = (event, newValue) => {
+
         setValue(newValue);
+
         const newTab = tabIndex[newValue];
+
         props.tabChange(newTab);
-    }
+    };
 
     return (
-            <Paper className={classes.root}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                    variant="fullWidth"
-                >
-                    <Tab wrapped={true} className={classes.label} label="Timeline" />
-                    <Tab wrapped={true} className={classes.label} label="About" />
-                    <Tab wrapped={true} className={classes.label} label="Friends" />
-                    <Tab wrapped={true} className={classes.label} label="Photos" />
-                </Tabs>
-            </Paper>
+
+        <Paper className={classes.root}>
+
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+                variant="fullWidth"
+            >
+
+                <Tab wrapped={true} className={classes.label} label="Timeline" />
+                <Tab wrapped={true} className={classes.label} label="About" />
+                <Tab wrapped={true} className={classes.label} label="Friends" />
+                <Tab wrapped={true} className={classes.label} label="Photos" />
+            
+            </Tabs>
+        
+        </Paper>
     );
-}
+};
 
 export default ProfileNav;

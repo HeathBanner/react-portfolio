@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Divider, Popover, Typography, Button } from '@material-ui/core';
+import { Divider, Paper, Popper, Fade, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,17 +20,17 @@ const useStyles = makeStyles(theme => ({
             padding: '20px 40px',
         },
         [theme.breakpoints.up('sm')]: {
-            width: '90%',
+            width: '70%',
             margin: '50px auto',
             padding: '20px 40px',
         },
         [theme.breakpoints.down('sm')]: {
-            width: '90%',
+            width: '70%',
             margin: '20px auto',
             padding: '20px 40px',
         },
         [theme.breakpoints.down('xs')]: {
-            width: '90%',
+            width: '70%',
             margin: '20px auto',
             padding: '10px 20px',
         },
@@ -50,7 +50,7 @@ const Description = () => {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
+        setAnchorEl(anchorEl ? null : e.currentTarget);
     };
 
     const handleClose = () => {
@@ -58,7 +58,7 @@ const Description = () => {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const id = open ? 'simple-popper' : undefined;
     
     return (
         <div className={classes.root}>
@@ -67,42 +67,47 @@ const Description = () => {
                 Information
             </Button>
 
-            <Popover
-                classes={{paper: classes.weatherInfo}}
+            <Popper
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center'
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center'
-                }}
+                placement="top"
+                transition
             >
-                    <Typography className={classes.title} align="center" color="textSecondary" variant="h3">
-                        Description
-                    </Typography>
+                {({ TransitionProps }) => (
 
-                        <Divider />
-
-                    <Typography variant="body1" align="center" className={classes.description}>
-                        This concept uses Open Weather Map's 5 day forecast API to render the widgets above.
-                        It grabs the weather data from Charlotte, NC by default. The color or mood of the 
-                        navigation bar at the top of the screen is based upon the weather of the currently selected city.
+                    <Fade {...TransitionProps} timeout={350}>
                         
-                    </Typography>
+                        <Paper className={classes.weatherInfo}>
 
-                    <Typography variant="body1" align="center" className={classes.description}>
-                        If the user chooses to change the city, they may do so by selecting the State then City of their choice.
-                        It'll search a DB of cities from around the world provided by Open Weather Map. The list
-                        isn't specific so it's been narrowed down to a few cities per state within the US. I'm currently
-                        searching for a better Database with Coordinates as well as Cities/Provinces and States.
-                    </Typography>
+                            <Typography className={classes.title} align="center" color="textSecondary" variant="h3">
+                                Description
+                            </Typography>
 
-            </Popover>
+                            <Divider />
+
+                            <Typography variant="body1" align="center" className={classes.description}>
+                                This concept uses Open Weather Map's 5 day forecast API to render the widgets above.
+                                It grabs the weather data from Charlotte, NC by default. The color or mood of the 
+                                navigation bar at the top of the screen is based upon the weather of the currently selected city.
+                                
+                            </Typography>
+
+                            <Typography variant="body1" align="center" className={classes.description}>
+                                If the user chooses to change the city, they may do so by selecting the State then City of their choice.
+                                It'll search a DB of cities from around the world provided by Open Weather Map. The list
+                                isn't specific so it's been narrowed down to a few cities per state within the US. I'm currently
+                                searching for a better Database with Coordinates as well as Cities/Provinces and States.
+                            </Typography>
+
+                        </Paper>
+
+
+                    </Fade>
+                
+                )}
+
+            </Popper>
 
         </div>
     );

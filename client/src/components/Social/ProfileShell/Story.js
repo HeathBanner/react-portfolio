@@ -9,11 +9,7 @@ import Moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        // marginTop: '40px',
         color: 'black !important',
-        // width: '60% !important',
-        // flexWrap: 'wrap',
-        // flexDirection: 'column',
     },
     postStory: {
         marginLeft: '10px',
@@ -42,59 +38,65 @@ const useStyles = makeStyles(theme => ({
             color: 'rgb(255, 145, 71)'
         },
     },
-}))
+}));
 
-
-function Story() {
+const Story = () => {
     
-    const [story, setStory] = useState('')
-
+    
     const classes = useStyles();
-    const auth = useContext(AuthContext)
+    const auth = useContext(AuthContext);
+    
+    const [story, setStory] = useState('');
 
-    function handleInputChange(e) {
+    const handleInputChange = (e) => {
         const { value } = e.target
         setStory(value)
-    }
+    };
 
-    function handleStoryPost(e) {
+    const handleStoryPost = (e) => {
         e.preventDefault();
+
         const userId = auth.user._id;
         const infoId = auth.user.info._id;
         const time = Moment();
+
         fetch('/api/social/newStory', {
             method: 'POST',
             body: JSON.stringify({userId: userId, infoId: infoId,story: story, time: time}),
             headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
+        })
+        .then(res => res.json())
         .then((user) => {
             setStory('');
             auth.updateNewStory(auth.user, true);
-        })
-    }
+        });
+    };
 
     return (
+
         <Fragment>
+
             <form className={classes.form} onSubmit={handleStoryPost}>
-                    <TextField
-                        // className={classes.root}
-                        InputProps={{classes:{underline: classes.underline}}}
-                        InputLabelProps={{className: classes.label}}
-                        multiline
-                        fullWidth={false}
-                        rowsMax="8"
-                        label="Story"
-                        helperText="Story here..."
-                        name="setStory"
-                        value={story}
-                        onChange={handleInputChange}
-                        // InputLabelProps={{className: classes.label}}
-                        // inputProps={{className: classes.label}}
-                    />
-                    <Fab type="submit" size="small" className={classes.postStory} color="primary"><Icon>create</Icon></Fab>
+
+                <TextField
+                    InputProps={{classes:{underline: classes.underline}}}
+                    InputLabelProps={{className: classes.label}}
+                    multiline
+                    fullWidth={false}
+                    rowsMax="8"
+                    label="Story"
+                    helperText="Story here..."
+                    name="setStory"
+                    value={story}
+                    onChange={handleInputChange}
+                />
+
+                <Fab type="submit" size="small" className={classes.postStory} color="primary"><Icon>create</Icon></Fab>
+            
             </form>
+
         </Fragment>
     );
-}
+};
 
 export default Story;

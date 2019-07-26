@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery, Grid, GridList, GridListTile, GridListTileBar, ListSubheader, Typography, Avatar, LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -9,20 +8,15 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        // overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
     },
-    listContainer: {
-
-    },
+    listContainer: {},
     gridList: {
         width: '100%',
-        // height: 450,
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
         overflow: 'hidden',
-        // backgroundColor: theme.palette.background.paper,
         margin: '0px auto 40px auto !important',
     },
     subheader: {
@@ -44,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Friends(props) {
+const Friends = (props) => {
 
     const classes = useStyles();
     const theme = useTheme();
@@ -73,7 +67,7 @@ function Friends(props) {
 
     useEffect(() => {
 
-        if((!loaded) && (props.user)) {
+        if( (!loaded) && (props.user) ) {
             
             fetch('/api/social/getFriends', {
                 method: 'POST',
@@ -86,16 +80,22 @@ function Friends(props) {
                 setLoaded(true);
             });
         };
-    })
+    });
 
-    function renderFriends() {
+    const renderFriends = () => {
         
         if(friendList.length > 1) {
+
             return (
-                friendList.map((friend, index) => {
+
+                friendList.map((friend) => {
+
                     return (
+
                         <GridListTile cols={gridCols()}  className={classes.tile} key={friend._id} >
+                            
                             <img src={friend.info.skyline} alt="skyline" />
+                            
                             <GridListTileBar 
                                 title={friend.username}
                                 actionIcon={
@@ -103,42 +103,57 @@ function Friends(props) {
                                 }
                                 actionPosition="left"
                             />
+
                         </GridListTile>
-                    )
+                    );
                 })  
             );
-        } else if(!loaded) {
+        } 
+        else if(!loaded) {
+
             return (
+
                 <GridListTile cols={1} className={classes.tile} >
                     <LinearProgress />
                 </GridListTile>
-            )
-        } 
-        
-        
+            );
+        }    
         else {
+
             return (
-                <GridListTile cols={1} className={classes.tile} >
+
+                <GridListTile cols={1} className={classes.tile}>
+
                     <Typography variant="h4" align="center" color="textSecondary" >
                         Sorry, no friends to show {`¯|_(ツ)_/¯`}
                     </Typography>
+
                 </GridListTile>
             );
         }
-    }
+    };
 
     return (
         <Grid item className={classes.listContainer} xs={12}>
+
             <GridList cellHeight={gridHeight()} spacing={18} col={2.5} className={classes.gridList}>
+                
                 <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
+                    
                     <ListSubheader component="div">
+
                         <Typography variant="h3" color="textSecondary" className={classes.subheader}>Friends</Typography>
+                    
                     </ListSubheader>
+
                 </GridListTile>
+
                 {renderFriends()}
+
             </GridList>
+
         </Grid>
     );
-}
+};
 
 export default (Friends);

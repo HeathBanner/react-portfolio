@@ -35,10 +35,10 @@ const useStyles = makeStyles(theme => ({
   media: {
     [theme.breakpoints.down('xs')]: {
       height: 70,
-      width: 70,
+      width: 'auto',
     },
     height: 100,
-    width: 100,
+    width: 'auto',
   },
   title: {
     [theme.breakpoints.down('xs')]: {
