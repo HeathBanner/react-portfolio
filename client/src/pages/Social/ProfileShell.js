@@ -87,8 +87,8 @@ function Profile() {
 
     const [user, setUser] = useState();
     const [onLoad, setOnLoad] = useState(false);
-    const [profileTimeline, setProfileTimeline] = useState(false);
-    const [About, setAbout] = useState(true);
+    const [profileTimeline, setProfileTimeline] = useState(true);
+    const [About, setAbout] = useState(false);
     const [Friends, setFriends] = useState(false);
     const [Photos, setPhotos] = useState(false);
     const [open, setOpen] = useState(true);
