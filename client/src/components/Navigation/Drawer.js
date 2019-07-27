@@ -12,8 +12,8 @@ import FormatDate from 'moment';
 const drawerWidth = 240;
 
 const links = [
-  {link: '/', text: 'Home', icon: 'home'}, 
-  {link: '/about', text: 'About', icon: 'face'}, 
+  {link: '/', text: 'Home', icon: 'face'}, 
+  {link: '/showcase', text: 'Show Case', icon: 'code'}, 
   {link: '/contact', text: 'Contact', icon: 'contact_phone'}
 ];
 
@@ -66,7 +66,7 @@ export default function PersistentDrawerLeft(props) {
       display: 'flex',
       alignItems: 'center',
       flexWrap: 'nowrap',
-      background: props.contact ? 'linear-gradient(45deg, #ff6a38 30%, #ff5938 90%)' : props.mood ? `${props.mood.toolbar}` : 'linear-gradient(45deg, #3cfae7 30%, #21d9c6 90%)',
+      background: props.contact ? 'linear-gradient(45deg, #ff6a38 30%, #ff5938 90%)' : props.mood ? `${props.mood.toolbar}` : 'linear-gradient(45deg, #539ad4 30%, #3676aa 90%)',
     },
     menuButton: {
         position: 'absolute',

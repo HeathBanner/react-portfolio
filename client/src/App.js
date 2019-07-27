@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from './pages/Home/home';
-import Social from './pages/Social/Social';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
 import AuthContext from './context/AuthContext';
-import Settings from './pages/Social/Settings';
-import FindFriends from './pages/Social/FindFriends';
-import Profile from './pages/Social/Profile';
-import Chat from './pages/Chat/Chat';
-import About from './pages/Main/About';
-import Contact from './pages/Main/Contact';
-
 import TokenStore from './lib/TokenStore';
+
+import Home from './pages/Home/home';
+import Contact from './pages/Main/Contact';
+import Landing from './pages/Landing/Landing';
+
 
 function App() {
 
@@ -88,20 +82,11 @@ function App() {
 
   return (
     <AuthContext.Provider value={auth}>
-      {/* {!validated ? <Redirect to="/login" /> : ''} */}
       <div className="App">
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/home" component={Home} />
-            <Route path="/about" component={About} />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/showcase" component={Home} />
             <Route path="/contact" component={Contact} />
-            <Route path="/social" exact component={Social} />
-            <Route path="/social/:handle" component={Profile} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/findFriends" component={FindFriends} />
-            <Route path="/chat" component={Chat} />
         </Switch>
       </div>
     </AuthContext.Provider>

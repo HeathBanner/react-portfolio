@@ -64,15 +64,17 @@ const useStyles = makeStyles(theme => ({
         margin: '10px auto 30px auto',
         padding: 40
     },
-    intro: {
-        [theme.breakpoints.down('xs')]: {
-            height: '170vh',
-        },
+    background: {
         backgroundImage: `url(${BGImage})`,
         backgroundSize: 'cover',
-        height: '150vh',
+        height: '50vh',
+    },
+    intro: {
+        [theme.breakpoints.down('xs')]: {
+            height: '100vh',
+        },
+        height: '100vh',
         width: '100%',
-        marginTop: '100px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
@@ -180,36 +182,33 @@ function Profile() {
                     </Typography>
                 </Grid>
 
-                <Grid item className={classes.intro} md={12} sm={12} xs={12}>
+                <Grid className={classes.background} item xs={12}></Grid>
 
                         {/* {renderDescription()} */}
 
-                    <Grid className={classes.whiteOut} container>
 
-                            <Grid item xs={12}>
+                            <Grid className={classes.whiteOut} item xs={12}>
 
                                 <SocialDrawer />
 
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid className={classes.whiteOut} item xs={12}>
 
                                 <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
                             
                             </Grid>
-                            <Grid item style={{zIndex: 1500}} xs={12}>
+                            <Grid item xs={12}>
 
                                 <ProfileNav  tabChange={handleTabChange} />
 
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid style={{backgroundColor: 'white'}} item xs={12}>
 
                                 {renderTabs()}
 
                             </Grid>
 
-                        </Grid>
 
-                    </Grid>
 
                 </Grid>
 

@@ -8,6 +8,7 @@ const useStyles = makeStyles({
         flexGrow: 1,
         height: '100%',
         overflow: 'hidden',
+        zIndex: 1500,
     },
     label: {
         fontSize: '0.9rem'
