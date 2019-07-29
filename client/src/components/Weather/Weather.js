@@ -70,7 +70,7 @@ function Weather(props) {
     };
 
     function getListCols() {
-        if(xs){return 1.8};
+        if(xs){return 1.4};
         if(sm){return 2.2};
         if(md){return 2.8};
         if(lg){return 2.8};
@@ -84,7 +84,8 @@ function Weather(props) {
     }
 
     const getVariant = () => {
-        if(xs) { return 'h3' }
+        if(xs) { return 'h4' }
+        if(sm) { return 'h3' }
         else { return 'h2' }
     };
 
@@ -175,13 +176,13 @@ function Weather(props) {
 
                     <Grid container>
 
-                        <Grid item md={12} sm={12} xs={12}>
+                        <Grid item xs={12}>
                                 <div >
                                     <Search updateModule={updateModule} />
                                 </div>
                         </Grid>
 
-                        <Grid item md={12} sm={12} xs={12}>
+                        <Grid item xs={12}>
 
                             <Description />
 

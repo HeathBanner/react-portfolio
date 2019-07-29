@@ -9,19 +9,7 @@ import FormatDate from 'moment';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        [theme.breakpoints.up('md')]: {
-            width: '70%',
-        },
-        [theme.breakpoints.down('md')]: {
-            width: '70%',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '80%',
-        },
-        [theme.breakpoints.down('xs')]: {
-            width:  '95%',
-        },
-        width: '70%',
+        height: 230,
         paddingBottom: 10,
         margin: '50px 20px',
         background: 'linear-gradient(45deg, #ffffff 30%, #e3e3e3 90%)'
@@ -58,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0 10px'
     },
     monthYear: {
-        margin: '0 10px'
+        // margin: '0 10px'
     },
     temp: {
         backgroundColor: 'rgb(94, 188, 255. 0.7)'
@@ -66,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function WeatherModule(props) {
+const WeatherModule = (props) => {
     
     const classes = useStyles();
 

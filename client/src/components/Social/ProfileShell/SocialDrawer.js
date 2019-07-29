@@ -16,7 +16,8 @@ export default function PersistentDrawerLeft(props) {
     root: {
       display: 'flex',
       position: 'relative',
-      zIndex: 1500
+      zIndex: 1500,
+      
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
@@ -101,6 +102,10 @@ export default function PersistentDrawerLeft(props) {
       [theme.breakpoints.down('xs')]:{
         width: 140,
       },
+      position: 'absolute',
+      zIndex: 1600,
+      overflowY: 'visible',
+      height: '100vh',
     },
     drawerHeader: {
       display: 'flex',

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Divider, Paper, Popper, Fade, Typography, Button } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useMediaQuery, Divider, Paper, Popper, Fade, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,25 +16,29 @@ const useStyles = makeStyles(theme => ({
     weatherInfo: {
         [theme.breakpoints.up('md')]: {
             width: '70%',
-            margin: '50px auto',
+            margin: '0px auto',
             padding: '20px 40px',
         },
         [theme.breakpoints.up('sm')]: {
             width: '70%',
-            margin: '50px auto',
+            margin: '0px auto',
             padding: '20px 40px',
         },
         [theme.breakpoints.down('sm')]: {
             width: '70%',
-            margin: '20px auto',
+            margin: '0px auto',
             padding: '20px 40px',
         },
         [theme.breakpoints.down('xs')]: {
             width: '70%',
-            margin: '20px auto',
+            margin: '0px auto',
             padding: '10px 20px',
         },
         padding: 20,
+        height: 300,
+        zIndex: 1900,
+        position: 'relative',
+        overflowY: 'scroll'
     },
     title: {
         marginBottom: 10,
@@ -47,6 +51,15 @@ const useStyles = makeStyles(theme => ({
 const Description = () => {
 
     const classes = useStyles();
+    const theme = useTheme();
+
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const getVariant = () => {
+        if(xs) { return 'h4' }
+        else { return 'h3' }
+    };
+
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (e) => {
@@ -80,7 +93,7 @@ const Description = () => {
                         
                         <Paper className={classes.weatherInfo}>
 
-                            <Typography className={classes.title} align="center" color="textSecondary" variant="h3">
+                            <Typography className={classes.title} color="primary" align="center" variant={getVariant()}>
                                 Description
                             </Typography>
 

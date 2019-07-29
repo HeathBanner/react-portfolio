@@ -5,7 +5,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import AuthContext from '../../context/AuthContext';
 
-import DescPaper from '../../components/Social/ProfileShell/DescPaper';
 import DescPopover from '../../components/Social/ProfileShell/DescPopover';
 import SocialDrawer from '../../components/Social/ProfileShell/SocialDrawer';
 import Skyliner from '../../components/Social/ProfileShell/Skyliner';
@@ -101,20 +100,15 @@ function Profile() {
     const [open, setOpen] = useState(true);
 
     const classes = useStyles();
-    const theme = useTheme();
 
     const auth = useContext(AuthContext);
 
-    const lg = useMediaQuery(theme.breakpoints.up('md'));
-    const md = useMediaQuery(theme.breakpoints.down('md'));
-    const sm = useMediaQuery(theme.breakpoints.down('sm'));
-    const xs = useMediaQuery(theme.breakpoints.down('xs'));
 
-    function handleClick(event) {
+    const handleClick = () => {
         setOpen(!open);
-    }
+    };
 
-    function handleTabChange(tab) {
+    const handleTabChange = (tab) => {
         switch (tab) {
             case 'Timeline':
                 setProfileTimeline(true);
@@ -145,21 +139,14 @@ function Profile() {
         }
     };
 
-    const renderDescription = () => {
-        if(xs) { return <DescPopover /> }
-        if(sm) { return <DescPaper /> }
-        if(md) { return <DescPaper /> }
-        if(lg) { return <DescPaper/> }
-    };
-
-    function renderTabs() {
+    const renderTabs = () => {
         if(user) {
-            if(profileTimeline){return <TimelineTab page={{handle: 'HeathBanner'}} />}
-            if(About){return <AboutTab handle={{handle: 'HeathBanner'}} auth={auth.user} info={user.info} />}
-            if(Friends){return <FriendsTab user={user} />}
-            if(Photos){return <PhotosTab info={user.info} />}
+            if(profileTimeline) { return <TimelineTab page={{handle: 'HeathBanner'}} /> }
+            if(About) { return <AboutTab handle={{handle: 'HeathBanner'}} auth={auth.user} info={user.info} /> }
+            if(Friends) { return <FriendsTab user={user} /> }
+            if(Photos) { return <PhotosTab info={user.info} /> }
         }
-    }
+    };
 
     useEffect(() => {
         const username = 'HeathBanner'
@@ -193,8 +180,6 @@ function Profile() {
 
                 </Grid>
 
-                        {/* {renderDescription()} */}
-
                 <Grid style={{zIndex: 1301}} className={classes.whiteOut} item xs={12}>
 
                     <SocialDrawer />
@@ -205,7 +190,7 @@ function Profile() {
                     <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
                 
                 </Grid>
-                <Grid item xs={12}>
+                <Grid style={{zIndex: 1300}} item xs={12}>
 
                     <ProfileNav  tabChange={handleTabChange} />
 
