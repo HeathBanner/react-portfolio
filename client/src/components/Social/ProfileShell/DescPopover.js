@@ -34,6 +34,10 @@ const useStyles = makeStyles(theme => ({
         width: '70%',
         margin: '10px auto',
         padding: '20px',
+        zIndex: 1800,
+    },
+    popover: {
+        zIndex: '1600 !important',
     },
     title: {
         marginBottom: 10
@@ -72,6 +76,7 @@ const DescPopover = () => {
 
             <Popover
                 classes={{paper: classes.description}}
+                className={classes.popover}
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
@@ -86,7 +91,7 @@ const DescPopover = () => {
                 }}
             >
 
-                <Typography className={classes.title} variant="h3" align="center" color="textSecondary">
+                <Typography className={classes.title} variant="h3" align="center" color="primary">
                     Social Media Concept
                 </Typography>
                     <Divider />

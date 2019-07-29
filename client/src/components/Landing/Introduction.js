@@ -89,7 +89,7 @@ const getStepContent = (step) => {
             was even released.`;
 
         case 1:
-            return `After highschool, my friend who was a photographer for a modeling 
+            return `After high school, my friend who was a photographer for a modeling 
             agency invited me and a couple of friends to a trip to New York 
             City. The modeling agency wanted take their models to the city and 
             help them get signed with even greater agencies in Time Square as 

@@ -2,33 +2,36 @@ import React, { Fragment, useContext, useEffect, useState } from 'react';
 
 import AuthContext from '../../../context/AuthContext';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Avatar, Typography, Fab, Icon } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, Avatar, Typography, Fab, Icon } from '@material-ui/core';
 
 
 import { Parallax } from 'react-parallax';
 
 const useStyles = makeStyles(theme => ({
     skyliner: {
+        [theme.breakpoints.up('sm')]: {
+            height: '60vh',  
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: '50vh',
+        },
         width: '100%',
-        height: '40vh',
-        // overflow: 'visible'
+        zIndex: 1400,
+        position: 'relative',
     },
     skylinerRow: {
-        [theme.breakpoints.down('xs')]: {
-            height: '40vh',
+        [theme.breakpoints.down('sm')]: {
+            height: '50vh',
             display: 'flex',
             alignItems: 'flex-end',    
             justifyContent: 'center',
         },
-        height: '40vh',
+        height: '60vh',
         display: 'flex',
         alignItems: 'flex-end',
     },
     skylinerContent: {
-        [theme.breakpoints.down('xs')]: {
-            // justifyContent: 'center',
-        },
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
@@ -54,7 +57,6 @@ const useStyles = makeStyles(theme => ({
         width: 120,
         height: 120,
         margin: '0px 20px 0px 10px',
-        // zIndex: 1800,
     },
     username: {
         [theme.breakpoints.down('md')]: {
@@ -78,9 +80,6 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'flex-end',
         position: 'relative',
-        // position: 'absolute',
-        // bottom:  -10,
-        // left: 20,
     },
     skylinerDivRight: {
         padding: '0px 20px',
@@ -96,11 +95,24 @@ const useStyles = makeStyles(theme => ({
 const Skyliner = (props) => {
 
     const auth = useContext(AuthContext);
-    const classes = useStyles();
     
+    const classes = useStyles();
+    const theme = useTheme();
+
+    const md = useMediaQuery(theme.breakpoints.down('md'));
+    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const getTop = () => {
+        if(xs) { return { top: '0%' } }
+        if(sm) { return { top: '-20%' } }
+        if(md) { return { top: '-20%' } }
+        else { return { top: '-40%' } }
+    };
+
+
     const [loaded, setLoaded] = useState(false);
     const [friend, setFriend] = useState(false);
-
 
     useEffect(() => {
 
@@ -142,6 +154,8 @@ const Skyliner = (props) => {
                         bgImageAlt="Skyliner"
                         strength={200}
                         className={classes.skyliner}
+                        bgImageStyle={getTop()}
+                        bgStyle={{}}
                     >
                         <Grid container className={classes.skylinerRow}>
 

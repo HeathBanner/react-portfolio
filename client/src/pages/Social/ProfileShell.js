@@ -15,7 +15,7 @@ import AboutTab from '../../components/Social/ProfileShell/About';
 import FriendsTab from '../../components/Social/ProfileShell/Friends';
 import PhotosTab from '../../components/Social/ProfileShell/Photos';
 
-import BGImage from './imgs/1x/background.png';
+import BGImage from './imgs/1x/bacground.png';
 
 const useStyles = makeStyles(theme => ({
     chatMenu: {
@@ -68,6 +68,11 @@ const useStyles = makeStyles(theme => ({
         backgroundImage: `url(${BGImage})`,
         backgroundSize: 'cover',
         height: '50vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        zIndex: 1302
     },
     intro: {
         [theme.breakpoints.down('xs')]: {
@@ -81,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     },
     whiteOut: {
         backgroundColor: 'white',
-        zIndex: 1400,
+        position: 'relative',
     },
 }));
 
@@ -182,35 +187,36 @@ function Profile() {
                     </Typography>
                 </Grid>
 
-                <Grid className={classes.background} item xs={12}></Grid>
+                <Grid className={classes.background} item xs={12}>
+
+                        <DescPopover />
+
+                </Grid>
 
                         {/* {renderDescription()} */}
 
+                <Grid style={{zIndex: 1301}} className={classes.whiteOut} item xs={12}>
 
-                            <Grid className={classes.whiteOut} item xs={12}>
-
-                                <SocialDrawer />
-
-                            </Grid>
-                            <Grid className={classes.whiteOut} item xs={12}>
-
-                                <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
-                            
-                            </Grid>
-                            <Grid item xs={12}>
-
-                                <ProfileNav  tabChange={handleTabChange} />
-
-                            </Grid>
-                            <Grid style={{backgroundColor: 'white'}} item xs={12}>
-
-                                {renderTabs()}
-
-                            </Grid>
-
-
+                    <SocialDrawer />
 
                 </Grid>
+                <Grid style={{zIndex: 1300}} className={classes.whiteOut} item xs={12}>
+
+                    <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
+                
+                </Grid>
+                <Grid item xs={12}>
+
+                    <ProfileNav  tabChange={handleTabChange} />
+
+                </Grid>
+                <Grid style={{backgroundColor: 'white'}} item xs={12}>
+
+                    {renderTabs()}
+
+                </Grid>
+
+            </Grid>
 
         </Fragment>
     );

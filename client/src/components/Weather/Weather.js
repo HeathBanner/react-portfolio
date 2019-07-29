@@ -42,24 +42,11 @@ const useStyles = makeStyles(theme => ({
         height: '160vh',
     },
     concept: {
-        [theme.breakpoints.up('md')]: {
-            fontSize: '5rem',
-            marginLeft: '180px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            fontSize: '3.4rem',
-            marginLeft: '180px',
-        },
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '2rem',
-            marginLeft: '120px',
-        },
         marginTop: '30px',
         marginLeft: '80px',
     },
-  }));
+}));
   
-
 function Weather(props) {
 
     const [weather, setWeather] = useState('');
@@ -95,6 +82,11 @@ function Weather(props) {
         if(md){return 1};
         if(lg){return 1};
     }
+
+    const getVariant = () => {
+        if(xs) { return 'h3' }
+        else { return 'h2' }
+    };
 
     useEffect(() => {
         if (!sentRequest) {
@@ -163,7 +155,7 @@ function Weather(props) {
 
                     <Grid item xs={12}>
 
-                        <Typography className={classes.concept} align="center" color="primary" variant="h2">
+                        <Typography className={classes.concept} align="center" color="primary" variant={getVariant()}>
                             Weather Concept
                         </Typography>
 

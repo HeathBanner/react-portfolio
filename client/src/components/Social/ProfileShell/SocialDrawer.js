@@ -15,6 +15,8 @@ export default function PersistentDrawerLeft(props) {
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
+      position: 'relative',
+      zIndex: 1500
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
@@ -162,19 +164,19 @@ export default function PersistentDrawerLeft(props) {
       text: 'Inbox',
       icon: 'inbox',
       link: '/',
-      tip: 'My inbox is empty. Not by choice :('
+      tip: 'This will lead the user to their inbox'
     },
     {
       text: 'Settings',
       icon: 'settings',
       link: '/',
-      tip: 'The user, theoretically, would be able to change their email, password, avatar and other settings'
+      tip: 'The user will be able to change their email, password, avatar and other settings'
     },
     {
       text: 'Find Friends',
       icon: 'people',
       link: '/',
-      tip: `The pub of the internet...or the cafe if you're bold enough`
+      tip: `This will lead the user to the friend finder page where they may search for new friends`
     }
   ];
   
