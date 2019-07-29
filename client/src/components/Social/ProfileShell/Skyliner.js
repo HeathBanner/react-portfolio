@@ -163,7 +163,7 @@ const Skyliner = (props) => {
 
                                 <div className={classes.skylinerDivLeft}>
 
-                                    <Avatar src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8`} className={classes.profileAvatar}/>
+                                    <Avatar src={`./imgs/me.png`} className={classes.profileAvatar}/>
                                     
                                     <Typography
                                         display="inline"

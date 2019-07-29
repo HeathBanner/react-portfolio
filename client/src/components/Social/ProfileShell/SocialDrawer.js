@@ -242,7 +242,7 @@ export default function PersistentDrawerLeft(props) {
               </IconButton>
 
                 <Link className={classes.barTitle} to='/'>
-                  <Avatar alt={value.user ? value.user.username : ''} src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8`} />
+                  <Avatar alt={value.user ? value.user.username : ''} src={`./imgs/me.png`} />
                   <Typography className={classes.typo} variant="h6">
                     {value.user ? value.user.username : <CircularProgress />}
                   </Typography>

@@ -198,7 +198,7 @@ const Timeline = () => {
                         <ListItem className={classes.listItem}>
 
                             <ListItemAvatar>
-                                <Avatar alt={story._id} src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8`} />
+                                <Avatar alt={story._id} src={`./imgs/me.png`} />
                             </ListItemAvatar>
 
                             <ListItemText 

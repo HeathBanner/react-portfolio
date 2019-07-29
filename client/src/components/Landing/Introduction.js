@@ -6,8 +6,6 @@ import { useMediaQuery, Grid, Avatar, Typography } from '@material-ui/core';
 import Desktop from './Steppers/Desktop';
 import Mobile from './Steppers/Mobile';
 
-const Photo = 'https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1569456000&v=beta&t=YtZoiTHVJEXn3syxgpM5VVg7zTMFjD6SXZLVKHh9JB8';
-
 const useStyles = makeStyles(theme => ({
     container: {
         position: 'relative',
@@ -167,7 +165,7 @@ const Introduction = () => {
 
             <Grid className={classes.container} item xs={12}>
                 
-                <Avatar className={classes.avatar} src={Photo} alt="Heath Banner"  />   
+                <Avatar className={classes.avatar} src='./imgs/me.png' alt="Heath Banner"  />   
 
                 <Typography className={classes.skillsHeader} variant={getVariant()} align="center">
                     About Me
