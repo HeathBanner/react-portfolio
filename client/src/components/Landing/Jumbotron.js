@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography } from '@material-ui/core';
+import { AppContext } from '../../context/AuthContext';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography } from '@material-ui/core';
 
 import Image from './imgs/1x/background.png';
 
 const useStyles = makeStyles(theme => ({
     container: {
+        [theme.breakpoints.up('lg')]: {
+            height: '85vh',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: '60vh',
+        },
         backgroundImage: `url(${Image})`,
         backgroundSize: 'cover',
         height: '80vh',
@@ -22,13 +30,17 @@ const useStyles = makeStyles(theme => ({
 const Jumbotron = () => {
 
     const classes = useStyles();
-    const theme = useTheme();
-
-    const sm = useMediaQuery(theme.breakpoints.down('sm'));
+    const holder = useContext(AppContext);
 
     const getVariant = () => {
-        if(sm) { return 'h2' }
-        else { return 'h1' }
+        switch (true) {
+            case holder.xs:
+                return 'h4';
+            case holder.sm:
+                return 'h2';
+            default:
+                return 'h1';
+        }
     };
 
     return (

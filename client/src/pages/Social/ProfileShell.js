@@ -1,20 +1,27 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 
-import {  useMediaQuery, Typography, Grid } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { AppContext } from '../../context/AuthContext';
 
-import AuthContext from '../../context/AuthContext';
+import {  Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import DescPopover from '../../components/Social/ProfileShell/DescPopover';
-import SocialDrawer from '../../components/Social/ProfileShell/SocialDrawer';
-import Skyliner from '../../components/Social/ProfileShell/Skyliner';
-import ProfileNav from '../../components/Social/ProfileShell/ProfileNav';
-import TimelineTab from '../../components/Social/ProfileShell/TimelineTab';
-import AboutTab from '../../components/Social/ProfileShell/About';
-import FriendsTab from '../../components/Social/ProfileShell/Friends';
-import PhotosTab from '../../components/Social/ProfileShell/Photos';
+import DescPopover from '../../components/Showcase/Social/DescPopover';
+import SocialDrawer from '../../components/Showcase/Social/SocialDrawer';
+import Skyliner from '../../components/Showcase/Social/Skyliner';
+import ProfileNav from '../../components/Showcase/Social/ProfileNav';
+import TimelineTab from '../../components/Showcase/Social/TimelineTab';
+import AboutTab from '../../components/Showcase/Social/About';
+import FriendsTab from '../../components/Showcase/Social/Friends';
+import PhotosTab from '../../components/Showcase/Social/Photos';
 
 import BGImage from './imgs/1x/bacground.png';
+
+const initTabs = {
+    ProfileTimeline: false,
+    About: true,
+    Friends: false,
+    Photos: false,
+};
 
 const useStyles = makeStyles(theme => ({
     chatMenu: {
@@ -42,7 +49,14 @@ const useStyles = makeStyles(theme => ({
     listItem: {
         padding: '0px 0px 0px 0px'
     },
-    wip: {
+    socialHeader: {
+        [theme.breakpoints.down('xs')]: {
+            flexWrap: 'wrap',
+        },
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
         marginTop: 50,
     },
     conceptContainer: {},
@@ -66,12 +80,7 @@ const useStyles = makeStyles(theme => ({
     background: {
         backgroundImage: `url(${BGImage})`,
         backgroundSize: 'cover',
-        height: '50vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'relative',
-        zIndex: 1302
+        height: '30vh',
     },
     intro: {
         [theme.breakpoints.down('xs')]: {
@@ -89,20 +98,25 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Profile() {
+const Profile = () => {
 
     const [user, setUser] = useState();
-    const [onLoad, setOnLoad] = useState(false);
-    const [profileTimeline, setProfileTimeline] = useState(true);
-    const [About, setAbout] = useState(false);
-    const [Friends, setFriends] = useState(false);
-    const [Photos, setPhotos] = useState(false);
+    const [tabs, setTabs] = useState({ ...initTabs });
     const [open, setOpen] = useState(true);
 
     const classes = useStyles();
+    const holder = useContext(AppContext);
 
-    const auth = useContext(AuthContext);
-
+    const getVariant = () => {
+        switch (true) {
+            case holder.xs:
+                return 'h4';
+            case holder.md:
+                return 'h2';
+            default:
+                return 'h1';
+        }
+    };
 
     const handleClick = () => {
         setOpen(!open);
@@ -111,91 +125,84 @@ function Profile() {
     const handleTabChange = (tab) => {
         switch (tab) {
             case 'Timeline':
-                setProfileTimeline(true);
-                setAbout(false);
-                setFriends(false);
-                setPhotos(false);
+                setTabs({ ...initTabs, profileTimeline: true });
                 break;
             case 'About':
-                setAbout(true);
-                setProfileTimeline(false);
-                setFriends(false);
-                setPhotos(false);
+                setTabs({ ...initTabs, about: true });
                 break;
             case 'Friends':
-                setFriends(true);
-                setProfileTimeline(false);
-                setAbout(false);
-                setPhotos(false);
+                setTabs({ ...initTabs, friends: true });
                 break;
             case 'Photos': 
-                setPhotos(true);
-                setProfileTimeline(false);
-                setAbout(false);
-                setFriends(false);
+                setTabs({ ...initTabs, photos: true });
                 break;
             default:
-                break; 
+                break;
         }
     };
 
     const renderTabs = () => {
-        if(user) {
-            if(profileTimeline) { return <TimelineTab page={{handle: 'HeathBanner'}} /> }
-            if(About) { return <AboutTab handle={{handle: 'HeathBanner'}} auth={auth.user} info={user.info} /> }
-            if(Friends) { return <FriendsTab user={user} /> }
-            if(Photos) { return <PhotosTab info={user.info} /> }
+        if (!user) { return }
+        switch (true) {
+            case tabs.profileTimeline:
+                return <TimelineTab page={{handle: 'HeathBanner'}} />;
+            case tabs.about:
+                return <AboutTab handle={{handle: 'HeathBanner'}} auth={holder.auth} info={user.info} />;
+            case tabs.friends:
+                return <FriendsTab user={user} />;
+            case tabs.photos:
+                return <PhotosTab info={user.info} />;
+            default:
+                return <TimelineTab page={{handle: 'HeathBanner'}} />;
         }
     };
 
     useEffect(() => {
-        const username = 'HeathBanner'
-        if(!onLoad){
-            setOnLoad(true)
-            fetch('/api/social/getProfile', {
-                method: 'POST',
-                body: JSON.stringify({username: username}),
-                headers: {'Content-Type': 'application/json'}
-            }).then(res => res.json())
+        const username = 'HeathBanner';
+        fetch('/api/social/getProfile', {
+            method: 'POST',
+            body: JSON.stringify({ username }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => res.json())
             .then((result) => {
-                setUser(result)
+                setUser(result);
             });
-        }
-    })
+    }, []);
 
     return (
         <Fragment>
 
             <Grid container>
 
-                <Grid item xs={12}>
-                    <Typography className={classes.wip} variant="h2" align="center" color="primary">
-                        WORK IN PROGRESS
+                <Grid className={classes.socialHeader} item xs={12}>
+
+                    <Typography className={classes.wip} variant={getVariant()} align="center" color="primary">
+                        Social Media Concept
                     </Typography>
-                </Grid>
-
-                <Grid className={classes.background} item xs={12}>
-
-                        <DescPopover />
+                    
+                    <DescPopover />
 
                 </Grid>
 
-                <Grid style={{zIndex: 1301}} className={classes.whiteOut} item xs={12}>
+                <Grid className={classes.background} item xs={12}></Grid>
+
+                <Grid style={{ zIndex: 1301 }} className={classes.whiteOut} item xs={12}>
 
                     <SocialDrawer />
 
                 </Grid>
-                <Grid style={{zIndex: 1300}} className={classes.whiteOut} item xs={12}>
+                <Grid style={{ zIndex: 1300 }} className={classes.whiteOut} item xs={12}>
 
-                    <Skyliner user={user} handleClick={handleClick} auth={auth.user} username={'HeathBanner'} />
+                    <Skyliner user={user} handleClick={handleClick} auth={holder.auth} username={'HeathBanner'} />
                 
                 </Grid>
-                <Grid style={{zIndex: 1300}} item xs={12}>
+                <Grid style={{ zIndex: 1300 }} item xs={12}>
 
                     <ProfileNav  tabChange={handleTabChange} />
 
                 </Grid>
-                <Grid style={{backgroundColor: 'white'}} item xs={12}>
+                <Grid style={{ backgroundColor: 'white' }} item xs={12}>
 
                     {renderTabs()}
 

@@ -1,7 +1,8 @@
 
-var userList = [];
-var userIndex = [];
+const userList = [];
+const userIndex = [];
 
 module.exports = {
-    userList, userIndex
+    userList,
+    userIndex,
 };

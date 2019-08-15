@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Stories = require('./stories.js');
-const Info = require('./userInfo.js');
+
+const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     username: {
         type: String,
         trim: true,
-        required: true
+        required: true,
     },
     type: {
         type: String,
@@ -15,11 +14,16 @@ const UserSchema = new Schema({
     info: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Info',
-    }
+    },
 });
 
 class newUser {
-    constructor({id, username, email, password}) {
+    constructor({
+        id,
+        username,
+        email,
+        password,
+    }) {
         this.id = id;
         this.username = username;
         this.email = email;

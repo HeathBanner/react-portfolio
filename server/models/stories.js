@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const commentSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     type: String,
-    authored_by: {type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
+    authored_by: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     likes: Array,
     text: String,
     time: String,
-})
-
+});
 
 const StorySchema = new Schema({
     type: {
@@ -17,7 +17,7 @@ const StorySchema = new Schema({
     },
     authored_by: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users',  
+        ref: 'Users',
     },
     comments: [commentSchema],
     likes: [{
@@ -31,9 +31,8 @@ const StorySchema = new Schema({
         type: String,
         trim: true,
     },
-}, {collection: 'Stories'});
+}, { collection: 'Stories' });
 
 const Stories = mongoose.model('Stories', StorySchema, 'Stories');
 
 module.exports = Stories;
-

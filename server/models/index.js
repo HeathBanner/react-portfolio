@@ -1,7 +1,13 @@
+const Cities = require('./cities');
+const Users = require('./users');
+const Stories = require('./stories');
+const Info = require('./userInfo');
+const Contact = require('./contact');
+
 module.export = {
-    Cities: require('./cities'),
-    Users: require('./users'),
-    Stories: require('./stories'),
-    Info: require('./userInfo'),
-    Contact: require('./contact'),
-}
+    Cities,
+    Users,
+    Stories,
+    Info,
+    Contact,
+};

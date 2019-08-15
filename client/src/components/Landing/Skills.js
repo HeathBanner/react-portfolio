@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography, GridList, GridListTile, GridListTileBar, ListSubheader, IconButton, Icon } from '@material-ui/core';
+import { AppContext } from '../../context/AuthContext';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon } from '@material-ui/core';
 
 import Background from './imgs/1x/skills.png';
 
@@ -17,7 +19,6 @@ import HTML from './imgs/html.png';
 import CSS from './imgs/css.png';
 import GitHub from './imgs/github.svg';
 import Bash from './imgs/bash.png';
-
 
 const tileData = [
     {
@@ -86,14 +87,12 @@ const useStyles = makeStyles(theme => ({
     container: {
         backgroundImage: `url(${Background})`,
         backgroundSize: 'cover',
-    },
-    headerContainer: {
-        marginTop: 80,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        paddingBottom: 60,
     },
     header: {
+        [theme.breakpoints.up('lg')]: {
+            marginTop: 240,
+        },
         marginTop: 120,
         color: 'white',
     },
@@ -105,20 +104,25 @@ const useStyles = makeStyles(theme => ({
         overflowY: 'none',
     },
     gridList: {
-        [theme.breakpoints.down('sm')]: {
-            width: 550,
-            height: 450
+        [theme.breakpoints.up('lg')]: {
+            width: '75%',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '80%',
         },
         [theme.breakpoints.down('xs')]: {
-            width: 400,
-            height: 450,
+            width: '90%',
         },
         width: 700,
-        height: 600,
+    },
+    tile: {
+
     },
     imgs: {
-        with: 'auto',
+        width: 'auto',
         height: '100%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)'
@@ -128,48 +132,63 @@ const useStyles = makeStyles(theme => ({
 const Skills = () => {
 
     const classes = useStyles();
-    const theme = useTheme();
-
-    const xs = useMediaQuery(theme.breakpoints.down('xs'));
-    const sm = useMediaQuery(theme.breakpoints.down('sm'));
-    const md = useMediaQuery(theme.breakpoints.up('sm'))
-    
-    const getVariant = () => {
-        if(xs) { return 'h2' }
-        if(sm) { return 'h2' }
-        if(md) { return 'h1' }
-    };
+    const holder = useContext(AppContext);
 
     const getCols = () => {
+        switch (true) {
+            case holder.xs:
+                return 2;
+            case holder.sm:
+                return 3;
+            default:
+                return 4;
+        }
+    };
 
-        if(xs) { return 2 }
-        if(sm) { return 3 }
-        if(md) { return 4 }
-    };  
+    const getHeight = () => {
+        switch (true) {
+            case holder.sm:
+                return 180;
+            case holder.md:
+                return 180;
+            case holder.lg:
+                return 240;
+            default:
+                return 320;
+        }
+    };
 
     return (
 
         <Grid item xs={12} className={classes.container}>
 
-                <Typography className={classes.header} variant={getVariant()} align="center">
+                <Typography className={classes.header} variant={holder.sm ? 'h2' : 'h1'} align="center">
                     What Do I Know?
                 </Typography>
 
                 <div className={classes.root}>
 
-                    <GridList cellHeight={180} cols={getCols()} spacing={12} className={classes.gridList}>
+                    <GridList cellHeight={getHeight()} cols={getCols()} spacing={12} className={classes.gridList}>
                         
                         {
                             tileData.map(tile => (
 
-                                <GridListTile key={tile.img}>
+                                <GridListTile
+                                    className={classes.tile}
+                                    classes={{ imgFullWidth: classes.imgs }}
+                                    key={tile.img}
+                                >
 
                                     <img className={classes.imgs} src={tile.img} alt={tile.title} />
 
                                     <GridListTileBar
                                         title={tile.title}
                                         actionIcon={
-                                            <a href={tile.link} target="_blank">
+                                            <a 
+                                                href={tile.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
                                                 <IconButton 
                                                     aria-label={`info about ${tile.title}`} 
                                                     className={classes.icon}

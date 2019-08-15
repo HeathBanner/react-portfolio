@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Stories = require('./stories.js');
-const users = require('./users.js');
+
+const { Schema } = mongoose;
 
 const infoSchema = new Schema({
     userId: {
@@ -54,20 +53,15 @@ const infoSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Stories',
     }],
-    email: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-    },
 });
 
 class newUser {
-    constructor({id, username, email, password}) {
+    constructor({
+        id,
+        username,
+        email,
+        password,
+    }) {
         this.id = id;
         this.username = username;
         this.email = email;

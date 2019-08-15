@@ -7,7 +7,6 @@ import Jumbotron from '../../components/Landing/Jumbotron';
 import Introduction from '../../components/Landing/Introduction';
 import Skills from '../../components/Landing/Skills';
 
-
 const Landing = () => {
 
     return (

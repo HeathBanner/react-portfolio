@@ -1,77 +1,57 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Avatar, Typography } from '@material-ui/core';
+import { AppContext } from '../../context/AuthContext';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Divider } from '@material-ui/core';
 
 import Desktop from './Steppers/Desktop';
 import Mobile from './Steppers/Mobile';
 
 const useStyles = makeStyles(theme => ({
     container: {
+        [theme.breakpoints.down('xs')]: {
+            height: '120vh',
+            marginTop: 40,
+        },
         position: 'relative',
-        // height: 200,
+        height: '80vh',
         marginTop: 80,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        alignContent: 'center',
         flexWrap: 'wrap',
-    },
-    aboutContainer: {
-        marginBottom: 80,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-    },
-    stepperContainer: {
-        width: '60%',
-        marginTop: 40,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-    },
-    stepper: {
-        width: '100%',
-        borderRadius: '4px 4px 0px 0px',
-        background: 'linear-gradient(45deg, #ffffff 30%, #fff4d1 90%)',
-        boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)',
-    },
-    avatar: {
-        [theme.breakpoints.down('sm')]: {
-            position: 'relative',
-            top: 0,
-            left: 0,    
-            transform: 'translate(0%, 0%)',
-        },
-        height: 200,
-        width: 200,
-        position: 'absolute',
-        top: '50%',
-        left: 20,
-        transform: 'translate(0%, -50%)',
     },
     skillsHeader: {
-        color: 'white',
         width: '100%',
-    },
-    paper: {
-        height: 300,
-        padding: 20,
-        borderRadius: '0px 0px 4px 4px',
-        background: 'linear-gradient(45deg, #ffffff 30%, #ece9e6 90%)'
-    },
-    button: {
-        margin: '10px 20px 0px 0px',
-        width: '40%',
-    },
-    spacer: {
-        height: '80vh',
-    },
+        color: 'white',        
+    }
 }));
 
 const getSteps = () => {
-    return ['High School', 'Photography', 'Construction', `Hawai'i`, 'Boot Camp'];
+    return [
+        {
+            title: 'High School',
+            icon: 'school'
+        },
+        {
+            title: 'Photography',
+            icon: 'photo_camera',
+        },
+        {
+            title: 'Construction',
+            icon: 'location_city',
+        },
+        {
+            title: `Hawai'i`,
+            icon: 'pool',
+        },
+        {
+            title: 'Boot Camp',
+            icon: 'code',
+        },
+    ];
 };
   
 const getStepContent = (step) => {
@@ -121,9 +101,9 @@ const getStepContent = (step) => {
         case 4:
             return `After dabbling in programming by reading some books, A Crash Course 
             to Python/Beginning Django, watching a bunch of youtube videos. I 
-            found UNC Programming Bootcamp. My Father, who has made a career out 
-            of programming, decided it was would be a good direction to take. 
-            So here I am. Making this website for Homework at the Bootcamp...`;
+            found Trilogy Web Development Bootcamp. My Father, who has made a career out 
+            of programming, decided it was would be a good direction to take. After pulling in
+            from 70 to 80 hours a week for 3 months I finally graduated.`;
 
         default:
             return 'Unknown step';
@@ -133,21 +113,12 @@ const getStepContent = (step) => {
 const Introduction = () => {
 
     const classes = useStyles();
-    const theme = useTheme();
-
-    const sm = useMediaQuery(theme.breakpoints.down('sm'));
-    const xs = useMediaQuery(theme.breakpoints.down('xs'));
-
-    const getVariant = () => {
-        if(xs) { return 'h2'}
-        else { return 'h1' }
-    };
+    const holder = useContext(AppContext);
 
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
 
     const handleNext = () => {
-    
         setActiveStep(prevActiveStep => prevActiveStep + 1);
     };
     
@@ -160,46 +131,37 @@ const Introduction = () => {
     };
 
     return (
+        <Grid className={classes.container} item xs={12}>
+            
+            <Typography className={classes.skillsHeader} variant={holder.xs ? 'h2' : 'h1'} align="center">
+                About Me
+            </Typography>
 
-        <Fragment>
+            <Divider style={{ width: '50%', marginBottom: 40 }} />      
 
-            <Grid className={classes.container} item xs={12}>
-                
-                <Avatar className={classes.avatar} src='./imgs/me.png' alt="Heath Banner"  />   
+            {
+                holder.sm
+                    ?
+                <Mobile 
+                    activeStep={activeStep} 
+                    getContent={getStepContent} 
+                    steps={steps}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleReset={handleReset}
+                />    
+                    :
+                <Desktop 
+                    activeStep={activeStep} 
+                    getContent={getStepContent} 
+                    steps={steps}
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    handleReset={handleReset}
+                />
+            }
 
-                <Typography className={classes.skillsHeader} variant={getVariant()} align="center">
-                    About Me
-                </Typography>         
-
-            </Grid>
-            <Grid className={classes.aboutContainer} item xs={12}>
-
-                {
-                    sm 
-                        ?
-                    <Mobile 
-                        activeStep={activeStep} 
-                        getContent={getStepContent} 
-                        steps={steps}
-                        handleNext={handleNext}
-                        handleBack={handleBack}
-                        handleReset={handleReset}
-                    />    
-                        :
-                    <Desktop 
-                        activeStep={activeStep} 
-                        getContent={getStepContent} 
-                        steps={steps}
-                        handleNext={handleNext}
-                        handleBack={handleBack}
-                        handleReset={handleReset}
-                    />
-                }
-
-
-            </Grid>
-
-        </Fragment>
+        </Grid>
     );
 };
 

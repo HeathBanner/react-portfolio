@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AppContext } from '../../context/AuthContext';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -9,15 +11,14 @@ import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconBu
 import Moment from 'react-moment';
 import FormatDate from 'moment';
 
-const drawerWidth = 240;
-
 const links = [
-  {link: '/', text: 'Home', icon: 'face'}, 
-  {link: '/showcase', text: 'Show Case', icon: 'code'}, 
-  {link: '/contact', text: 'Contact', icon: 'contact_phone'}
+  { link: '/', text: 'Home', icon: 'face' }, 
+  { link: '/showcase', text: 'Show Case', icon: 'code' }, 
+  { link: '/contact', text: 'Contact', icon: 'contact_phone' },
 ];
 
-export default function PersistentDrawerLeft(props) {
+const PersistentDrawer = (props) => {
+  
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -88,21 +89,24 @@ export default function PersistentDrawerLeft(props) {
       display: 'none',
     },
     drawer: {
-      width: drawerWidth,
+      [theme.breakpoints.up('lg')]: {
+        width: 300,
+      },
+      width: 240,
       flexShrink: 0,
     },
     drawerPaper: {
-      [theme.breakpoints.down('lg')]:{
-        width: 240,
+      [theme.breakpoints.up('lg')]:{
+        width: 300,
       },
       [theme.breakpoints.down('md')]:{
         width: 240,
       },
       [theme.breakpoints.down('sm')]:{
-        width: 180,
+        width: 200,
       },
       [theme.breakpoints.down('xs')]:{
-        width: 140,
+        width: 150,
       },
     },
     drawerHeader: {
@@ -140,41 +144,52 @@ export default function PersistentDrawerLeft(props) {
       marginLeft: 0,
     },
     moment: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'none'
+      },
       position: 'absolute',
       right: '3%',
       marginRight: theme.spacing(2),
       display: 'flex',
       alignItems: 'center',
-      [theme.breakpoints.down('xs')]: {
-        display: 'none'
-      }
     },
     clock: {
       marginRight: '5px'
-    }
+    },
+    listButtons: {
+      transition: 'transform .4s ease',
+      '&:hover': {
+        transform: 'translate(20px, 0px)',
+      },
+    },
   }));
-  
+
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const holder = useContext(AppContext);
 
-  function handleDrawerOpen() {
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
     setOpen(true);
-  }
+  };
 
-  function handleDrawerClose() {
+  const handleDrawerClose = () => {
     setOpen(false);
-  }
+  };
 
-  function getTime() {
+  const getTime = () => {
     date = FormatDate()
-  }
-  var date = ''
+  };
+
+  let date = ''
   setInterval(getTime, 30000);
 
   return (
       <div className={classes.root}>
+
         <CssBaseline />
+
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
@@ -190,22 +205,30 @@ export default function PersistentDrawerLeft(props) {
               edge="start"
               className={clsx(classes.menuButton, open && classes.hide)}
             >
-              <Icon>menu</Icon>
+              <Icon fontSize={holder.xs ? 'default' : 'large'}>menu</Icon>
             </IconButton>
 
             <Link to="/" className={classes.homeLink}>
-              <Typography className={classes.barTitle} variant="h6" noWrap>
+
+              <Typography className={classes.barTitle} variant="h5" noWrap>
                 Heath Banner
               </Typography>
+
             </Link>
 
             <div className={classes.moment}>
-              <Icon className={classes.clock}>access_time</Icon>
-              <Moment interval={30000} date={date} format={'dddd h:mm a'} />
+
+              <Icon  className={classes.clock}>access_time</Icon>
+             
+              <Typography variant="body1">
+                <Moment interval={30000} date={date} format={'dddd h:mm a'} />
+              </Typography>
+              
             </div>
 
           </Toolbar>
         </AppBar>
+
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -216,23 +239,49 @@ export default function PersistentDrawerLeft(props) {
           }}
         >
           <div className={classes.drawerHeader}>
+
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <Icon>chevron_left</Icon> : <Icon>cheveron_right</Icon>}
+              {
+                theme.direction === 'ltr'
+                  ? 
+                <Icon fontSize="large">chevron_left</Icon>
+                  :
+                <Icon fontSize="large">cheveron_right</Icon>
+              }
             </IconButton>
+
           </div>
+
           <Divider />
+
           <List>
-            {links.map((link, index) => (
-              <Link key={index} style={{color: 'black', textDecoration: 'none'}} to={link.link}>
-                <ListItem button>
-                  <ListItemIcon><Icon>{link.icon}</Icon></ListItemIcon>
-                  <ListItemText primary={link.text} />
-                </ListItem>
-              </Link>
-            ))}
+
+            {
+              links.map((link, index) => (
+                <Link key={index} style={{ color: 'black', textDecoration: 'none' }} to={link.link}>
+
+                  <ListItem className={classes.listButtons} button>
+
+                    <ListItemIcon style={{ minWidth: holder.xs ? 0 : 'inherit', marginRight: holder.xs ? 10 : 0 }}>
+                      <Icon fontSize={holder.xs ? 'default' : 'large'}>{link.icon}</Icon>
+                    </ListItemIcon>
+
+                    <ListItemText primary={link.text} primaryTypographyProps={{ variant: holder.xs ? 'body1' : 'h5' }} />
+
+                  </ListItem>
+
+                </Link>
+              ))
+            }
+
           </List>
+
           <Divider />
+
           </Drawer>
+
       </div>
   );
-}
+};
+
+export default PersistentDrawer;

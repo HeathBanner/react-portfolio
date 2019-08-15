@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const CitySchema = new Schema({
     id: {
@@ -23,8 +24,8 @@ const CitySchema = new Schema({
     langs: {
         type: Array,
         trim: true,
-    }
-}, {collection: 'cityList'});
+    },
+}, { collection: 'cityList' });
 
 const Cities = mongoose.model('Cities', CitySchema);
 
