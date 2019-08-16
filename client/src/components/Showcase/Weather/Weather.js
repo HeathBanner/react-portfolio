@@ -13,11 +13,11 @@ import weatherBG from './imgs/1x/weatherBGNew.png'
 
 const useStyles = makeStyles(theme => ({
     weatherSection: {
-        [theme.breakpoints.up('md')]: {
-            height: '160vh',
+        [theme.breakpoints.up('lg')]: {
+            height: '200vh'
         },
-        [theme.breakpoints.up('sm')]: {
-            height: '170vh',
+        [theme.breakpoints.down('md')]: {
+            height: '180vh',
         },
         [theme.breakpoints.down('sm')]: {
             height: '160vh',
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         },
         backgroundImage: `url(${weatherBG})`,
         backgroundSize: 'cover',
-        height: '160vh',
+        height: '180vh',
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
             height: '40vh',
             alignItems: 'center',
         },
-        height: '30vh',
+        height: '40vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
@@ -124,11 +124,16 @@ const Weather = (props) => {
 
             <Grid className={classes.headerContainer} item xs={12}>
 
-                <Typography className={classes.concept} color="primary" variant={getVariant()}>
-                    Weather Concept
-                </Typography>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                <Description />
+                    <Typography className={classes.concept} color="primary" variant={getVariant()}>
+                        Weather Concept
+                    </Typography>
+
+                    <Description />
+
+                </div>
+
 
             </Grid>
                     

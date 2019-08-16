@@ -180,7 +180,7 @@ const Timeline = () => {
                                 <Avatar
                                     className={classes.avatar}
                                     alt={story._id}
-                                    src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1571270400&v=beta&t=Fwpkf09f2GNerYN2fC12EwcsHYivKOPTtRBhechPva4`}
+                                    src="./imgs/heath.jpeg"
                                 />
                             </ListItemAvatar>
 

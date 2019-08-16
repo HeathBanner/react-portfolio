@@ -126,7 +126,7 @@ const Skyliner = (props) => {
 
                                 <Avatar
                                     className={classes.profileAvatar}
-                                    src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_200_200/0?e=1571270400&v=beta&t=Fwpkf09f2GNerYN2fC12EwcsHYivKOPTtRBhechPva4`}
+                                    src="./imgs/heath.jpeg"
                                     alt="Heath Banner Profile Picture"
                                 />
                                 

@@ -262,7 +262,7 @@ const PersistentDrawer = (props) => {
 
                   <ListItem className={classes.listButtons} button>
 
-                    <ListItemIcon style={{ minWidth: holder.xs ? 0 : 'inherit', marginRight: holder.xs ? 10 : 0 }}>
+                    <ListItemIcon style={{ minWidth: holder.xs ? 0 : 56, marginRight: holder.xs ? 10 : 0 }}>
                       <Icon fontSize={holder.xs ? 'default' : 'large'}>{link.icon}</Icon>
                     </ListItemIcon>
 

@@ -46,13 +46,10 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         [theme.breakpoints.down('sm')]: {
-            position: 'relative',
-            top: 0,
-            marginLeft: 20,
+            marginTop: 0,
         },
-        position: 'absolute',
-        top: '50%',
-        left: 0,
+        marginTop: 30,
+        marginLeft: 20,
         transition: 'all .4s ease',
         '&:hover': {
             backgroundColor: '#c4c4c4',
