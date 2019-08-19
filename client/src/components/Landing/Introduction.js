@@ -11,11 +11,11 @@ import Mobile from './Steppers/Mobile';
 const useStyles = makeStyles(theme => ({
     container: {
         [theme.breakpoints.down('xs')]: {
-            height: '120vh',
             marginTop: 40,
         },
+        paddingTop: 120,
+        paddingBottom: 120,
         position: 'relative',
-        height: '80vh',
         marginTop: 80,
         display: 'flex',
         justifyContent: 'center',

@@ -79,6 +79,9 @@ export default function PersistentDrawerLeft(props) {
       alignItems: 'center',
       color: props.mood ? `${props.mood.barTitle}` : 'white',
       width: 'auto',
+      '&:hover': {
+        color: 'rgb(255, 255, 255)',
+      },
     },
     typo: {
       width: 'auto',
@@ -249,14 +252,12 @@ export default function PersistentDrawerLeft(props) {
                 edge="start"
                 className={clsx(classes.menuButton, open && classes.hide)}
               >
-                <Icon
-                  style={{ fontSize: holder.xs ? '2rem' : '2.25rem' }}
-                >
+                <Icon style={{ fontSize: holder.xs ? '2rem' : '2.25rem' }} >
                   menu
                 </Icon>
               </IconButton>
 
-                <Link className={classes.barTitle} to='/'>
+                <Link style={{ textDecoration: 'none' }} className={classes.barTitle} to='/'>
 
                   <Avatar
                     className={classes.avatar}

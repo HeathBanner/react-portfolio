@@ -7,6 +7,8 @@ import Showcase from './pages/Showcase/Showcase';
 import Contact from './pages/Contact/Contact';
 import Landing from './pages/Landing/Landing';
 
+import './reset.css';
+
 const App = () => {
 
   return (

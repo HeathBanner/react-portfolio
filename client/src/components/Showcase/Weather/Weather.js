@@ -13,21 +13,12 @@ import weatherBG from './imgs/1x/weatherBGNew.png'
 
 const useStyles = makeStyles(theme => ({
     weatherSection: {
-        [theme.breakpoints.up('lg')]: {
-            height: '200vh'
-        },
-        [theme.breakpoints.down('md')]: {
-            height: '180vh',
-        },
         [theme.breakpoints.down('sm')]: {
-            height: '160vh',
-        },
-        [theme.breakpoints.down('xs')]: {
-            height: '260vh',
+            paddingBottom: 340,
         },
         backgroundImage: `url(${weatherBG})`,
         backgroundSize: 'cover',
-        height: '180vh',
+        paddingBottom: 280,
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
@@ -36,28 +27,36 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
     },
     headerContainer: {
+        [theme.breakpoints.down('md')]: {
+            alignItems: 'flex-end',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: 300,
+        },
         [theme.breakpoints.down('xs')]: {
-            height: '40vh',
             alignItems: 'center',
         },
-        height: '40vh',
+        height: 420,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
     },
     moduleContainer: {
+        [theme.breakpoints.down('md')]: {
+            paddingTop: 100,
+        },
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
     },
     concept: {
+        [theme.breakpoints.down('md')]: {
+            color: 'white',
+        },
         [theme.breakpoints.down('sm')]: {
             marginTop: 0,
             marginLeft: 0,
-        },
-        [theme.breakpoints.down('xs')]: {
-            color: 'white',
         },
         marginTop: 30,
         marginLeft: 80,

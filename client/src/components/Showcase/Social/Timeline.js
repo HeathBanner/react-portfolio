@@ -259,12 +259,16 @@ const Timeline = () => {
                         <Divider />
 
                         <ListItem key={index}>
-                            <ListItemText primary={
-                                <Typography variant={holder.xs ? 'body1' : 'h6'}>
-                                    {`${comment.authored_by.username}: ${comment.text}`}
-                                </Typography>
+
+                            <ListItemText
+                                primary={
+                                    <Typography variant={holder.xs ? 'body1' : 'h6'}>
+                                        {`${comment.authored_by.username}: ${comment.text}`}
+                                    </Typography>
                                 }
-                                secondary={<Moment date={comment.time} format={'dddd h:mm a'} />} />
+                                secondary={<Moment date={comment.time} format={'dddd h:mm a'} />} 
+                            />
+                            
                         </ListItem>
 
                     </Fragment>

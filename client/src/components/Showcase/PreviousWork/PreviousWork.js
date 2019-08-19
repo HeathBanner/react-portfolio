@@ -10,11 +10,12 @@ import DescPopper from './Popper';
 const useStyles = makeStyles(theme => ({
     headerContainer: {
         [theme.breakpoints.down('md')]: {
-            height: '20vh',
+            paddingBottom: 0,
             alignItems: 'flex-end',
             alignContent: 'flex-end',
         },
-        height: '100vh',
+        paddingTop: 100,
+        paddingBottom: 200,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -23,19 +24,19 @@ const useStyles = makeStyles(theme => ({
     },
     listContainer: {
         [theme.breakpoints.down('md')]: {
-            height: '80vh',
             marginTop: 60,
             alignItems: 'flex-start',
             alignContent: 'flex-start',
             perspective: 'none',
         },
         [theme.breakpoints.down('sm')]: {
-            height: '110vh',
+            // height: '110vh',
         },
         [theme.breakpoints.down('xs')]: {
-            height: '200vh',
+            // height: '200vh',
         },
-        height: '100vh',
+        paddingTop: 100,
+        paddingBottom: 200,
         perspective: 7000,
         display: 'flex',
         justifyContent: 'center',
