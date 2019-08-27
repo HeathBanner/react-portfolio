@@ -6,7 +6,9 @@ const dotENV = require('dotenv');
 const mongoose = require('mongoose');
 
 const MONGOD_URI = 'mongodb://HeathBanner:testing123@ds137631.mlab.com:37631/heroku_g0b41nhx';
-mongoose.connect(MONGOD_URI);
+// const MONGOD_URI = 'mongodb://localhost/portfolio';
+
+mongoose.connect(MONGOD_URI, { useNewUrlParser: true });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

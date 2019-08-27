@@ -6,6 +6,10 @@ import { AppProvider } from './context/AuthContext';
 import Showcase from './pages/Showcase/Showcase';
 import Contact from './pages/Contact/Contact';
 import Landing from './pages/Landing/Landing';
+import Blog from './pages/Blog/Blog';
+import Article from './components/Showcase/MtnDream/Blog/Article';
+import EditorSelection from './components/Showcase/MtnDream/Editor/EditorSelection';
+import Editor from './pages/Blog/Editor';
 
 import './reset.css';
 
@@ -18,6 +22,10 @@ const App = () => {
             <Route exact path="/" component={Landing} />
             <Route exact path="/showcase" component={Showcase} />
             <Route path="/contact" component={Contact} />
+            <Route path="/blog" exact component={Blog} />
+            <Route path="/blog/:title" component={Article} />
+            <Route path="/editor" exact component={EditorSelection} />
+            <Route path="/editor/:title" component={Editor} />
         </Switch>
         
     </AppProvider>

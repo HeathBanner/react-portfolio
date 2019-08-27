@@ -2,7 +2,6 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "main": "server/server.js",
   "engines": {
     "node": "11.10.1",
     "yarn": "1.16.0"

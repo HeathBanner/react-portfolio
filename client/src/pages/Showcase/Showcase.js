@@ -8,6 +8,7 @@ import Weather from '../../components/Showcase/Weather/Weather';
 import ProfileShell from '../Social/ProfileShell';
 import Jumbotron from '../../components/Showcase/Jumbotron/Jumbotron';
 import PreviousWork from '../../components/Showcase/PreviousWork/PreviousWork';
+import Links from '../../components/Showcase/MtnDream/Links';
 
 const atmosphere = ['Mist', 'Smoke', 'Haze', 'Dust', 'Fog', 'Sand', 'Dust', 'Ash', 'Squall', 'Tornado']
 const rain = ['Rain', 'Drizzle']
@@ -85,6 +86,8 @@ function Home() {
                 <PreviousWork />
 
                 <Weather grabWeather={grabWeather} />
+
+                <Links />
 
                 <Grid item xs={12}>
                     <ProfileShell />

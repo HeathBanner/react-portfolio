@@ -1,15 +1,6 @@
 const usersController = require('express').Router();
 const db = require('../../models/users');
-const infoDB = require('../../models/userInfo');
 const { ObjectID } = require('mongodb');
-
-const { JWTVerifier } = require('../../lib/passport');
-const jwt = require('jsonwebtoken');
-
-
-usersController.get('/me', JWTVerifier, (req, res) => {
-    res.json(req.user);
-});
 
 usersController.get('/portfolio', (req, res) => {
     db.findOne({ _id: ObjectID('5d12638abb93d2a54d7c37a0') })
@@ -36,20 +27,6 @@ usersController.get('/portfolio', (req, res) => {
         .exec((err, user) => {
             if (err) throw err;
             res.json(user);
-        });
-});
-
-usersController.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    infoDB.findOne({ email }, null, {})
-        .then((user) => {
-            if (!user || !user.comparePassword(password)) {
-                return res.status(401).send('Unauthorized!');
-            }
-            return res.json({
-                token: jwt.sign({ sub: user.userId }, process.env.JWT_SECRET),
-                user,
-            });
         });
 });
 
