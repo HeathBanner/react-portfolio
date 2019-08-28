@@ -11,12 +11,32 @@ import Latest from '../../components/Showcase/MtnDream/Blog/Latest';
 
 const useStyles = makeStyles((theme) => ({
     container: {
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+            marginTop: 60,
+            marginBottom: 40,
+        },
         marginTop: 120,
         marginBottom: 80,
+        paddingLeft: 40,
+        paddingRight: 40,
     },
     articlesContainer: {
-        paddingLeft: '20%',
-        paddingRight: 40,
+        [theme.breakpoints.down('lg')]: {
+            paddingLeft: '15%',
+            paddingRight: '15%',
+        },
+        [theme.breakpoints.down('md')]: {
+            paddingLeft:'10%',
+            paddingRight: '10%',
+        },
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+        },
+        paddingLeft: '25%',
+        paddingRight: '25%',
     },
 }));
 
@@ -34,15 +54,12 @@ const Blog = () => {
                     <Nav isBlog={true} />
 
                 </Grid>
-                <Grid className={classes.articlesContainer} item xs={9}>
+                <Grid className={classes.articlesContainer} item xs={12}>
 
                     <NewArticle />
 
                     <Latest />
                 
-                </Grid>
-                <Grid item xs={3}>
-
                 </Grid>
 
             </EditorProvider>

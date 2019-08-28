@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
 import { Menu, MenuItem, Button, Icon } from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
@@ -53,16 +52,9 @@ const textOptions = [
     }
 ];
 
-const useStyles = makeStyles(theme => ({
-
-}));
-
 const TextSize = () => {
     
-    const classes = useStyles();
-
     const holder = useContext(EditorContext);
-    const style = holder.textStyle;
 
     const [anchorEl, setAnchorEl] = useState(null);
 

@@ -6,6 +6,8 @@ import { Grid, Button, Divider, Typography, Paper, Avatar } from '@material-ui/c
 
 import { EditorContext } from '../../../../context/EditorContext';
 
+import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
+
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
@@ -49,6 +51,21 @@ const useStyles = makeStyles((theme) => ({
         alignContent: 'center',
         flexWrap: 'wrap',
         flexBasis: 'auto',
+    },
+    title: {
+        width: '100%',
+        marginBottom: 10,
+        display: 'box',
+        boxOrient: 'vertical',
+        lineClamp: 2,
+        overflow: 'hidden',
+    },
+    desc: {
+        width: '100%',
+        display: 'box',
+        boxOrient: 'vertical',
+        lineClamp: 2,
+        overflow: 'hidden',
     },
     avatar: {
         height: 60,
@@ -101,13 +118,13 @@ const ArticleSelection = () => {
                                 key={article.title.text}
                             >
 
-                                <Typography style={{ width: '100%', marginBottom: 20 }} align="center" variant="h2">
+                                <Typography className={classes.title} align="center" variant="h2">
                                     <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/editor/${article.title.text}`}>
                                         {article.title.text}
                                     </Link>
                                 </Typography>
 
-                                <Typography style={{ width: '100%'}} align="center" variant="h5" color="textSecondary">
+                                <Typography className={classes.desc} align="center" variant="h5" color="textSecondary">
                                     <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/editor/${article.title.text}`}>
                                         {article.description.text}
                                     </Link>
@@ -117,7 +134,7 @@ const ArticleSelection = () => {
 
                                     <Avatar
                                         className={classes.avatar}
-                                        src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_100_100/0?e=1572480000&v=beta&t=QNVV8XF1wUl0Pw5sTEVgahCY8A0N1d58dCU7qAXFf20`}
+                                        src={Heath}
                                         alt="Heath Banner Profile Photo"
                                     />
 

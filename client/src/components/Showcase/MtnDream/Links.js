@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
@@ -29,34 +31,36 @@ const useStyles = makeStyles((theme) => ({
 const Links = () => {
 
     const classes = useStyles();
+    const media = useContext(AppContext);
 
     return (
         <Grid className={classes.container} item xs={12}>
 
-            <Typography style={{ width: '100%' }} align="center" variant="h1">
+            <Typography style={{ width: '100%' }} align="center" variant={media.xs ? 'h3' : 'h1'}>
                 Blog Editor Concept
             </Typography>
 
             <Typography
                 style={{
-                    width: '100%',
+                    width: media.xs ? '80%' : '60%',
                     marginTop: 20,
                 }}
                 align="center"
-                variant="h6"
+                variant={media.xs ? 'body1' : 'h6'}
                 color="error"
             >
-                This project is still under construction. Media queries and other little
-                feature are still being added.
+                This project is still under construction. It is responsive up to a screen width
+                of 960px due to Material UI breakpoints. I will roll out the updates for lower
+                screen widths soon.
             </Typography>
 
             <Typography
                 style={{ 
-                    width: '50%',
+                    width: media.xs ? '80%' : '60%',
                     marginTop: 20.
                 }}
                 align="center"
-                variant="h6"
+                variant={media.xs ? 'body1' : 'h6'}
             >
                 Mountain Dream is an application built to showcase a rental cabin in
                 the mountains of Boone, NC. It uses basic parallax and transform

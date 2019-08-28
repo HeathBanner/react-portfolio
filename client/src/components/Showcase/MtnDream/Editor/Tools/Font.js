@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext } from 'react';
 
-import { Menu, MenuItem, Button, Icon, Fab } from '@material-ui/core';
+import { Menu, MenuItem, Button, Icon } from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
 

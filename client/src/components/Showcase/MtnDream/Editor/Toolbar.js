@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 
 import TextSize from './Tools/TextSize';
 import Font from './Tools/Font';
@@ -7,6 +7,7 @@ import Justify from './Tools/Justify';
 import Margin from './Tools/Margin';
 
 import { EditorContext } from '../../../../context/EditorContext';
+import { AppContext } from '../../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { green, amber } from '@material-ui/core/colors';
@@ -24,12 +25,23 @@ const useStyles = makeStyles(theme => ({
         boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     },
     editorTools: {
+        [theme.breakpoints.down('md')]: {
+            marginTop: 20,
+        },
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     input: {
         width: '80%'
+    },
+    saveContainer: {
+        [theme.breakpoints.down('md')]: {
+            justifyContent: 'center',
+        },
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     save: {
         position: 'relative',
@@ -59,6 +71,7 @@ const Toolbar = () => {
 
     const classes = useStyles();
     const holder = useContext(EditorContext);
+    const media = useContext(AppContext);
 
     const [error, setError] = useState({
         open: false,
@@ -132,8 +145,7 @@ const Toolbar = () => {
                 holder.setPublished();
             })
             .catch((error) => {
-                console.log(JSON.stringify(error));
-                // setError({ open: true, message: error });
+                setError({ open: true, message: 'Something went wrong :(' });
             });
     };
 
@@ -157,14 +169,14 @@ const Toolbar = () => {
             })
             .catch((error) => {
                 console.log(JSON.stringify(error));
-                // setError({ open: true, message: error });
+                setError({ open: true, message: 'Something went wrong :(' });
             });
     };
 
     return (
         <Grid className={classes.container} justify="center" alignItems="center" container>
 
-            <Grid item xs={1}>
+            <Grid className={classes.saveContainer} item lg={1} md={12}>
 
                 {
                     holder.title.isPublished
@@ -275,7 +287,7 @@ const Toolbar = () => {
                 </Snackbar>
 
             </Grid>
-            <Grid className={classes.editorTools} item xs={11}>
+            <Grid className={classes.editorTools} item lg={11} md={12}>
 
                 <TextSize />
                 
@@ -283,11 +295,34 @@ const Toolbar = () => {
 
                 <Styling />
 
-                <Justify />
+                {
+                    !media.md
+                        ?
+                        <Fragment>
+                            <Justify />
+        
+                            <Margin />
+                        </Fragment>
+                        :
+                    ''
+                }
 
-                <Margin />
 
             </Grid>
+
+            {
+                media.md
+                    ?
+                <Grid className={classes.editorTools} item lg={5} md={12}>
+                            
+                    <Justify />
+
+                    <Margin />
+                    
+                </Grid>
+                    :
+                ''
+            }
 
         </Grid>
     );

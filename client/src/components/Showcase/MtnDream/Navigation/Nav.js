@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, Fragment } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, CircularProgress, Modal, Button, Paper }from '@material-ui/core';
+import { AppBar, Toolbar, Typography, CircularProgress }from '@material-ui/core';
 
 import { AppContext } from '../../../../context/AuthContext';
 
@@ -43,10 +43,6 @@ const Nav = (props) => {
       desc: '',
       image: '',
     });
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {setOpen(true); };
-    const handleClose = () => { setOpen(false); };
 
     useEffect(() => {
       fetch('https://api.openweathermap.org/data/2.5/weather?lat=36.2168&lon=81.6746&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2')

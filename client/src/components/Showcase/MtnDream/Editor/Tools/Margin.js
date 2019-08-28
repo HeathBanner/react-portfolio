@@ -3,10 +3,12 @@ import React, { Fragment, useContext } from 'react';
 import { Typography, TextField, Icon } from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
+import { AppContext } from '../../../../../context/AuthContext';
 
 const Margin = () => {
 
     const holder = useContext(EditorContext);
+    const media = useContext(AppContext);
 
     const marginSwitch = () => {
         switch (holder.sectionMode.el) {
@@ -26,7 +28,7 @@ const Margin = () => {
     return (
         <Fragment>
 
-            <Typography style={{ marginRight: 10 }}>
+            <Typography style={{ marginRight: 10,  display: media.md ? 'inline' : 'block' }}>
                 Margin Top:
             </Typography>
 
@@ -48,7 +50,7 @@ const Margin = () => {
                 <Icon style={{ width: 40 }}>lock</Icon>
             }
 
-            <Typography style={{ margin: '0px 10px' }}>
+            <Typography style={{ margin: '0px 10px', display: media.md ? 'inline' : 'block' }}>
                 Margin Bottom:
             </Typography>
 

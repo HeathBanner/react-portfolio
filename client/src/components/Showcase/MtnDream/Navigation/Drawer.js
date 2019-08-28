@@ -60,6 +60,11 @@ const drawerList = [
     icon: 'edit',
     link: '/editor',
   },
+  {
+    text: 'Portfolio',
+    icon: 'code',
+    link: '/showcase',
+  }
 ];
 
 const TemporaryDrawer = props => {

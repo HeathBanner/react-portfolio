@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Avatar } from '@material-ui/core';
 
 import { EditorContext } from '../../../../context/EditorContext';
+import { AppContext } from '../../../../context/AuthContext';
+
+import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
 
 const useStyles = makeStyles((theme) => ({
     infoContainer: {
@@ -30,8 +33,9 @@ const useStyles = makeStyles((theme) => ({
 
 const NewArticle = () => {
 
-    const holder = useContext(EditorContext);
     const classes = useStyles();
+    const holder = useContext(EditorContext);
+    const media = useContext(AppContext);
 
     if (holder.articleList) {
         return (
@@ -48,13 +52,13 @@ const NewArticle = () => {
                     />
                 </Link>
     
-                <Typography style={{ marginTop: 20 }} variant="h2">
+                <Typography style={{ marginTop: 20 }} variant={media.md ? 'h3' : 'h2'}>
                     <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${holder.articleList[0].title.text}`}>
                         {holder.articleList[0].title.text}
                     </Link>
                 </Typography>
     
-                <Typography style={{ marginTop: 15, marginBottom: 15 }} variant="h6" color="textSecondary">
+                <Typography style={{ marginTop: 15, marginBottom: 15 }} variant={media.md ? 'body1' : 'h6'} color="textSecondary">
                     <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${holder.articleList[0].title.text}`}>
                         {holder.articleList[0].description.text}
                     </Link>
@@ -64,15 +68,15 @@ const NewArticle = () => {
 
                     <Avatar
                         className={classes.avatar}
-                        src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_100_100/0?e=1572480000&v=beta&t=QNVV8XF1wUl0Pw5sTEVgahCY8A0N1d58dCU7qAXFf20`}
+                        src={Heath}
                         alt="Heath Banner Profile Photo"
                     />
         
-                    <Typography style={{ width: '100%' }} variant="body1">
+                    <Typography style={{ width: '100%' }} variant={media.md ? 'body2' : 'body1'}>
                         Heath Banner
                     </Typography>
         
-                    <Typography style={{ width: '100%' }} variant="body1" color="textSecondary">
+                    <Typography style={{ width: '100%' }} variant={media.md ? 'body2' : 'body1'} color="textSecondary">
                         {`${holder.articleList[0].date.parsedDate} `} &#8226; {` ${holder.articleList[0].readLength.text} min read`}
                     </Typography>
                     

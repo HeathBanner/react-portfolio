@@ -5,6 +5,8 @@ import { Grid, Typography, Avatar } from '@material-ui/core';
 
 import Nav from '../Navigation/Nav';
 
+import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
+
 const fontSizes = {
     h1: '6rem',
     h2: '3.75rem',
@@ -119,7 +121,7 @@ const Article = ({ match }) => {
 
                     <Avatar
                         className={classes.avatar}
-                        src={`https://media.licdn.com/dms/image/C4E03AQESXvxigX8NfQ/profile-displayphoto-shrink_800_800/0?e=1571875200&v=beta&t=jVs0jK8YKBHrOOcmnghTMtN9bhPfu7rH9MHADyTboBY`}
+                        src={Heath}
                         alt="Terri Banner Profile Photo"
                     />
 

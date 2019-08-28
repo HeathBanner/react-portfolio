@@ -8,6 +8,8 @@ import Image from './Tools/Image';
 
 import { EditorContext } from '../../../../context/EditorContext';
 
+import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
+
 const fontSizes = {
     h1: '6rem',
     h2: '3.75rem',
@@ -152,7 +154,7 @@ const Preview = (props) => {
 
                     <Avatar
                         className={classes.avatar}
-                        src={`https://media.licdn.com/dms/image/C5603AQHqTyUqMrqJZA/profile-displayphoto-shrink_100_100/0?e=1572480000&v=beta&t=QNVV8XF1wUl0Pw5sTEVgahCY8A0N1d58dCU7qAXFf20`}
+                        src={Heath}
                         alt="Heath Banner Profile Photo"
                     />
 
