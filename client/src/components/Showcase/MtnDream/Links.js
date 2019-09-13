@@ -8,22 +8,32 @@ import { Grid, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        height: '90vh',
+        [theme.breakpoints.up('md')]: {
+            paddingBottom: 100,
+        },
+        padding: '20px 20px 50px 20px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
         flexWrap: 'wrap',
+        backgroundColor: '#0000a2',
+        color: 'white',
+    },
+    header: {
+        width: '100%',
+        marginTop: 50,
     },
     button: {
         marginTop: 20,
         padding: 15,
         width: '100%',
-        color: 'white',
-        backgroundColor: 'rgb(0, 0, 0, 0.7)',
-        transition: 'background-color 0.4s ease',
+        color: '#0000a2',
+        backgroundColor: 'rgb(255, 255 ,255, 1)',
+        transition: 'all 0.4s ease',
         '&:hover': {
-            backgroundColor: 'rgb(0, 0, 0, 1)',
+            backgroundColor: 'rgb(255, 255, 255, 0.8)',
+            transform: 'scale(1.01)',
         },
     },
 }));
@@ -36,7 +46,11 @@ const Links = () => {
     return (
         <Grid className={classes.container} item xs={12}>
 
-            <Typography style={{ width: '100%' }} align="center" variant={media.xs ? 'h3' : 'h1'}>
+            <Typography
+                className={classes.header}
+                align="center"
+                variant={media.xs ? 'h4' : 'h3'}
+            >
                 Blog Editor Concept
             </Typography>
 
@@ -80,7 +94,7 @@ const Links = () => {
                 to={'/blog'}
             >
                 <Button className={classes.button} variant="contained">
-                    <Typography variant="h6">
+                    <Typography variant={media.xs ? 'body1' : 'h6'}>
                         A Mountain Dream
                     </Typography>
                 </Button>

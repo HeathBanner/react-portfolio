@@ -13,30 +13,12 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     description: {
-        [theme.breakpoints.up('md')]: {
-            width: '50%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('md')]: {
-            width: '70%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '80%',
-            margin: '10px auto',
-            padding: '20px',
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '80%',
-            height: 350,
-            margin: '10px auto',
-            padding: 10,
-        },
-        width: '70%',
-        margin: '10px auto',
-        padding: '20px',
+        padding: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        color: '#0000a2',
         zIndex: 1800,
     },
     popover: {
@@ -53,15 +35,14 @@ const useStyles = makeStyles(theme => ({
     },
     fab: {
         [theme.breakpoints.down('xs')]: {
-            marginLeft: 0,
             marginTop: 10,
         },
-        marginLeft: 20,
+        marginLeft: 10,
         transition: 'all .4s ease',
         '&:hover': {
             transform: 'scale(1.1)',
         },
-    }
+    },
 }));
 
 const DescPopover = () => {
@@ -71,13 +52,8 @@ const DescPopover = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClick = (e) => { setAnchorEl(e.currentTarget); };
+    const handleClose = () => { setAnchorEl(null); };
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -85,12 +61,18 @@ const DescPopover = () => {
     return (
         <Fragment>
 
-            <Fab className={classes.fab} onClick={handleClick}>
-                <Icon fontSize="large">keyboard_arrow_down</Icon>
+            <Fab
+                className={classes.fab}
+                onClick={handleClick}
+                size={holder.xs ? 'small' : 'large'}
+            >
+                <Icon fontSize={holder.xs ? 'small' : 'large'}>
+                    keyboard_arrow_down
+                </Icon>
             </Fab>
 
             <Popover
-                classes={{paper: classes.description}}
+                PaperProps={{ className: classes.description }}
                 className={classes.popover}
                 id={id}
                 open={open}
@@ -106,14 +88,25 @@ const DescPopover = () => {
                 }}
             >
 
-                <Typography color="secondary" align="center" className={classes.warning} variant={holder.xs ? 'h6' : 'h5'}>
+                <Typography
+                    className={classes.warning}
+                    variant={holder.xs ? 'body1' : 'h6'}
+                    align="center"
+                    color="secondary"
+                >
                     ***Still under development***
                 </Typography>
-                <Typography className={classes.body} variant={holder.xs ? 'h6' : 'h5'} align="center">
+                <Typography
+                    className={classes.body}
+                    variant={holder.xs ? 'body1' : 'h6'}
+                    align="center">
                     The Database uses a similar method that Facebook has. Foreign Keys/References linking every type of information
                     as if it were a spider's web. When one "strand" of the web is touched, it can be heard from another end of the web.
                 </Typography>
-                <Typography className={classes.body} variant={holder.xs ? 'h6' : 'h5'} align="center">
+                <Typography
+                    className={classes.body}
+                    variant={holder.xs ? 'body1' : 'h6'}
+                    align="center">
                     This concept uses MongoDB to store and use the information.
                     Users, Stories and the rest of their information are stored within seperate collections containing references to one another.
                     A private messaging feature will be implemented in the near future. It is very close to being finished.

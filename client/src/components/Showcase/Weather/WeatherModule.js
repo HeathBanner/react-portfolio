@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         width: '70%',
         marginBottom: 100,
         color: 'white',
-        backgroundColor: 'rgb(0, 0, 0, 0.1)',
+        backgroundColor: 'rgb(0, 0, 0, 0.3)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -95,7 +95,14 @@ const WeatherModule = (props) => {
     return (
         <Paper className={classes.moduleBox}>
 
-            <Typography style={{ width: '100%', padding: '20px 0px 10px 0px' }} variant={holder.sm ? 'h2' : 'h1'} align="center">
+            <Typography
+                style={{
+                    width: '100%',
+                    padding: '20px 0px 10px 0px',
+                }}
+                variant={holder.sm ? 'h2' : 'h1'}
+                align="center"
+            >
                 {props.city}
             </Typography>
 

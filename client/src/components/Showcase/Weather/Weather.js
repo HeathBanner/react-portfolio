@@ -9,57 +9,52 @@ import Search from './Search';
 import WeatherModule from './WeatherModule';
 import Description from './Description';
 
-import weatherBG from './imgs/1x/weatherBGNew.png'
-
 const useStyles = makeStyles(theme => ({
     weatherSection: {
-        [theme.breakpoints.down('sm')]: {
-            paddingBottom: 340,
-        },
-        backgroundImage: `url(${weatherBG})`,
-        backgroundSize: 'cover',
-        paddingBottom: 280,
-        position: 'relative',
+        paddingTop: 50,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
         alignContent: 'flex-start',
         flexWrap: 'wrap',
+        backgroundColor: 'white',
     },
     headerContainer: {
-        [theme.breakpoints.down('md')]: {
-            alignItems: 'flex-end',
-        },
-        [theme.breakpoints.down('sm')]: {
-            height: 300,
-        },
-        [theme.breakpoints.down('xs')]: {
-            alignItems: 'center',
-        },
-        height: 420,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     moduleContainer: {
-        [theme.breakpoints.down('md')]: {
-            paddingTop: 100,
-        },
+        marginTop: 50,
+        paddingBottom: 80,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
     },
     concept: {
-        [theme.breakpoints.down('md')]: {
-            color: 'white',
-        },
         [theme.breakpoints.down('sm')]: {
             marginTop: 0,
             marginLeft: 0,
         },
+        color: '#0000a2',
         marginTop: 30,
         marginLeft: 80,
+    },
+    bottomDiv: {
+        [theme.breakpoints.down('sm')]: {
+            borderWidth: '0 100vw 90px 0',
+        },
+        [theme.breakpoints.down('xs')]: {
+            borderWidth: '0 100vw 40px 0', 
+        },
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth: '0 100vw 130px 0',
+        borderColor: 'transparent white transparent transparent',
+        backgroundColor: '#0000a2',
+        transform: 'scale(1.0001)',
     },
 }));
   
@@ -69,18 +64,7 @@ const Weather = (props) => {
     const [parsedForecast, setParsedForecast] = useState('');
 
     const classes = useStyles();
-    const holder = useContext(AppContext);
-
-    const getVariant = () => {
-        switch (true) {
-            case holder.xs:
-                return 'h4';
-            case holder.sm:
-                return 'h3';
-            default:
-                return 'h1';
-        }
-    };
+    const media = useContext(AppContext);
 
     useEffect(() => {
         fetch('https://api.openweathermap.org/data/2.5/forecast?lat=35.227085&lon=-80.843124&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2')
@@ -123,16 +107,14 @@ const Weather = (props) => {
 
             <Grid className={classes.headerContainer} item xs={12}>
 
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography
+                    className={classes.concept}
+                    variant={media.xs ? 'h5' : 'h4'}
+                >
+                    Weather Concept
+                </Typography>
 
-                    <Typography className={classes.concept} color="primary" variant={getVariant()}>
-                        Weather Concept
-                    </Typography>
-
-                    <Description />
-
-                </div>
-
+                <Description />
 
             </Grid>
                     
@@ -153,6 +135,8 @@ const Weather = (props) => {
                 <Search updateModule={updateModule} />
             
             </Grid>
+
+            <div className={classes.bottomDiv}></div>
 
         </Grid>
     );

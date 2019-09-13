@@ -3,57 +3,68 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core'
+import { Typography, Grid } from '@material-ui/core'
 
-import JumboImage from './imgs/Jumbotron.png';
+import BG from './imgs/julius-drost.png';
 
 const useStyles = makeStyles(theme => ({
     jumbotron: {
-        backgroundImage: `url(${JumboImage})`,
+        backgroundImage: `url(${BG})`,
         backgroundSize: 'cover',
-        height: '70vh',
         width: '100%',
+    },
+    headerContainer: {
+        [theme.breakpoints.down('xs')]: {
+            padding: '80px 20px',
+        },
+        padding: '120px 20px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexWrap: 'wrap',
     },
     header: {
-        [theme.breakpoints.down('lg')]: {
-            marginBottom: 80,
-        },
+        marginTop: 50,
+        color: 'white',
+        width: '100%',
+    },
+    topDiv: {
         [theme.breakpoints.down('sm')]: {
-            marginBottom: 100,
+            borderWidth: '90px 100vw 0 0',
         },
         [theme.breakpoints.down('xs')]: {
-            marginBottom: 150,
+            borderWidth: '40px 100vw 0 0', 
         },
-        marginBottom: 80,
-        color: 'white',
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth: '100px 100vw 0 0',
+        borderColor: 'transparent white transparent transparent',
+        transform: 'scale(1.0001)',
     },
 }));
 
-function Jumbotron() {
+const Jumbotron = () => {
 
     const classes = useStyles();
     const holder = useContext(AppContext);
 
-    const getVariant = () => {
-        switch (true) {
-            case holder.xs:
-                return 'h3';
-            case holder.sm:
-                return 'h2';
-            default:
-                return 'h1';
-        }
-    };
-
     return (
-        <div className={classes.jumbotron}>
-            <Typography className={classes.header} variant={getVariant()} align="center">
-                {`< Show Case />`}
-            </Typography>
-        </div>
+        <Grid className={classes.jumbotron}>
+
+            <div className={classes.headerContainer}>
+                <Typography
+                    className={classes.header}
+                    variant={holder.sm ? 'h4' : 'h3'}
+                    align="center"
+                >
+                    {`< Show Case />`}
+                </Typography>
+            </div>
+
+            <div className={classes.topDiv}></div>
+
+        </Grid>
     );
 }
 

@@ -7,21 +7,9 @@ import { Paper, TextField, Button, Snackbar, SnackbarContent, IconButton, Icon, 
 
 const useStyles = makeStyles(theme => ({
     paper: {
-        [theme.breakpoints.down('lg')]: {
-            width: '60%',
-            padding: '20px 40px',
-        },
-        [theme.breakpoints.down('md')]: {
-            width: '80%',
-            padding: '20px 40px',
-        },
         [theme.breakpoints.down('sm')]: {
             width: '90%',
             padding: '20px 40px',
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '90%',
-            padding: '20px 20px',    
         },
         width: '60%',
         padding: '20px 40px',
@@ -32,45 +20,23 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
     },
     header: {
-        [theme.breakpoints.down('lg')]: {
-            fontSize: '3.2rem',  
-        },
-        [theme.breakpoints.down('md')]: {
-            fontSize: '3rem',  
-        },
-        [theme.breakpoints.down('sm')]: {
-            fontSize: '2.7rem',  
-        },
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '2.3rem',  
-        },
         width: '100%',
+        color: '#0000a2',
     },
     textFields: {
-        [theme.breakpoints.down('md')]: {
-            width: '90%',
-        },
-        [theme.breakpoints.down('xs')]: {
-            marginTop: 10,
-        },
         marginTop: 20,
-        width: '80%',
+        width: '100%',
     },
     button: {
-        [theme.breakpoints.down('md')]: {
-            width: '90%',
-        },
-        [theme.breakpoints.down('xs')]: {
-            padding: '10px 5px 5px 5px',
-        },
-        width: '80%',
+        width: '100%',
         padding: '15px 10px 10px 10px',
         marginTop: '20px',
-        backgroundColor: 'rgb(63, 81, 181, 0.1)',
+        color: 'white',
+        backgroundColor: '#0000a2',
         transition: 'all .4s ease',
         '&:hover': {
-            backgroundColor: 'rgb(63, 81, 181, 0.2)',
-            transform: 'scale(1.05)',
+            backgroundColor: '#1f1fc4',
+            transform: 'scale(1.01)',
         },
     },
     snackbar: {
@@ -81,37 +47,7 @@ const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: '10px',
     },
-    input: {
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '1rem',
-            padding: 10,
-        },
-        fontSize: '1.5rem',
-        padding: 10,
-    },
-    label: {
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '1rem',
-            lineHeight: 0,
-        },
-        fontSize: '1.5rem',
-        lineHeight: 0.5,
-        '&.Mui-focused': {
-            color: 'rgb(0, 0, 0)',
-        },
-    },
-    outlinedInput: {
-        '&$focused $notchedOutline': {
-            borderColor: '#f50057 !important',
-        },
-        '&:hover $notchedOutline': {
-            borderColor: '#f50057 !important',
-        }
-    },
-    focused: {},
-    hover: {},
-    notchedOutline: {},
-}))
+}));
 
 const ContactForm = () => {
 
@@ -153,7 +89,11 @@ const ContactForm = () => {
     return (
         <Paper className={classes.paper}>
 
-            <Typography className={classes.header} align="center" color="primary" variant="h2">
+            <Typography
+                className={classes.header}
+                variant={holder.xs ? 'h4' : 'h3'}
+                align="center"
+            >
                 Contact Me
             </Typography>
             

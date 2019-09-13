@@ -14,8 +14,6 @@ import AboutTab from '../../components/Showcase/Social/About';
 import FriendsTab from '../../components/Showcase/Social/Friends';
 import PhotosTab from '../../components/Showcase/Social/Photos';
 
-import BGImage from './imgs/1x/bacground.png';
-
 const initTabs = {
     ProfileTimeline: false,
     About: true,
@@ -53,11 +51,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('xs')]: {
             flexWrap: 'wrap',
         },
+        marginTop: 50,
+        padding: '20px 0px 60px 0px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         alignContent: 'center',
-        marginTop: 50,
     },
     conceptContainer: {},
     socialMedia: {
@@ -78,9 +77,18 @@ const useStyles = makeStyles(theme => ({
         padding: 40
     },
     background: {
-        backgroundImage: `url(${BGImage})`,
-        backgroundSize: 'cover',
-        height: '30vh',
+        [theme.breakpoints.down('sm')]: {
+            borderWidth: '0 100vw 90px 0',
+        },
+        [theme.breakpoints.down('xs')]: {
+            borderWidth: '0 100vw 40px 0', 
+        },
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth: '0 100vw 100px 0',
+        borderColor: 'transparent #0000a2 transparent transparent',
+        transform: 'scale(1.0001)',
     },
     intro: {
         [theme.breakpoints.down('xs')]: {
@@ -107,20 +115,7 @@ const Profile = () => {
     const classes = useStyles();
     const holder = useContext(AppContext);
 
-    const getVariant = () => {
-        switch (true) {
-            case holder.xs:
-                return 'h4';
-            case holder.md:
-                return 'h2';
-            default:
-                return 'h1';
-        }
-    };
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
+    const handleClick = () => { setOpen(!open); };
 
     const handleTabChange = (tab) => {
         switch (tab) {
@@ -142,7 +137,7 @@ const Profile = () => {
     };
 
     const renderTabs = () => {
-        if (!user) { return }
+        if (!user) { return; }
         switch (true) {
             case tabs.profileTimeline:
                 return <TimelineTab page={{handle: 'HeathBanner'}} />;
@@ -165,52 +160,51 @@ const Profile = () => {
             headers: { 'Content-Type': 'application/json' }
         })
             .then(res => res.json())
-            .then((result) => {
-                setUser(result);
-            });
+            .then((result) => { setUser(result); })
+            .catch(() => { return; });
     }, []);
 
     return (
-        <Fragment>
+        <Grid container>
 
-            <Grid container>
+            <Grid className={classes.background} item xs={12}></Grid>
 
-                <Grid className={classes.socialHeader} item xs={12}>
+            <Grid className={classes.socialHeader} item xs={12}>
 
-                    <Typography className={classes.wip} variant={getVariant()} align="center" color="primary">
-                        Social Media Concept
-                    </Typography>
-                    
-                    <DescPopover />
-
-                </Grid>
-
-                <Grid className={classes.background} item xs={12}></Grid>
-
-                <Grid style={{ zIndex: 1301 }} className={classes.whiteOut} item xs={12}>
-
-                    <SocialDrawer />
-
-                </Grid>
-                <Grid style={{ zIndex: 1300 }} className={classes.whiteOut} item xs={12}>
-
-                    <Skyliner user={user} handleClick={handleClick} auth={holder.auth} username={'HeathBanner'} />
+                <Typography
+                    className={classes.wip}
+                    variant={holder.xs ? 'h5' : 'h4'}
+                    align="center"
+                    color="primary"
+                >
+                    Social Media Concept
+                </Typography>
                 
-                </Grid>
-                <Grid style={{ zIndex: 1300 }} item xs={12}>
+                <DescPopover />
 
-                    <ProfileNav  tabChange={handleTabChange} />
+            </Grid>
+            <Grid style={{ zIndex: 1301 }} className={classes.whiteOut} item xs={12}>
 
-                </Grid>
-                <Grid style={{ backgroundColor: 'white' }} item xs={12}>
+                <SocialDrawer />
 
-                    {renderTabs()}
+            </Grid>
+            <Grid style={{ zIndex: 1300 }} className={classes.whiteOut} item xs={12}>
 
-                </Grid>
+                <Skyliner user={user} handleClick={handleClick} auth={holder.auth} username={'HeathBanner'} />
+            
+            </Grid>
+            <Grid style={{ zIndex: 1300 }} item xs={12}>
+
+                <ProfileNav  tabChange={handleTabChange} />
+
+            </Grid>
+            <Grid style={{ backgroundColor: 'white' }} item xs={12}>
+
+                {renderTabs()}
 
             </Grid>
 
-        </Fragment>
+        </Grid>
     );
 };
 

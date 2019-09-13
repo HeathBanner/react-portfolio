@@ -8,9 +8,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
-import Moment from 'react-moment';
-import FormatDate from 'moment';
-
 const links = [
   { link: '/', text: 'Home', icon: 'face' }, 
   { link: '/showcase', text: 'Show Case', icon: 'code' }, 
@@ -178,13 +175,6 @@ const PersistentDrawer = (props) => {
     setOpen(false);
   };
 
-  const getTime = () => {
-    date = FormatDate()
-  };
-
-  let date = ''
-  setInterval(getTime, 30000);
-
   return (
       <div className={classes.root}>
 
@@ -215,16 +205,6 @@ const PersistentDrawer = (props) => {
               </Typography>
 
             </Link>
-
-            <div className={classes.moment}>
-
-              <Icon  className={classes.clock}>access_time</Icon>
-             
-              <Typography variant="body1">
-                <Moment interval={30000} date={date} format={'dddd h:mm a'} />
-              </Typography>
-              
-            </div>
 
           </Toolbar>
         </AppBar>

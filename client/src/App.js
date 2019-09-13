@@ -3,9 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 
 import { AppProvider } from './context/AuthContext';
 
+import Home from './pages/Landing/Home';
 import Showcase from './pages/Showcase/Showcase';
 import Contact from './pages/Contact/Contact';
-import Landing from './pages/Landing/Landing';
+// import Landing from './pages/Landing/Landing';
 import Blog from './pages/Blog/Blog';
 import Article from './components/Showcase/MtnDream/Blog/Article';
 import EditorSelection from './components/Showcase/MtnDream/Editor/EditorSelection';
@@ -19,7 +20,8 @@ const App = () => {
     <AppProvider>
 
         <Switch>
-            <Route exact path="/" component={Landing} />
+            {/* <Route exact path="/" component={Landing} /> */}
+            <Route exact path="/" component={Home} />
             <Route exact path="/showcase" component={Showcase} />
             <Route path="/contact" component={Contact} />
             <Route path="/blog" exact component={Blog} />

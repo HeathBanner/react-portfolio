@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 
-import Drawer from '../../components/Navigation/Drawer';
+import Nav from '../../components/Navigation/Nav';
 
 import Weather from '../../components/Showcase/Weather/Weather';
 import ProfileShell from '../Social/ProfileShell';
@@ -52,9 +53,17 @@ const styles = {
         barTitle: 'white',
         menuButton: 'white',
     },
-}
+};
 
-function Home() {
+const useStyles = makeStyles((theme) => ({
+    jumboContainer: {
+        backgroundColor: '#777',  
+    },
+}));
+
+const Home = () => {
+
+    const classes = useStyles();
 
     const [mood, setMood] = useState('');
 
@@ -75,15 +84,10 @@ function Home() {
     return (
         <Grid container>
 
-                <Grid item xs={12}>
-                    <Drawer mood={mood.Drawer} />
-                </Grid>
+                <Nav />
 
-                <Grid item xs={12}>
+
                     <Jumbotron />
-                </Grid>
-
-                <PreviousWork />
 
                 <Weather grabWeather={grabWeather} />
 
