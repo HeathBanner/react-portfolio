@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -49,8 +50,12 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: 20,
     },
-    button: {
+    link: {
         marginTop: 40,
+        textDecoration: 'none',
+        color: 'inherit',
+    },
+    button: {
         padding: 15,
         color: '#0000a2',
         background: 'white',
@@ -114,11 +119,13 @@ const Intro = () => {
                     applications in record time
                 </Typography>
 
-                <Button className={classes.button}>
-                    <Typography variant={media.xs ? 'body2' : 'body1'}>
-                        Discuss your project with me
-                    </Typography>
-                </Button>
+                <Link className={classes.link} to="/contact">
+                    <Button className={classes.button}>
+                        <Typography variant={media.xs ? 'body2' : 'body1'}>
+                            Discuss your project with me
+                        </Typography>
+                    </Button>
+                </Link>
             </div>
 
             <div className={classes.topDiv}></div>
