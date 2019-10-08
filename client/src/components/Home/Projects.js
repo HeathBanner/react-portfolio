@@ -1,4 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, {
+    useState,
+    useContext,
+    Fragment,
+} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -11,6 +15,56 @@ import {
 import { AppContext } from '../../context/AuthContext';
 
 import Notification from './Notifications/Notification';
+
+const projectList = [
+    {
+        title: 'Peritus IT',
+        body: `"This website was created for a client to help market their IT consulting
+        company based in Charlotte, NC. By using a mobile first method, I was able to quickly
+        release this website made from scratch. The contact form on the Contact page allows
+        users to send information directly to the client's email"`,
+        click: false,
+        repo: 'https://github.com/HeathBanner/peritusit',
+        website: 'https://peritusit.herokuapp.com/',
+    },
+    {
+        title: 'A Mountain Dream',
+        body: `"Mountain Dream is an application built to showcase a rental cabin in
+        the mountains of Boone, NC. It uses basic parallax and transform
+        animations. What will stand out is the blog editor for
+        the future implementation of the blog section. The client will
+        be able to maintain their blog without the need of programming.
+        By replicating the basic functions of Google Docs they can
+        create, edit and delete blog articles."`,
+        click: 'mtnDream',
+        repo: 'https://github.com/HeathBanner/MtnDream',
+        website: '',
+    },
+    {
+        title: 'Game Book',
+        body: `"Game Book is a project currently being built that will cater to the
+        "everyday" gamer's needs. A social media application built around using
+        game company APIs to allow players to showoff and create guides to help
+        on another. Players will also be allowed to form groups to play together
+        or share information. Using this application would help compact a lot of
+        the information on the internet in to a more singular place while also
+        building a community whose goal is to connect and inform."`,
+        click: 'GameBook',
+        repo: 'https://github.com/HeathBanner/GameBook',
+    },
+    {
+        title: 'Future Scaper',
+        body: `"Future Scaper uses the USDA database to help our users form better and 
+        more precise landscaping projects. There are over 40,000 different 
+        plants to choose from. Once you have a good idea as to what you want 
+        to work with, hope on over to the Planner. From there, you'll be able 
+        to choose, drag and drop different plants. This should be able to help 
+        you better plan the layout of your landscaping project."`,
+        click: false,
+        repo: 'https://github.com/HeathBanner/FutureScaper',
+        website: 'https://futurescaper.herokuapp.com/',
+    },
+];
 
 const projectsInit = {
     GameBook: false,
@@ -113,153 +167,75 @@ const Projects = () => {
                 projects={projects}
             />
 
-            <Typography
-                className={classes.headers}
-                variant={media.xs ? 'h6' : 'h5'}
-                align="center"
-            >
-                A Mountain Dream
-            </Typography>
+            {
+                projectList.map((item, index) => {
+                    return (
+                        <Fragment key={`${item.title}${index}`}>
 
-            <Divider className={classes.dividers} />
+                            <Typography
+                                className={classes.headers}
+                                variant={media.xs ? 'h6' : 'h5'}
+                                align="center"
+                            >
+                                {item.title}
+                            </Typography>
 
-            <Typography
-                className={classes.body}
-                variant={media.xs ? 'body1' : 'h6'}
-                align="center"
-                color="textSecondary"
-            >
-                "Mountain Dream is an application built to showcase a rental cabin in
-                the mountains of Boone, NC. It uses basic parallax and transform
-                animations. What will stand out is the blog editor for
-                the future implementation of the blog section. The client will
-                be able to maintain their blog without the need of programming.
-                By replicating the basic functions of Google Docs they can
-                create, edit and delete blog articles."
-            </Typography>
+                            <Divider className={classes.dividers} />
 
-            <div className={classes.links}>
-                <Button
-                    className={classes.buttons}
-                    onClick={(e) => handleClick(e, 'mtnDream')}
-                >
-                    <Typography>
-                        Website
-                    </Typography>
-                </Button>
-            </div>
-            <a
-                href="https://github.com/HeathBanner/MtnDream"
-                className={classes.links}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <Button className={classes.buttons}>
-                    <Typography>
-                        Repository
-                    </Typography>
-                </Button>
-            </a>
+                            <Typography
+                                className={classes.body}
+                                variant={media.xs ? 'body1' : 'h6'}
+                                align="center"
+                                color="textSecondary"
+                            >
+                                {item.body}
+                            </Typography>
 
-            <Typography
-                className={classes.headers}
-                variant={media.xs ? 'h6' : 'h5'}
-                align="center"
-            >
-                Game Book
-            </Typography>
+                            {
+                                item.click
+                                    ?
+                                <div className={classes.links}>
+                                    <Button
+                                        className={classes.buttons}
+                                        onClick={(e) => handleClick(e, item.click)}
+                                    >
+                                        <Typography>
+                                            Website
+                                        </Typography>
+                                    </Button>
+                                </div>
+                                    :
+                                <a
+                                    href={item.website}
+                                    className={classes.links}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Button className={classes.buttons}>
+                                        <Typography>
+                                            Website
+                                        </Typography>
+                                    </Button>
+                                </a>
+                            }
+                            <a
+                                href={item.repo}
+                                className={classes.links}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Button className={classes.buttons}>
+                                    <Typography>
+                                        Repository
+                                    </Typography>
+                                </Button>
+                            </a>
 
-            <Divider className={classes.dividers} />
-
-            <Typography
-                className={classes.body}
-                variant={media.xs ? 'body1' : 'h6'}
-                align="center"
-                color="textSecondary"
-            >
-                "Game Book is a project currently being built that will cater to the
-                "everyday" gamer's needs. A social media application built around using
-                game company APIs to allow players to showoff and create guides to help
-                on another. Players will also be allowed to form groups to play together
-                or share information. Using this application would help compact a lot of
-                the information on the internet in to a more singular place while also
-                building a community whose goal is to connect and inform."
-            </Typography>
-
-            <div
-                className={classes.links}
-            >
-                <Button
-                    className={classes.buttons}
-                    onClick={(e) => handleClick(e, 'GameBook')}
-                >
-                    <Typography>
-                        Website
-                    </Typography>
-                </Button>
-            </div>
-            <a
-                href="https://github.com/HeathBanner/MtnDream"
-                className={classes.links}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <Button className={classes.buttons}>
-                    <Typography>
-                        Repository
-                    </Typography>
-                </Button>
-            </a>
-
-            <Typography
-                className={classes.headers}
-                variant={media.xs ? 'h6' : 'h5'}
-                align="center"            
-            >
-                Future Scaper
-            </Typography>
-
-            <Divider className={classes.dividers} />
-
-            <Typography
-                className={classes.body}
-                variant={media.xs ? 'body1' : 'h6'}
-                align="center"
-                color="textSecondary"
-            >
-                "Future Scaper uses the USDA database to help our users form better and 
-                more precise landscaping projects. There are over 40,000 different 
-                plants to choose from. Once you have a good idea as to what you want 
-                to work with, hope on over to the Planner. From there, you'll be able 
-                to choose, drag and drop different plants. This should be able to help 
-                you better plan the layout of your landscaping project."
-            </Typography>
-
-            <a
-                href="https://futurescaper.herokuapp.com/"
-                className={classes.links}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <Button className={classes.buttons}>
-                    <Typography>
-                        Website
-                    </Typography>
-                </Button>
-            </a>
-            <a
-                href="https://github.com/HeathBanner/FutureScaper"
-                className={classes.links}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <Button className={classes.buttons}>
-                    <Typography>
-                        Repository
-                    </Typography>
-                </Button>
-            </a>
-
+                        </Fragment>
+                    );
+                })
+            }
+            
         </Grid>
     );
 };

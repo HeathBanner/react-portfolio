@@ -127,7 +127,7 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
     [theme.breakpoints.down('xs')]:{
-      width: 150,
+      width: 170,
     },
   },
   drawerHeader: {

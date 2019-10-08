@@ -52,7 +52,7 @@ const PersistentDrawer = (props) => {
         }),
       },
       [theme.breakpoints.down('xs')]: {
-        width: `calc(100% - 140px)`,
+        width: `calc(100% - 160px)`,
         marginLeft: '140px',
         transition: theme.transitions.create(['margin', 'width'], {
           easing: theme.transitions.easing.easeOut,
@@ -103,7 +103,7 @@ const PersistentDrawer = (props) => {
         width: 200,
       },
       [theme.breakpoints.down('xs')]:{
-        width: 150,
+        width: 180,
       },
     },
     drawerHeader: {

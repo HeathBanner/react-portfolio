@@ -1,9 +1,22 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, {
+    useState,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, TextField, Button, Snackbar, SnackbarContent, IconButton, Icon, Typography, Divider } from '@material-ui/core';
+import {
+    Paper,
+    TextField,
+    Button,
+    Typography,
+    Divider,
+} from '@material-ui/core';
+
+import SuccessNotification from '../Notifications/SuccessNotification';
+import ErrorNotification from '../Notifications/ErrorNotification';
+import WarningNotification from '../Notifications/WarningNotification';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -49,41 +62,80 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const initInfo = {
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+};
+
+const initNotifications = {
+    open: false,
+    message: '',
+};
+
 const ContactForm = () => {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [message, setMessage] = useState('');
-    const [open, setOpen] = useState(false);
+    const [info, setInfo] = useState({ ...initInfo });
+    const [success, setSuccess] = useState({ ...initNotifications });
+    const [error, setError] = useState({ ...initNotifications });
+    const [warning, setWarning] = useState({ ...initNotifications });
  
+    const closeError = () => { setError({ ...initNotifications }); };
+    const closeSuccess = () => { setSuccess({ ...initNotifications }); };
+    const closeWarning = () => { setWarning({ ...initNotifications }); };
+
     const classes = useStyles();
     const holder = useContext(AppContext);
 
+    const preSubmit = () => {
+        switch (true) {
+            case info.name.length < 1:
+                return setWarning({
+                    open: true,
+                    message: 'Name must have at least 2 characters'
+                })
+            case info.email.length < 2:
+                return setWarning({
+                    open: true,
+                    message: 'Incorrect email!',
+                });
+            case info.message.length < 2:
+                return setWarning({
+                    open: true,
+                    message: 'Message must have at least 2 characters!',
+                });
+            default:
+                return handleSubmit();
+        }
+    };
+
     const handleSubmit = () => {
-        const data = {
-            name,
-            email,
-            phone,
-            message,
-        };
         fetch('/api/contact/newContact', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(info),
             headers: { 'Content-Type': 'application/json' }
         })
             .then(res => res.json())
             .then((response) => {
-                setOpen(true)
-                setName('');
-                setEmail('');
-                setPhone('');
-                setMessage('');
+                if (!response) {
+                    setError({
+                        open: true,
+                        message: 'Something went wrong!',
+                    });
+                }
+                setSuccess({
+                    open: true,
+                    message: response.message,
+                });
+                setInfo({ ...initInfo });
+            })
+            .catch(() => {
+                setError({
+                    open: true,
+                    message: 'Something went wrong!',
+                });
             });
-    };
-
-    const handleClose = () => {
-        setOpen(false);
     };
 
     return (
@@ -104,23 +156,9 @@ const ContactForm = () => {
                     label="Your Name"
                     name="Name"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={info.name}
+                    onChange={(e) => setInfo({ ...info, name: e.target.value })}
                     className={classes.textFields}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.label,
-                            focused: classes.focused,
-                        }
-                    }}
-                    InputProps={{
-                        classes: {
-                            root: classes.outlinedInput,
-                            focused: classes.focused,
-                            notchedOutline: classes.notchedOutline,
-                            input: classes.input,
-                        }
-                    }}
                 />
 
                 <TextField 
@@ -129,23 +167,9 @@ const ContactForm = () => {
                     name="Email"
                     type="email"
                     required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={info.email}
+                    onChange={(e) => setInfo({ ...info, email: e.target.value })}
                     className={classes.textFields}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.label,
-                            focused: classes.focused
-                        }
-                    }}
-                    InputProps={{
-                        classes: {
-                            root: classes.outlinedInput,
-                            focused: classes.focused,
-                            notchedOutline: classes.notchedOutline,
-                            input: classes.input,
-                        }
-                    }}
                 />
 
                 <TextField 
@@ -153,23 +177,9 @@ const ContactForm = () => {
                     label="Your Phone Number"
                     name="Phone"
                     required
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    value={info.phone}
+                    onChange={(e) => setInfo({ ...info, phone: e.target.value })}
                     className={classes.textFields}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.label,
-                            focused: classes.focused
-                        }
-                    }}
-                    InputProps={{
-                        classes: {
-                        root: classes.outlinedInput,
-                        focused: classes.focused,
-                        notchedOutline: classes.notchedOutline,
-                        input: classes.input,
-                        }
-                    }}
                 />
 
                 <TextField 
@@ -177,27 +187,13 @@ const ContactForm = () => {
                     label="Message"
                     name="Message"
                     required
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={info.message}
+                    onChange={(e) => setInfo({ ...info, message: e.target.value })}
                     className={classes.textFields}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.label,
-                            focused: classes.focused
-                        }
-                    }}
-                    InputProps={{
-                        classes: {
-                            root: classes.outlinedInput,
-                            focused: classes.focused,
-                            notchedOutline: classes.notchedOutline,
-                            input: classes.input,
-                        }
-                    }}
                 />
 
                 <Button
-                    onClick={handleSubmit}
+                    onClick={preSubmit}
                     className={classes.button}
                     fullWidth
                     color='secondary'
@@ -207,31 +203,22 @@ const ContactForm = () => {
                     </Typography>
                 </Button>
 
-            <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleClose}
-            >
 
-                <SnackbarContent 
-                    message={
-                        <Fragment>
-                            <Icon className={classes.icon}>check</Icon>
-                            <Typography>
-                                Your contact information has been saved!
-                            </Typography>
-                        </Fragment>
-                    }
-                    action={
-                        <IconButton onClick={handleClose}>
-                            <Icon style={{color: 'white'}}>close</Icon>
-                        </IconButton>
-                    }
-                    classes={{ message: classes.snackbar }}
-                />
-
-            </Snackbar>
+            <SuccessNotification
+                success={success}
+                closeSuccess={closeSuccess}
+                holder={holder}
+            />
+            <ErrorNotification
+                error={error}
+                closeError={closeError}
+                holder={holder}
+            />
+            <WarningNotification
+                warning={warning}
+                closeWarning={closeWarning}
+                holder={holder}
+            />
 
         </Paper>
     );

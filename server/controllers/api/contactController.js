@@ -1,5 +1,20 @@
 const contactController = require('express').Router();
-const db = require('../../models/contact');
+const nodeMailer = require('nodemailer');
+
+const transport = {
+    host: process.env.host,
+    auth: {
+        user: process.env.user,
+        pass: process.env.pass,
+    },
+};
+
+const transporter = nodeMailer.createTransport(transport);
+
+transporter.verify((error) => {
+    if (error) { return console.log(error); }
+    return console.log('Server is ready to take messages');
+});
 
 contactController.post('/newContact', (req, res) => {
     const {
@@ -8,13 +23,15 @@ contactController.post('/newContact', (req, res) => {
         phone,
         message,
     } = req.body;
-    db.findOneAndUpdate({ email }, {
-        name,
-        email,
-        phone,
-        message,
-    }, { useFindAndModify: false, new: true, upsert: true }, (err, result) => {
-        res.json(result);
+    transporter.sendMail({
+        from: email,
+        to: process.env.user,
+        subject: name,
+        text: `${message} - ${phone}`,
+    });
+    res.status(200).json({
+        error: false,
+        message: 'Email has been sent!'
     });
 });
 

@@ -6,6 +6,7 @@ import {
     Grid,
     Typography,
     Button,
+    Divider,
 } from '@material-ui/core';
 
 import { AppContext } from '../../context/AuthContext';
@@ -15,14 +16,27 @@ import Logo from './imgs/Logo.png';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        paddingTop: 60,
         color: 'white',
         backgroundImage: `url(${BG})`,
         backgroundSize: 'cover',
+        backgroundPosition: 'right',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
+        alignContent: 'center',
         flexWrap: 'wrap',
+        height: 'calc(100vh + 130px)',
+        padding: '0 25%',
+        [theme.breakpoints.down('md')]: {
+            padding: '0 15%',
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: 'calc(100vh + 90px)', 
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: 40,
+            height: 'calc(100vh + 40px)',
+        },
     },
     introContainer: {
         [theme.breakpoints.down('sm')]: {
@@ -43,12 +57,25 @@ const useStyles = makeStyles((theme) => ({
         height: 'auto',
     },
     header: {
-        margin: '20px 0px',
+        marginTop: 40,
+        marginBottom: 10,
         width: '100%',
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 20,
+            marginBottom: 0,
+        },
+    },
+    divider: {
+        marginBlockStart: '0.5em',
+        width: '50%',
+        marginBottom: 60,
+        backgroundColor: 'rgb(255, 255, 255, 0.2)',
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: 30,
+        },
     },
     body: {
         width: '100%',
-        marginTop: 20,
     },
     link: {
         marginTop: 40,
@@ -68,10 +95,14 @@ const useStyles = makeStyles((theme) => ({
     topDiv: {
         [theme.breakpoints.down('sm')]: {
             borderWidth: '90px 100vw 0 0',
+            bottom: -90,
         },
         [theme.breakpoints.down('xs')]: {
             borderWidth: '40px 100vw 0 0', 
+            bottom: -40
         },
+        bottom: -130,
+        position: 'absolute',
         width: 0,
         height: 0,
         borderStyle: 'solid',
@@ -108,6 +139,8 @@ const Intro = () => {
                     Develop successful web, mobile applications 
                     in weeks, not months
                 </Typography>
+
+                <Divider className={classes.divider} />
 
                 <Typography
                     className={classes.body}
