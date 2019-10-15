@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useState } from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
-import { TextField, Icon, Fab } from '@material-ui/core';
+import { TextField, Icon, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Moment from 'moment';
@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     },
     postStory: {
         marginLeft: '10px',
-        backgroundColor: 'rgb(255, 145, 71)'
     },
     form: {
         display: 'flex',
@@ -49,15 +48,6 @@ const useStyles = makeStyles((theme) => ({
             fontSize: '1rem',
         },
         fontSize: '1.5rem',
-        '&.Mui-focused': {
-            color: 'rgb(255, 145, 71)'
-        },
-    },
-    helperText: {
-        [theme.breakpoints.down('xs')]: {
-            fontSize: '0.8rem',
-        },
-        fontSize: '1.2rem',
     },
 }));
 
@@ -96,7 +86,6 @@ const Story = () => {
 
                 <TextField
                     className={classes.textField}
-                    FormHelperTextProps={{ className: classes.helperText }}
                     InputProps={{ classes: {
                         input: classes.input,
                         }
@@ -106,20 +95,21 @@ const Story = () => {
                     fullWidth={false}
                     rowsMax="8"
                     label="Story"
-                    helperText="Story here..."
                     name="setStory"
                     value={story}
                     onChange={handleInputChange}
                 />
 
-                <Fab
+                <Button
                     className={classes.postStory}
                     onClick={handleStoryPost}
                     size={holder.xs ? 'small' : 'large'}
                     color="primary"
                 >
-                    <Icon fontSize={holder.xs ? 'small' : 'large'}>create</Icon>
-                </Fab>
+                    <Icon fontSize={holder.xs ? 'small' : 'large'}>
+                        add_circle
+                    </Icon>
+                </Button>
             
             </div>
 
