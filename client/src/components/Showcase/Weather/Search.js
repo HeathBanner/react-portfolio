@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         padding: 15,
     },
     padding: 30,
-    background: 'rgb(0, 0, 0, 0.4)',
+    background: 'rgb(0, 0, 0, 0.7)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

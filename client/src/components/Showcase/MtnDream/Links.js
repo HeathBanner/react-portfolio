@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Button } from '@material-ui/core';
+import {
+    Grid,
+    Typography,
+    Button,
+    Divider,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -23,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     header: {
         width: '100%',
         marginTop: 50,
+    },
+    divider: {
+        marginBlockStart: '0.5em',
+        width: '60%',
+        marginBottom: 30,
+        backgroundColor: 'rgb(255, 255, 255, 0.2)',
     },
     button: {
         marginTop: 20,
@@ -54,19 +65,7 @@ const Links = () => {
                 Blog Editor Concept
             </Typography>
 
-            <Typography
-                style={{
-                    width: media.xs ? '80%' : '60%',
-                    marginTop: 20,
-                }}
-                align="center"
-                variant={media.xs ? 'body1' : 'h6'}
-                color="error"
-            >
-                This project is still under construction. It is responsive up to a screen width
-                of 960px due to Material UI breakpoints. I will roll out the updates for lower
-                screen widths soon.
-            </Typography>
+            <Divider className={classes.divider} />
 
             <Typography
                 style={{ 
