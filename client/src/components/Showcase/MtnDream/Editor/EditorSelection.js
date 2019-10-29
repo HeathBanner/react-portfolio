@@ -11,18 +11,10 @@ const EditorSelection = () => {
 
     return (
         <Grid container>
-
-            <Grid style={{ zIndex: 5, height: 70 }} item xs={12}>
                 
-                <Nav />
+            <Nav />
 
-            </Grid>
-            
-            <EditorProvider>
-
-                <ArticleSelection />
-
-            </EditorProvider>
+            <ArticleSelection />
 
         </Grid>
     );

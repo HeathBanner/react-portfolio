@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Grid } from '@material-ui/core';
 
-import { EditorProvider } from '../../context/EditorContext';
+import { AppContext } from '../../context/AuthContext';
 
 import Nav from '../../components/Showcase/MtnDream/Navigation/Nav';
-import Toolbar from '../../components/Showcase/MtnDream/Editor/Toolbar';
+import LGToolbar from '../../components/Showcase/MtnDream/Editor/LGToolbar';
+import MDToolbar from '../../components/Showcase/MtnDream/Editor/MDToolbar';
 import Preview from '../../components/Showcase/MtnDream/Editor/Preview';
 
 const Editor = ({ match }) => {
 
+    const media = useContext(AppContext);
+
     return (
         <Grid container>
 
-            <Grid style={{ height: 70 }} item xs={12}>
-                <Nav />
-            </Grid>
-
             <Grid item xs={12}>
 
-                <EditorProvider>
-
-                    <Toolbar />
-
-                    <Preview title={match.params.title} />
+                {
+                    media.md
+                        ?
+                    <MDToolbar xs={media.xs} md={media.md} />
+                        :
+                    <LGToolbar />
+                }
+                
+                <Preview xs={media.xs} title={match.params.title} />
                
-                </EditorProvider>
-
             </Grid>
 
         </Grid>

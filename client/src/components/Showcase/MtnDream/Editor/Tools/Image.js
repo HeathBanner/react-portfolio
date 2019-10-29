@@ -1,7 +1,15 @@
-import React, { useContext, useState, Fragment } from 'react';
+import React, {
+    useContext,
+    useState,
+    Fragment,
+} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Popover, Button, TextField } from '@material-ui/core';
+import {
+    Popover,
+    Button,
+    TextField,
+} from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
 
@@ -18,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Image = (props) => {
+    
     const classes = useStyles();
     const holder = useContext(EditorContext);
 

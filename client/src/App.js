@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import { AppProvider } from './context/AuthContext';
+import { EditorProvider } from './context/EditorContext';
 
 import Home from './pages/Landing/Home';
 import Showcase from './pages/Showcase/Showcase';
@@ -27,8 +28,11 @@ const App = () => {
             <Route path="/contact" component={Contact} />
             <Route path="/blog" exact component={Blog} />
             <Route path="/blog/:title" component={Article} />
-            <Route path="/editor" exact component={EditorSelection} />
-            <Route path="/editor/:title" component={Editor} />
+
+            <EditorProvider>
+              <Route path="/editor" exact component={EditorSelection} />
+              <Route path="/editor/:title" component={Editor} />
+            </EditorProvider>
         </Switch>
         
     </AppProvider>

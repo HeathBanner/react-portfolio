@@ -1,6 +1,16 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, {
+    Fragment,
+    useState,
+    useContext,
+} from 'react';
 
-import { Menu, MenuItem, Button, Icon } from '@material-ui/core';
+import {
+    Menu,
+    MenuItem,
+    Button,
+    Icon,
+    Typography,
+} from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
 
@@ -52,7 +62,7 @@ const textOptions = [
     }
 ];
 
-const TextSize = () => {
+const TextSize = (props) => {
     
     const holder = useContext(EditorContext);
 
@@ -74,24 +84,52 @@ const TextSize = () => {
     const sizeSwitch = () => {
         switch (holder.sectionMode.el) {
             case 'body':
-                return <Button style={{ marginRight: 10 }} onClick={handleOpen} variant="contained">
-                            {holder[holder.sectionMode.el][holder.sectionMode.index].textStyle}
+                return <Button
+                            style={{ marginRight: props.margin }}
+                            onClick={handleOpen}
+                            variant="contained"
+                        >
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder[holder.sectionMode.el][holder.sectionMode.index].textStyle}
+                            </Typography>
                         </Button>;
             case 'jumbotron':
-                return <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
+                return <Button
+                            style={{ marginRight: props.margin }}
+                            disabled={true}
+                            variant="contained"
+                        >
                             <Icon>lock</Icon>
                         </Button>;
             case 'image':
-                return <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
+                return <Button 
+                            style={{ marginRight: props.margin }}
+                            disabled={true}
+                            variant="contained"
+                        >
                             <Icon>lock</Icon>
                         </Button>;
             case 'readLength':
-                return <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
+                return <Button
+                            style={{ marginRight: props.margin }}
+                            disabled={true}
+                            variant="contained"
+                        >
                             <Icon>lock</Icon>
                         </Button>;
             default:
-                return <Button style={{ marginRight: 10 }} onClick={handleOpen} variant="contained">
-                            {holder[holder.sectionMode.el].textStyle}
+                return <Button
+                            style={{ marginRight: props.margin }}
+                            onClick={handleOpen}
+                            variant="contained"
+                        >
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder[holder.sectionMode.el].textStyle}
+                            </Typography>
                         </Button>;
         }
     };

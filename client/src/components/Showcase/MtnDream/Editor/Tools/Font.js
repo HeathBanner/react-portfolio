@@ -1,6 +1,16 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, {
+    Fragment,
+    useState,
+    useContext,
+} from 'react';
 
-import { Menu, MenuItem, Button, Icon } from '@material-ui/core';
+import {
+    Menu,
+    MenuItem,
+    Button,
+    Icon,
+    Typography,
+} from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
 
@@ -52,7 +62,7 @@ const fontOptions = [
     }
 ];
 
-const Font = () => {
+const Font = (props) => {
 
     const holder = useContext(EditorContext);
 
@@ -66,7 +76,7 @@ const Font = () => {
         setAnchorEl(null);
     };  
 
-    const wrapper = font => {
+    const wrapper = (font) => {
         holder.handleFont(font);
         handleClose();
     };
@@ -76,53 +86,69 @@ const Font = () => {
             case 'body':
                 return <Button
                             style={{
-                                marginRight: 10,
+                                marginRight: props.margin,
                                 textTransform: 'capitalize',
                                 fontFamily: `${holder.body[holder.sectionMode.index].font}, Helvetica, Arial, sans-serif`,
                             }}
                             onClick={handleOpen}
                             variant="contained"
                         >
-                            {holder.body[holder.sectionMode.index].font}
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder.body[holder.sectionMode.index].font}
+                            </Typography>
                         </Button>;
             case 'title':
                 return <Button
                             style={{
-                                marginRight: 10,
+                                marginRight: props.margin,
                                 textTransform: 'capitalize',
                                 fontFamily: `${holder[holder.sectionMode.el].font}, Helvetica, Arial, sans-serif`,
                             }}
                             onClick={handleOpen}
                             variant="contained"
                         >
-                            {holder[holder.sectionMode.el].font}
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder[holder.sectionMode.el].font}
+                            </Typography>
                         </Button>;
             case 'description':
                 return <Button
                             style={{
-                                marginRight: 10,
+                                marginRight: props.margin,
                                 textTransform: 'capitalize',
                                 fontFamily: `${holder[holder.sectionMode.el].font}, Helvetica, Arial, sans-serif`,
                             }}
                             onClick={handleOpen}
                             variant="contained"
                         >
-                            {holder[holder.sectionMode.el].font}
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder[holder.sectionMode.el].font}
+                            </Typography>
                         </Button>;
             case 'readLength':
                 return <Button
                             style={{
-                                marginRight: 10,
+                                marginRight: props.margin,
                                 textTransform: 'capitalize',
                                 fontFamily: `${holder[holder.sectionMode.el].font}, Helvetica, Arial, sans-serif`,
                             }}
                             onClick={handleOpen}
                             variant="contained"
                         >
-                        {holder[holder.sectionMode.el].font}
+                            <Typography
+                                variant={props.xs ? 'body1' : 'h6'}
+                            >
+                                {holder[holder.sectionMode.el].font}
+                            </Typography>
                     </Button>;
             default:
-                return <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
+                return <Button style={{ marginRight: props.margin }} disabled={true} variant="contained">
                             <Icon>lock</Icon>
                         </Button>;
         }

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Styling = () => {
+const Styling = (props) => {
 
     const classes = useStyles();
     const holder = useContext(EditorContext);
@@ -59,27 +59,39 @@ const Styling = () => {
                     disabled={true}
                     onClick={() => holder.handleStyling('bold')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_bold</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_bold
+                    </Icon>
                 </Button>
 
                 <Button
                     disabled={true}
                     onClick={() => holder.handleStyling('italic')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_italic</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_italic
+                    </Icon>
                 </Button>
 
                 <Button
                     disabled={true}
                     onClick={() => holder.handleStyling('underline')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_underline</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_underline
+                    </Icon>
                 </Button>
 
                 {
@@ -87,8 +99,16 @@ const Styling = () => {
                         ?
                     <ColorPicker />
                         :
-                    <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
-                        <Icon>format_color_text</Icon>
+                    <Button
+                        style={{ marginRight: props.margin }}
+                        disabled={true}
+                        variant="contained"
+                    >
+                        <Icon
+                            fontSize={props.xs ? 'small' : 'large'}
+                        >
+                            format_color_text
+                        </Icon>
                     </Button>
                 }
 
@@ -96,9 +116,13 @@ const Styling = () => {
                     disabled={true}
                     onClick={() => holder.handleStyling('highlight')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>highlight</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        highlight
+                    </Icon>
                 </Button>
 
             </Fragment>
@@ -111,27 +135,39 @@ const Styling = () => {
                     className={checkDisabled('bold') ? classes.disabled : classes.active}
                     onClick={() => holder.handleStyling('bold')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_bold</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_bold
+                    </Icon>
                 </Button>
     
                 <Button
                     className={checkDisabled('italic') ? classes.disabled : classes.active}
                     onClick={() => holder.handleStyling('italic')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_italic</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_italic
+                    </Icon>
                 </Button>
     
                 <Button
                     className={checkDisabled('underline') ? classes.disabled : classes.active}
                     onClick={() => holder.handleStyling('underline')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>format_underline</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        format_underline
+                    </Icon>
                 </Button>
     
                 {
@@ -139,8 +175,16 @@ const Styling = () => {
                         ?
                     <ColorPicker />
                         :
-                    <Button style={{ marginRight: 10 }} disabled={true} variant="contained">
-                        <Icon>format_color_text</Icon>
+                    <Button
+                        style={{ marginRight: props.margin }}
+                        disabled={true}
+                        variant="contained"
+                    >
+                        <Icon
+                            fontSize={props.xs ? 'small' : 'large'}
+                        >
+                            format_color_text
+                        </Icon>
                     </Button>
                 }
     
@@ -148,9 +192,13 @@ const Styling = () => {
                     className={checkDisabled('highlight') ? classes.disabled : classes.active}
                     onClick={() => holder.handleStyling('highlight')}
                     variant="contained"
-                    style={{ marginRight: 10 }}
+                    style={{ marginRight: props.margin }}
                 >
-                    <Icon>highlight</Icon>
+                    <Icon
+                        fontSize={props.xs ? 'small' : 'large'}
+                    >
+                        highlight
+                    </Icon>
                 </Button>
     
             </Fragment>

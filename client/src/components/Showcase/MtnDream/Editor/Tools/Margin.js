@@ -1,14 +1,16 @@
 import React, { Fragment, useContext } from 'react';
 
-import { Typography, TextField, Icon } from '@material-ui/core';
+import {
+    Typography,
+    TextField,
+    Icon,
+} from '@material-ui/core';
 
 import { EditorContext } from '../../../../../context/EditorContext';
-import { AppContext } from '../../../../../context/AuthContext';
 
-const Margin = () => {
+const Margin = (props) => {
 
     const holder = useContext(EditorContext);
-    const media = useContext(AppContext);
 
     const marginSwitch = () => {
         switch (holder.sectionMode.el) {
@@ -28,7 +30,13 @@ const Margin = () => {
     return (
         <Fragment>
 
-            <Typography style={{ marginRight: 10,  display: media.md ? 'inline' : 'block' }}>
+            <Typography
+                style={{
+                    margin: '0 auto',
+                    marginRight: props.margin,    
+                }}
+                variant={props.xs ? 'body1' : 'h6'}
+            >
                 Margin Top:
             </Typography>
 
@@ -36,7 +44,10 @@ const Margin = () => {
                 marginSwitch()
                     ?
                 <TextField
-                    style={{ width: 40 }}
+                    style={{
+                        width: 40,
+                        margin: props.md ? '0 auto' : 0,
+                    }}
                     value={
                         holder.sectionMode.el === 'body' || holder.sectionMode.el === 'image'
                             ?
@@ -47,10 +58,21 @@ const Margin = () => {
                     onChange={holder.handleMarginTop}
                 />
                     :
-                <Icon style={{ width: 40 }}>lock</Icon>
+                <Icon
+                    style={{ width: 40 }}
+                    fontSize={props.xs ? 'small' : 'large'}
+                >
+                    lock
+                </Icon>
             }
 
-            <Typography style={{ margin: '0px 10px', display: media.md ? 'inline' : 'block' }}>
+            <Typography
+                style={{
+                    margin: '0 auto',
+                    marginRight: props.margin,    
+                }}
+                variant={props.xs ? 'body1' : 'h6'}
+            >
                 Margin Bottom:
             </Typography>
 
@@ -58,7 +80,10 @@ const Margin = () => {
                 marginSwitch()
                     ?
                 <TextField
-                    style={{ width: 40 }}
+                    style={{
+                        width: 40,
+                        margin: props.md ? '0 auto' : 0,
+                    }}
                     value={
                         holder.sectionMode.el === 'body' || holder.sectionMode.el === 'image'
                             ?
@@ -69,7 +94,12 @@ const Margin = () => {
                     onChange={holder.handleMarginBottom}
                 />
                     :
-                <Icon style={{ width: 40 }}>lock</Icon>
+                <Icon
+                    style={{ width: 40 }}
+                    fontSize={props.xs ? 'small' : 'large'}
+                >
+                    lock
+                </Icon>
             }
 
         </Fragment>

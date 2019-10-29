@@ -2,7 +2,15 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Icon, IconButton } from '@material-ui/core';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Icon,
+  IconButton,
+} from '@material-ui/core';
 
 import { AppContext } from '../../../../context/AuthContext';
 
@@ -77,9 +85,7 @@ const TemporaryDrawer = props => {
   });
 
   const getVariant = () => {
-
     switch (true) {
-
       case media.xs:
         return 'h6';
       case media.sm:
@@ -91,7 +97,7 @@ const TemporaryDrawer = props => {
     }
   };
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (open) => event => {
 
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -106,20 +112,33 @@ const TemporaryDrawer = props => {
     <div
       className={classes.list}
       role="presentation"
-      onClick={toggleDrawer('left', false)}
-      onKeyDown={toggleDrawer('left', false)}
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
     >
       <List className={classes.menuList}>
 
         {
           drawerList.map((item) => (
 
-            <Link key={item.text} style={{textDecoration: 'none', color: 'black'}} to={item.link}>
+            <Link
+              key={item.text}
+              style={{textDecoration: 'none', color: 'black'}}
+              to={item.link}
+            >
               
-              <ListItem className={classes.listItems} button key={item.text}>
+              <ListItem
+                className={classes.listItems}
+                button
+                key={item.text}
+              >
               
                 <ListItemIcon className={classes.iconButtons}>
-                  <Icon style={{ color: 'white' }} fontSize={!media.sm ? 'large' : 'small'}>{item.icon}</Icon>
+                  <Icon
+                    style={{ color: 'white' }}
+                    fontSize={media.xs ? 'small' : 'large'}
+                  >
+                    {item.icon}
+                  </Icon>
                 </ListItemIcon>
                 
                 <ListItemText 
@@ -144,9 +163,12 @@ const TemporaryDrawer = props => {
 
     <div>
 
-      <IconButton onClick={toggleDrawer('left', true)}>
+      <IconButton onClick={toggleDrawer(true)}>
 
-        <Icon className={classes.menuIcon} fontSize={props.query ? 'small' : 'large'}>
+        <Icon
+          className={classes.menuIcon}
+          fontSize={props.query ? 'small' : 'large'}
+        >
           menu
         </Icon>
 
@@ -159,7 +181,7 @@ const TemporaryDrawer = props => {
           }
         }}
         open={state.left} 
-        onClose={toggleDrawer('left', false)}
+        onClose={toggleDrawer(false)}
       >
         
         {sideList('left')}

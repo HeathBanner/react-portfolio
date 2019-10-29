@@ -1,7 +1,12 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, {
+    useState,
+    createContext,
+    useEffect
+} from 'react';
 
 export const EditorContext = createContext();
 
+// The initial state for text elements
 const intialPreview = {
     text: '',
     bold: false,
@@ -17,14 +22,14 @@ const intialPreview = {
     isText: true,
     isImage: false,
 };
-
+// The initial state for Info
 const initialInfo = {
     text: '',
     font: 'Roboto',
     justify: 'center',
     color: '',
 };
-
+// The initial state for Images
 const initialImg = {
     isImage: true,
     src: '',
@@ -48,17 +53,24 @@ export const EditorProvider = (props) => {
     const [jumbotron, setJumbotron] = useState({ ...initialImg });
     const [body, setBody] = useState([ { ...intialPreview } ]);
     
+    // Once component mounts it will fetch a list of the
+    // top ten most recent articles
     useEffect(() => {
         fetch('/api/blog/getList')
             .then(res => res.json())
-            .then((result) => { setArticleList([ ...result ]) })
+            .then((result) => {
+                console.log('DID GET LIST');
+                setArticleList([ ...result ])
+            })
             .catch((error) => { console.log(error); });
     }, []);
 
+    // Function toggles edit mode on or off
     const handleMode = () => {
         setEditMode(!editMode);
     };
-
+    // Once the user clicks on the article they wish to edit, it will then
+    // grab the article elements and set them to state.
     const editArticle = (title) => {
         if (title === 'new') { return }
         fetch('/api/blog/getArticle', {
@@ -77,6 +89,8 @@ export const EditorProvider = (props) => {
             .catch((error) => { console.log(error); });
     };
 
+    // Once the user clicks on any element. The "section mode" will
+    // switch to the appropriate state to handle further edits within the element
     const handleSectionMode = (newSection) => {
         switch (newSection.el) {
             case 'title':
@@ -102,34 +116,43 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will set the Title state to published if the article
+    // was successfully stored within the database
     const setPublished = () => {
         setTitle({ ...title, isPublished: true });
     };
 
+    // This function will handle the user input then update the Body state
     const handleBody = ( input, index ) => {
         let newBody = body;
         newBody[index].text = input;
         setBody([ ...newBody ]);
     };
 
+    // This function will create a new body element within the state
     const newBody = () => {
         let newBody = body;
         newBody.push({ ...intialPreview });
         setBody([ ...newBody ]);
     };
 
+    // This function will store the url posted within the input and update the state
     const handleImage = (input, index) => {
         let newBody = body;
         newBody[index].src = input;
         setBody([ ...newBody ]);
     };
 
+    // This function will create a new Image element within the
+    // Body and update the state
     const newImgEl = () => {
         const newBody = body;
         newBody.push({ ...initialImg });
         setBody([ ...newBody ]);
     };
 
+    // This function will check which section the user has selected and
+    // update the state with the new input
     const handleInput = ( e, section ) => {
         let input = e.target.value;
         switch (section.El) {
@@ -156,6 +179,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check which section the user is in and
+    // change the font value to the selected font
     const handleFont = ( newFont ) => {
         switch (sectionMode.el) {
             case 'title':
@@ -177,6 +202,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleStyling = (style) => {
         switch (sectionMode.el) {
             case 'title':
@@ -192,6 +219,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleInfoJustify = (justification) => {
         if (sectionMode.el === 'description') {
             switch (justification) {
@@ -226,6 +255,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleJumboJustify = (justification) => {
         switch (justification) {
             case 'left':
@@ -240,6 +271,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleImageJustify = (justification) => {
         let newBody = body;
         switch (justification) {
@@ -258,6 +291,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleJustify = (justification) => {
         switch (sectionMode.el) {
             case 'title':
@@ -285,6 +320,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleTextStyle = (style) => {
         switch (sectionMode.el) {
             case 'title':
@@ -300,6 +337,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleTextColor = (color) => {
         switch (sectionMode.el) {
             case 'title':
@@ -318,6 +357,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleMarginTop = (e) => {
         if (sectionMode.el === 'title') {
             return setTitle({ ...title, marginTop: e.target.value });
@@ -328,6 +369,8 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // This function will check with section the user is in
+    // and update the value with the new selected value
     const handleMarginBottom = (e) => {
         if (sectionMode.el === 'title') {
             return setTitle({ ...title, marginBottom: e.target.value });
@@ -338,6 +381,7 @@ export const EditorProvider = (props) => {
         }
     };
 
+    // All functions and variables listed will be shared with the child consumers
     return (
         <EditorContext.Provider
             value={{

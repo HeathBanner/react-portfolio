@@ -1,4 +1,7 @@
-import React, { useContext, useState, Fragment } from 'react';
+import React, {
+    useContext,
+    useState,
+} from 'react';
 
 import TextSize from './Tools/TextSize';
 import Font from './Tools/Font';
@@ -7,20 +10,38 @@ import Justify from './Tools/Justify';
 import Margin from './Tools/Margin';
 
 import { EditorContext } from '../../../../context/EditorContext';
-import { AppContext } from '../../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { green, amber } from '@material-ui/core/colors';
-import { Grid, Icon, Fab, Button, Snackbar, SnackbarContent, Typography } from '@material-ui/core';
+import { Grid,
+    Icon,
+    Fab,
+    Button,
+    Snackbar,
+    SnackbarContent,
+    Typography,
+} from '@material-ui/core';
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         padding: 20,
         background: '#ffffff',
         position: 'fixed',
-        top: 70,
         zIndex: 2,
         boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     },
@@ -70,9 +91,9 @@ const useStyles = makeStyles(theme => ({
 const Toolbar = () => {
 
     const classes = useStyles();
-    const holder = useContext(EditorContext);
-    const media = useContext(AppContext);
+    const edit = useContext(EditorContext);
 
+    // These will toggle the notification components
     const [error, setError] = useState({
         open: false,
         message: '',
@@ -90,27 +111,29 @@ const Toolbar = () => {
     const closeSuccess = () => { setSuccess({ open: false, message: 'Article Saved!' }); };
     const closeWarning = () => { setWarning({ open: false, message: '' }); };
 
+    // This function will check if the required parameters are passing
+    // before passing anything to the database
     const preSubmit = () => {
         switch (true) {
-            case !holder.title.text:
+            case !edit.title.text:
                 setWarning({ open: true, message: 'Title is required!' });
                 break;
-            case !holder.description.text:
+            case !edit.description.text:
                 setWarning({ open: true, message: 'Description is required!' });
                 break;
-            case !holder.readLength.text:
+            case !edit.readLength.text:
                 setWarning({ open: true, message: 'Read Length is required!' });
                 break;
-            case !holder.jumbotron.src:
+            case !edit.jumbotron.src:
                 setWarning({ open: true, message: 'Jumbotron is required!' });
                 break;
-            case !holder.body[0].text:
+            case !edit.body[0].text:
                 setWarning({ open: true, message: 'A body section is required!' });
                 break;
-            case holder.title.isPublished:
+            case edit.title.isPublished:
                 handleChanges();
                 break;
-            case !holder.title.isPublished:
+            case !edit.title.isPublished:
                 handleSubmit();
                 break;
             default:
@@ -119,6 +142,8 @@ const Toolbar = () => {
         }
     };
 
+    // If the preSubmit function passes with no errors or warnings it will
+    // then log the current date and store it within the database
     const handleSubmit = () => {
         const now = new Date();
         const date = {
@@ -126,11 +151,11 @@ const Toolbar = () => {
             epoch: now.getTime(),
         };
         const data = {
-            title: holder.title,
-            description: holder.description,
-            readLength: holder.readLength,
-            jumbotron: holder.jumbotron,
-            body: holder.body,
+            title: edit.title,
+            description: edit.description,
+            readLength: edit.readLength,
+            jumbotron: edit.jumbotron,
+            body: edit.body,
             date,
         };
         fetch('/api/blog/newArticle',{
@@ -140,22 +165,24 @@ const Toolbar = () => {
         })
             .then(res => res.json())
             .then((result) => {
-                if (result.error) { return setError({ open: true, message: result.error }); }
+                if (result.error) {
+                    return setError({ open: true, message: result.error });
+                }
                 setSuccess({ open: true, message: 'Article published!' });
-                holder.setPublished();
+                edit.setPublished();
             })
-            .catch((error) => {
-                setError({ open: true, message: 'Something went wrong :(' });
-            });
+            .catch((error) => { setError({ open: true, message: error }); });
     };
 
+    // If the user has already published the article, this function will then
+    // update the article within the database
     const handleChanges = () => {
         const data = {
-            title: holder.title,
-            description: holder.description,
-            readLength: holder.readLength,
-            jumbotron: holder.jumbotron,
-            body: holder.body,
+            title: edit.title,
+            description: edit.description,
+            readLength: edit.readLength,
+            jumbotron: edit.jumbotron,
+            body: edit.body,
         };
         fetch('/api/blog/saveChanges', {
             method: 'POST',
@@ -164,22 +191,26 @@ const Toolbar = () => {
         })
             .then(res => res.json())
             .then((result) => {
-                if (result.error) { return setError({ open: true, message: result.error }); }
+                if (result.error) {
+                    return setError({ open: true, message: result.error });
+                }
                 setSuccess({ open: true, message: 'Article Saved!' });
             })
-            .catch((error) => {
-                console.log(JSON.stringify(error));
-                setError({ open: true, message: 'Something went wrong :(' });
-            });
+            .catch((error) => { setError({ open: true, message: error }); });
     };
 
     return (
-        <Grid className={classes.container} justify="center" alignItems="center" container>
+        <Grid
+            className={classes.container}
+            justify="center"
+            alignItems="center"
+            container
+        >
 
-            <Grid className={classes.saveContainer} item lg={1} md={12}>
+            <Grid item xs={1}>
 
                 {
-                    holder.title.isPublished
+                    edit.title.isPublished
                         ?
                     <Fab className={classes.save} onClick={preSubmit} variant="extended">
                         <Icon>save</Icon>
@@ -287,42 +318,19 @@ const Toolbar = () => {
                 </Snackbar>
 
             </Grid>
-            <Grid className={classes.editorTools} item lg={11} md={12}>
+            <Grid className={classes.editorTools} item xs={11}>
 
-                <TextSize />
+                <TextSize margin={10} />
                 
-                <Font />
+                <Font margin={10} />
 
-                <Styling />
+                <Styling margin={10} />
 
-                {
-                    !media.md
-                        ?
-                        <Fragment>
-                            <Justify />
-        
-                            <Margin />
-                        </Fragment>
-                        :
-                    ''
-                }
+                <Justify margin={10} />
 
+                <Margin margin={10} />
 
             </Grid>
-
-            {
-                media.md
-                    ?
-                <Grid className={classes.editorTools} item lg={5} md={12}>
-                            
-                    <Justify />
-
-                    <Margin />
-                    
-                </Grid>
-                    :
-                ''
-            }
 
         </Grid>
     );

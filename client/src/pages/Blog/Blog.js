@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { EditorProvider } from '../../context/EditorContext';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 
@@ -47,22 +45,18 @@ const Blog = () => {
     return (
         <Grid className={classes.container} container>
 
-            <EditorProvider>
+            <Grid style={{ height: 60 }} item xs={12}>
 
-                <Grid style={{ height: 60 }} item xs={12}>
+                <Nav isBlog={true} />
 
-                    <Nav isBlog={true} />
+            </Grid>
+            <Grid className={classes.articlesContainer} item xs={12}>
 
-                </Grid>
-                <Grid className={classes.articlesContainer} item xs={12}>
+                <NewArticle />
 
-                    <NewArticle />
-
-                    <Latest />
-                
-                </Grid>
-
-            </EditorProvider>
+                <Latest />
+            
+            </Grid>
 
         </Grid>
     );

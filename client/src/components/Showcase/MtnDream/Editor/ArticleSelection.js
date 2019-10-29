@@ -2,9 +2,17 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, Divider, Typography, Paper, Avatar } from '@material-ui/core';
+import {
+    Grid,
+    Button,
+    Divider,
+    Typography,
+    Paper,
+    Avatar,
+} from '@material-ui/core';
 
 import { EditorContext } from '../../../../context/EditorContext';
+import { AppContext } from '../../../../context/AuthContext';
 
 import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
 
@@ -38,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
         transition: 'background-color 0.4s ease',
         '&:hover': {
             backgroundColor: '#e6e6e6',
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: 15,
+            width: '90%',
         },
     },
     infoContainer: {
@@ -78,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ArticleSelection = () => {
 
-    const holder = useContext(EditorContext);
+    const edit = useContext(EditorContext);
+    const media = useContext(AppContext);
     const classes = useStyles();
     
     return (
@@ -90,7 +103,7 @@ const ArticleSelection = () => {
                     style={{
                         textDecoration: 'none',
                         color: 'inherit',
-                        width: '70%',
+                        width: '80%',
                         marginTop: 30,
                     }}
                     to={`/editor/new`}
@@ -104,28 +117,45 @@ const ArticleSelection = () => {
 
             </Grid>
             
-            <Divider style={{width: '100%', marginTop: 40}} />
+            <Divider style={{ width: '100%', marginTop: 40 }} />
 
             <Grid className={classes.container} item xs={12}>
 
+                {/* Once the context has updated with the article list, it will
+                then loop through and render each article */}
                 {
-                    holder.articleList
+                    edit.articleList
                         ?
-                    holder.articleList.map((article, index) => {
+                    edit.articleList.map((article) => {
                         return (
                             <Paper
                                 className={classes.paper}
                                 key={article.title.text}
                             >
 
-                                <Typography className={classes.title} align="center" variant="h2">
-                                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/editor/${article.title.text}`}>
+                                <Typography
+                                    style={{ width: '100%', marginBottom: 20 }}
+                                    align="center"
+                                    variant={media.xs ? 'h5' : 'h2'}
+                                >
+                                    <Link
+                                        style={{ textDecoration: 'none', color: 'inherit' }}
+                                        to={`/editor/${article.title.text}`}
+                                    >
                                         {article.title.text}
                                     </Link>
                                 </Typography>
 
-                                <Typography className={classes.desc} align="center" variant="h5" color="textSecondary">
-                                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/editor/${article.title.text}`}>
+                                <Typography
+                                    style={{ width: '100%'}}
+                                    align="center"
+                                    color="textSecondary"
+                                    variant={media.xs ? 'h6' : 'h5'}
+                                >
+                                    <Link
+                                        style={{ textDecoration: 'none', color: 'inherit' }}
+                                        to={`/editor/${article.title.text}`}
+                                    >
                                         {article.description.text}
                                     </Link>
                                 </Typography>
@@ -151,11 +181,7 @@ const ArticleSelection = () => {
                                 </div>
 
                                 <Link
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: 'inherit',
-                                        width: '100%',
-                                    }}
+                                    style={{ textDecoration: 'none', color: 'inherit' }}
                                     to={`/editor/${article.title.text}`}
                                 >
                                     <div

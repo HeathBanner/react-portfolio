@@ -1,4 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+} from 'react';
 
 import useTheme from '@material-ui/core/styles/useTheme';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -17,22 +21,22 @@ export const AppProvider = (props) => {
   
   const [auth, setAuth] = useState('');
 
-  const getWidth = () => {
-    switch (true) {
-        case xs:
-            return console.log('xs');
-        case sm:
-            return console.log('sm');
-        case md:
-            return console.log('md');
-        case lg:
-            return console.log('lg');
-        default:
-            return console.log('xl');
-    }
-};
+//   const getWidth = () => {
+//     switch (true) {
+//         case xs:
+//             return console.log('xs');
+//         case sm:
+//             return console.log('sm');
+//         case md:
+//             return console.log('md');
+//         case lg:
+//             return console.log('lg');
+//         default:
+//             return console.log('xl');
+//     }
+// };
 
-getWidth();
+// getWidth();
 
   useEffect(() => {
     if (auth) { return }
@@ -41,7 +45,7 @@ getWidth();
       .then((user) => {
         return setAuth({ ...user });
       })
-      .catch(err => { return });
+      .catch((error) => { return });
   }, [auth]);
 
   const getNewStory = () => {
@@ -50,7 +54,7 @@ getWidth();
       .then((user) => {
         return setAuth({ ...user });
       })
-      .catch(err => { return });
+      .catch((error) => { return });
   };
 
   return (
@@ -69,5 +73,5 @@ getWidth();
       {props.children}
 
     </AppContext.Provider>
-  )
+  );
 };
