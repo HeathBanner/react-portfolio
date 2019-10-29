@@ -12,13 +12,8 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             paddingLeft: 0,
             paddingRight: 0,
-            marginTop: 60,
-            marginBottom: 40,
         },
-        marginTop: 120,
-        marginBottom: 80,
-        paddingLeft: 40,
-        paddingRight: 40,
+        paddingBottom: 40,
     },
     articlesContainer: {
         [theme.breakpoints.down('lg')]: {
@@ -35,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
         },
         paddingLeft: '25%',
         paddingRight: '25%',
+        marginTop: '15%',
     },
 }));
 
@@ -45,11 +41,8 @@ const Blog = () => {
     return (
         <Grid className={classes.container} container>
 
-            <Grid style={{ height: 60 }} item xs={12}>
+            <Nav isBlog={true} />
 
-                <Nav isBlog={true} />
-
-            </Grid>
             <Grid className={classes.articlesContainer} item xs={12}>
 
                 <NewArticle />

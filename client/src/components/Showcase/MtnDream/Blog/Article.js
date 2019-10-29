@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext,
+} from 'react';
+
+import { AppContext } from '../../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Avatar } from '@material-ui/core';
+import {
+    Grid,
+    Typography,
+    Avatar,
+} from '@material-ui/core';
 
 import Nav from '../Navigation/Nav';
-
 import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
 
 const fontSizes = {
@@ -14,6 +23,15 @@ const fontSizes = {
     h4: '2.125rem',
     h5: '1.5rem',
     h6: '1.25rem',
+};
+const mobileFontSizes = {
+    h1: '2.125rem',
+    h2: '2.125em',
+    h3: '1.5rem',
+    h4: '1.5rem',
+    h5: '1.25rem',
+    h6: '1rem',
+    body1: '0.75rem',
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Article = ({ match }) => {
 
+    const media = useContext(AppContext);
     const [article, setArticle] = useState('');
 
     useEffect(() => {
@@ -87,7 +106,7 @@ const Article = ({ match }) => {
 
                 <Typography
                     style={{
-                        fontSize: fontSizes[article.title.textStyle],
+                        fontSize: media.xs ? mobileFontSizes[article.title.textStyle] : fontSizes[article.title.textStyle],
                         fontFamily: `${article.title.font}, Helvetica, Arial, sans-serif`,
                         fontWeight: article.title.bold ? 'bold' : 'normal',
                         fontStyle: article.title.italic ? 'italic' : 'normal',
@@ -105,7 +124,7 @@ const Article = ({ match }) => {
 
                 <Typography
                     style={{
-                        fontSize: fontSizes[article.description.textStyle],
+                        fontSize: media.xs ? mobileFontSizes[article.description.textStyle] : fontSizes[article.description.textStyle],
                         fontFamily: `${article.description.font}, Helvetica, Arial, sans-serif`,
                         textAlign: article.description.justify,
                         width: '100%',
@@ -162,7 +181,7 @@ const Article = ({ match }) => {
                                 <Typography
                                     style={{
                                         width: '100%',
-                                        fontSize: fontSizes[section.textStyle],
+                                        fontSize: media.xs ? mobileFontSizes[section.textStyle] : fontSizes[section.textStyle],
                                         fontFamily: `${section.font}, Helvetica, Arial, sans-serif`,
                                         fontWeight: section.bold ? 'bold' : 'normal',
                                         fontStyle: section.italic ? 'italic' : 'normal',

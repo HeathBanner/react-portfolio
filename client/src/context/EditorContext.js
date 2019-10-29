@@ -58,11 +58,8 @@ export const EditorProvider = (props) => {
     useEffect(() => {
         fetch('/api/blog/getList')
             .then(res => res.json())
-            .then((result) => {
-                console.log('DID GET LIST');
-                setArticleList([ ...result ])
-            })
-            .catch((error) => { console.log(error); });
+            .then((result) => { setArticleList([ ...result ]); })
+            .catch((error) => { return });
     }, []);
 
     // Function toggles edit mode on or off

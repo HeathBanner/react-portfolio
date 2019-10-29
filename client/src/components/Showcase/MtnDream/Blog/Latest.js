@@ -1,4 +1,7 @@
-import React, { useContext, Fragment } from 'react';
+import React, {
+    useContext,
+    Fragment,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -60,7 +63,13 @@ const Latest = () => {
     return (
         <Fragment>
 
-            <Typography style={{ marginTop: media.sm ? 40 : 80 }} variant="h5">
+            <Typography
+                style={{
+                    marginTop: media.sm ? 40 : 80,
+                    paddingLeft: 10,
+                }}
+                variant="h5"
+            >
                 Latest
             </Typography>
 
@@ -72,7 +81,10 @@ const Latest = () => {
                     return (
                         <div className={classes.containers} key={article.title.text}>
 
-                            <Link className={classes.imgs} to={`/blog/${article.title.text}`}>
+                            <Link
+                                className={classes.imgs}
+                                to={`/blog/${article.title.text}`}
+                            >
                                 <div
                                     style={{
                                         backgroundImage: `url(${article.jumbotron.src})`,
@@ -83,8 +95,14 @@ const Latest = () => {
                                 ></div>
                             </Link>
                 
-                            <Typography className={classes.title} variant={media.md ? 'h5' : 'h4'}>
-                                <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${article.title.text}`}>
+                            <Typography
+                                className={classes.title}
+                                variant={media.md ? 'h5' : 'h4'}
+                            >
+                                <Link
+                                    style={{ textDecoration: 'none', color: 'inherit' }}
+                                    to={`/blog/${article.title.text}`}
+                                >
                                     {article.title.text}
                                 </Link>
                             </Typography>
@@ -94,16 +112,26 @@ const Latest = () => {
                                 variant={media.md ? 'body1' : 'h6'}
                                 color="textSecondary"
                             >
-                                <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${article.title.text}`}>
+                                <Link
+                                    style={{ textDecoration: 'none', color: 'inherit' }}
+                                    to={`/blog/${article.title.text}`}
+                                >
                                     {article.description.text}
                                 </Link>
                             </Typography>
                                     
-                            <Typography style={{ width: '100%' }} variant={media.md ? 'subtitle2' : 'body1'}>
+                            <Typography
+                                style={{ width: '100%' }}
+                                variant={media.md ? 'subtitle2' : 'body1'}
+                            >
                                 Heath Banner
                             </Typography>
                 
-                            <Typography style={{ width: '100%' }} variant={media.md ? 'subtitle2' : 'body1'} color="textSecondary">
+                            <Typography
+                                style={{ width: '100%' }}
+                                variant={media.md ? 'subtitle2' : 'body1'}
+                                color="textSecondary"
+                            >
                                 {`${article.date.parsedDate}`} &#8226; {`${article.readLength.text} min read`}
                             </Typography>
                                 

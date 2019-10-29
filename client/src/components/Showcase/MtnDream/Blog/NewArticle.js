@@ -42,7 +42,11 @@ const NewArticle = () => {
             <Fragment>
     
                 <Link
-                    style={{ width: '100%', height: 'auto' }}
+                    style={{
+                        width: '100%',
+                        height: 'auto',
+                        marginTop: 80,
+                    }}
                     to={`/blog/${holder.articleList[0].title.text}`}
                 >
                     <img
@@ -52,14 +56,27 @@ const NewArticle = () => {
                     />
                 </Link>
     
-                <Typography style={{ marginTop: 20 }} variant={media.md ? 'h3' : 'h2'}>
-                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${holder.articleList[0].title.text}`}>
+                <Typography
+                    style={{ marginTop: 20 }}
+                    variant={media.md ? 'h4' : 'h2'}
+                >
+                    <Link
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                        to={`/blog/${holder.articleList[0].title.text}`}
+                    >
                         {holder.articleList[0].title.text}
                     </Link>
                 </Typography>
     
-                <Typography style={{ marginTop: 15, marginBottom: 15 }} variant={media.md ? 'body1' : 'h6'} color="textSecondary">
-                    <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/blog/${holder.articleList[0].title.text}`}>
+                <Typography
+                    style={{ marginTop: 15, marginBottom: 15 }}
+                    variant={media.md ? 'body1' : 'h6'}
+                    color="textSecondary"
+                >
+                    <Link
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                        to={`/blog/${holder.articleList[0].title.text}`}
+                    >
                         {holder.articleList[0].description.text}
                     </Link>
                 </Typography>
@@ -72,11 +89,18 @@ const NewArticle = () => {
                         alt="Heath Banner Profile Photo"
                     />
         
-                    <Typography style={{ width: '100%' }} variant={media.md ? 'body2' : 'body1'}>
+                    <Typography
+                        style={{ width: '100%' }}
+                        variant={media.md ? 'body2' : 'body1'}
+                    >
                         Heath Banner
                     </Typography>
         
-                    <Typography style={{ width: '100%' }} variant={media.md ? 'body2' : 'body1'} color="textSecondary">
+                    <Typography
+                        style={{ width: '100%' }}
+                        variant={media.md ? 'body2' : 'body1'}
+                        color="textSecondary"
+                    >
                         {`${holder.articleList[0].date.parsedDate} `} &#8226; {` ${holder.articleList[0].readLength.text} min read`}
                     </Typography>
                     
