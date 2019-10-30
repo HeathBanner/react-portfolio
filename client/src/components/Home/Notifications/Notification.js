@@ -14,12 +14,19 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
     },
     paper: {
+        width: '40%',
         padding: 20,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexWrap: 'wrap',
         color: '#0000a2',
+        [theme.breakpoints.down('md')]: {
+            width: '60%',
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '90%',
+        },
     },
     dividers: {
         marginBlockStart: '0.5em',
@@ -88,7 +95,11 @@ const Notification = (props) => {
                     horizontal: 'center',
                 }}
             >
-                <Typography align="center" className={classes.typography}>
+                <Typography
+                    align="center"
+                    className={classes.typography}
+                    variant={props.media.xs ? 'body1' : 'h6'}
+                >
                     The website is still in it's pre-Alpha stage.
                     A sample of this application can be found by 
                     clicking on the sample button.
@@ -125,7 +136,11 @@ const Notification = (props) => {
                 horizontal: 'center',
             }}
         >
-            <Typography align="center" className={classes.typography}>
+            <Typography
+                align="center"
+                className={classes.typography}
+                variant={props.media.xs ? 'body1' : 'h6'}
+            >
                 The website has been finished but for obvious reasons, you cannot
                 use the Blog Editor. I have mirrored it within this application so you
                 may play with it.
@@ -135,7 +150,7 @@ const Notification = (props) => {
 
             <Link
                 className={classes.mtnLink}
-                to="/showcase"
+                to="/blog"
             >
                 <Button className={classes.mtnButton}>
                     <Typography>

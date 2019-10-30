@@ -147,8 +147,8 @@ const Intro = () => {
                     variant={media.xs ? 'body1' : 'h6'}
                     align="center"
                 >
-                    using my full-stack knowledge to bring together the tech, the talent 
-                    and the experience to develop your web and mobile 
+                    using my full-stack knowledge to apply the tech and my talent 
+                    and experience to develop your web and mobile 
                     applications in record time
                 </Typography>
 

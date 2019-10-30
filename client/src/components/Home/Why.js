@@ -95,8 +95,8 @@ const Why = () => {
                     align="center"
                     variant={media.xs ? 'body1' : 'h6'}
                 >
-                    Software development best practices used by most
-                    major companies throughout the United States
+                    Web development best practices for cleaner and
+                    easy to understand code
                 </Typography>
             </Grid>
             <Grid
@@ -124,7 +124,7 @@ const Why = () => {
                     align="center"
                     variant={media.xs ? 'body1' : 'h6'}
                 >
-                    Launch new software in weeks, not months
+                    Launch new applications in weeks, not months
                 </Typography>
             </Grid>
             <Grid

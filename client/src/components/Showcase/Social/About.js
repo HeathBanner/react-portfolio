@@ -1,9 +1,24 @@
-import React, { useEffect, useContext } from 'react';
+import React, {
+    useEffect,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Fab, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Divider, Icon, Typography, TextField } from '@material-ui/core';
+import {
+    Fab,
+    Paper,
+    Grid,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Divider,
+    Icon,
+    Typography,
+    TextField,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -74,21 +89,14 @@ const useStyles = makeStyles(theme => ({
         padding: '0px 0px !important',
     },
     listItemLeft: {
-        [theme.breakpoints.down('sm')]: {
-            display: 'flex',
-            justifyContent: 'center',
-        },
-        [theme.breakpoints.down('xs')]: {
-            display: 'flex',
-            justifyContent: 'center !important',
-            alignItems: 'center',
-        },
+        display: 'flex',
+        justifyContent: 'center !important',
+        alignItems: 'center',
         transition: 'all .4s ease',
         '&:hover': {
             [theme.breakpoints.down('sm')]: {
-                transform: 'scale(1.05)',
             },
-            transform: 'translate(30px, 0px)',
+            transform: 'scale(1.01)',
         },
     },
     edit: {
@@ -437,7 +445,7 @@ const About = (props) => {
     return (
         <Grid container>
 
-            <Grid item md={4} xs={12}>
+            <Grid item xs={12}>
 
                 <List  className={classes.list} component="nav">
                      
@@ -492,7 +500,7 @@ const About = (props) => {
                 </List>
 
             </Grid>
-            <Grid className={classes.listContainer} item md={8} xs={12}>
+            <Grid className={classes.listContainer} item xs={12}>
 
                 {renderList()}
 

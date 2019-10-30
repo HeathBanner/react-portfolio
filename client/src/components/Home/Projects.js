@@ -165,6 +165,7 @@ const Projects = () => {
                 anchorEl={anchorEl}
                 open={open}
                 projects={projects}
+                media={media}
             />
 
             {

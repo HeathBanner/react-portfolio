@@ -1,4 +1,7 @@
-import React, { useContext, Fragment } from 'react';
+import React, {
+    useContext,
+    Fragment,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +13,14 @@ import { AppContext } from '../../../../context/AuthContext';
 import Heath from '../../../../pages/Blog/imgs/Heath.jpeg';
 
 const useStyles = makeStyles((theme) => ({
+    imgLink: {
+        width: '100%',
+        height: 'auto',
+        marginTop: 40,
+        [theme.breakpoints.down('md')]: {
+            marginTop: 80,
+        },
+    },
     infoContainer: {
         position: 'relative',
         height: 60,
@@ -42,11 +53,7 @@ const NewArticle = () => {
             <Fragment>
     
                 <Link
-                    style={{
-                        width: '100%',
-                        height: 'auto',
-                        marginTop: 80,
-                    }}
+                    className={classes.imgLink}
                     to={`/blog/${holder.articleList[0].title.text}`}
                 >
                     <img

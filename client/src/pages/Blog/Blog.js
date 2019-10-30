@@ -27,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             paddingLeft: 0,
             paddingRight: 0,
+            marginTop: '15%',
         },
         paddingLeft: '25%',
         paddingRight: '25%',
-        marginTop: '15%',
+        marginTop: '10%',
     },
 }));
 

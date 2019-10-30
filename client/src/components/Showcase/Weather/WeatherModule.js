@@ -135,11 +135,7 @@ const WeatherModule = (props) => {
                         />
 
                         <Typography style={{ width: '100%' }} variant={getTempVariant()} align="center">
-                            High: {`${Math.round(weather.main.temp_max)}`}&#8457;
-                        </Typography>
-
-                        <Typography style={{ width: '100%' }} variant={getTempVariant()} align="center">
-                            Low: {`${Math.round(weather.main.temp_min)}`}&#8457;
+                            Temperature: {`${Math.round(weather.main.temp_max)}`}&#8457;
                         </Typography>
 
                     </Paper>

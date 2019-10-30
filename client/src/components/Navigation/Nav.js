@@ -1,11 +1,15 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useState,
+} from 'react';
 
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { AppContext } from '../../context/AuthContext';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -21,8 +25,9 @@ import {
   IconButton,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@material-ui/core';
+
+import WideNav from './WideNav';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -187,7 +192,7 @@ const useStyles = makeStyles(theme => ({
 
 const links = [
   { link: '/', text: 'Home', icon: 'face' }, 
-  { link: '/showcase', text: 'Show Case', icon: 'code' }, 
+  { link: '/showcase', text: 'Showcase', icon: 'code' }, 
   { link: '/contact', text: 'Contact', icon: 'contact_phone' },
 ];
 
@@ -218,8 +223,7 @@ ScrollTop.propTypes = {
 const BackToTop = (props) => {
 
   const classes = useStyles();
-  const theme = useTheme();
-  const holder = useContext(AppContext);
+  const media = useContext(AppContext);
 
   const [open, setOpen] = useState(false);
 
@@ -230,12 +234,15 @@ const BackToTop = (props) => {
     threshold: 50,
   });
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const toggleDrawer = (status) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setOpen(status);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -248,14 +255,24 @@ const BackToTop = (props) => {
           className={trigger ? classes.toolBarTrigger : classes.toolBar}
         >
 
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-          >
-            <Icon fontSize={holder.xs ? 'default' : 'large'}>menu</Icon>
-          </IconButton>
+          {
+            media.sm
+              ?
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+            >
+              <Icon fontSize={media.xs ? 'default' : 'large'}>menu</Icon>
+            </IconButton>
+              :
+            <WideNav
+              links={links}
+              media={media}
+              trigger={trigger}  
+            />
+          }
 
           <Link to="/" className={classes.homeLink}>
             <Typography
@@ -270,56 +287,47 @@ const BackToTop = (props) => {
         </Toolbar>
       </AppBar>
 
-      <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-
-            <IconButton onClick={handleDrawerClose}>
+      {
+        media.sm
+          ?
+        
+          <Drawer
+            className={classes.drawer}
+            anchor="left"
+            open={open}
+            onClose={toggleDrawer(false)}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+    
+            <List style={{ marginTop: 30 }}>
+    
               {
-                theme.direction === 'ltr'
-                  ? 
-                <Icon fontSize="large">chevron_left</Icon>
-                  :
-                <Icon fontSize="large">cheveron_right</Icon>
+                links.map((link, index) => (
+                  <Link key={index} style={{ color: 'black', textDecoration: 'none' }} to={link.link}>
+    
+                    <ListItem className={classes.listButtons} button>
+    
+                      <ListItemIcon style={{ minWidth: media.xs ? 0 : 56, marginRight: media.xs ? 10 : 0 }}>
+                        <Icon fontSize={media.xs ? 'default' : 'large'}>{link.icon}</Icon>
+                      </ListItemIcon>
+    
+                      <ListItemText primary={link.text} primaryTypographyProps={{ variant: media.xs ? 'body1' : 'h5' }} />
+    
+                    </ListItem>
+    
+                  </Link>
+                ))
               }
-            </IconButton>
-
-          </div>
-
-          <Divider />
-
-          <List>
-
-            {
-              links.map((link, index) => (
-                <Link key={index} style={{ color: 'black', textDecoration: 'none' }} to={link.link}>
-
-                  <ListItem className={classes.listButtons} button>
-
-                    <ListItemIcon style={{ minWidth: holder.xs ? 0 : 56, marginRight: holder.xs ? 10 : 0 }}>
-                      <Icon fontSize={holder.xs ? 'default' : 'large'}>{link.icon}</Icon>
-                    </ListItemIcon>
-
-                    <ListItemText primary={link.text} primaryTypographyProps={{ variant: holder.xs ? 'body1' : 'h5' }} />
-
-                  </ListItem>
-
-                </Link>
-              ))
-            }
-
-          </List>
-
-          <Divider />
-
+    
+            </List>
+    
           </Drawer>
+
+          :
+        ''
+      }    
 
       <Toolbar
         classes={{
@@ -332,7 +340,7 @@ const BackToTop = (props) => {
         <Fab
           style={{ zIndex: 5500 }}
           color="secondary"
-          size={holder.xs ? 'small' : 'large'}
+          size={media.xs ? 'small' : 'large'}
           aria-label="scroll back to top"
         >
           <Icon>keyboard_arrow_up</Icon>
@@ -341,6 +349,6 @@ const BackToTop = (props) => {
 
     </Fragment>
   );
-}
+};
 
 export default BackToTop;
