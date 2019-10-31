@@ -1,11 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext } from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, GridList, GridListTile, GridListTileBar, ListSubheader, Typography, Avatar, LinearProgress } from '@material-ui/core';
+import {
+    Grid,
+    GridList,
+    GridListTile,
+    GridListTileBar,
+    ListSubheader,
+    Typography,
+    Avatar,
+    LinearProgress,
+} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -37,7 +49,7 @@ const useStyles = makeStyles(theme => ({
         width: 60,
         height: 60,
         margin: '0px 20px 0px 10px',
-    }
+    },
 }));
 
 const Friends = (props) => {
@@ -127,4 +139,4 @@ const Friends = (props) => {
     );
 };
 
-export default (Friends);
+export default Friends;

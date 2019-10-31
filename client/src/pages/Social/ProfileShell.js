@@ -1,4 +1,8 @@
-import React, { useEffect, useState, useContext, Fragment } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../context/AuthContext';
 
@@ -108,12 +112,12 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = () => {
 
+    const classes = useStyles();
+    const holder = useContext(AppContext);
+
     const [user, setUser] = useState();
     const [tabs, setTabs] = useState({ ...initTabs });
     const [open, setOpen] = useState(true);
-
-    const classes = useStyles();
-    const holder = useContext(AppContext);
 
     const handleClick = () => { setOpen(!open); };
 

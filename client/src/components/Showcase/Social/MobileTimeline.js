@@ -1,14 +1,33 @@
-import React, { useContext, Fragment, useState, useEffect } from 'react';
+import React, {
+    useContext,
+    Fragment,
+    useState,
+    useEffect,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, TextField, Collapse, List, ListItem, ListItemText, ListItemAvatar, Divider, Avatar, Icon, IconButton, CircularProgress, Typography} from '@material-ui/core';
+import {
+    Paper,
+    TextField,
+    Collapse,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemAvatar,
+    Divider,
+    Avatar,
+    Icon,
+    IconButton,
+    CircularProgress,
+    Typography,
+} from '@material-ui/core';
 
 import Moment from 'react-moment';
 import GetMoment from 'moment';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         [theme.breakpoints.down('xs')]: {
             width: '90%',
@@ -31,10 +50,8 @@ const useStyles = makeStyles(theme => ({
     input: {
         [theme.breakpoints.down('xs')]: {
             fontSize: '1rem',
-            // padding: '5px 0px',
         },
         fontSize: '1.5rem',
-        // padding: '10px 0px',
     },
     underline: {
         '&:before': {
@@ -66,10 +83,11 @@ const useStyles = makeStyles(theme => ({
     },
     iconButton: {
         color: 'rgb(255, 145, 71)',
-    }
+    },
 }));
 
 const MobileTimeline = () => {
+
     const holder = useContext(AppContext);
     const classes = useStyles();
 
@@ -80,7 +98,7 @@ const MobileTimeline = () => {
     const [stories, setStories] = useState('');
 
     useEffect(() => {
-        if (!holder.auth) { return }
+        if (!holder.auth) { return; }
         fetch('/api/social/friendStories', {
             method: 'POST',
             body: JSON.stringify({ id: holder.auth.info }),
@@ -103,7 +121,7 @@ const MobileTimeline = () => {
     }, [holder.auth]);
 
     useEffect(() => {
-        if (!newComment) { return }
+        if (!newComment) { return; }
             setNewComment('');
             let storyStorage = [];
             let storyIDList = {};
@@ -171,8 +189,10 @@ const MobileTimeline = () => {
 
     const renderComments = (comments) => {
         let commentList = [];
-        if (comments.length < 5) { commentList = comments.slice(0, comments.length) }
-        else { commentList = comments.slice(0, 5) }
+        if (comments.length < 5) {
+            commentList = comments.slice(0, comments.length);
+        }
+        else { commentList = comments.slice(0, 5); }
         return (
             commentList.map((comment, index) => {
                 return (  
@@ -301,7 +321,19 @@ const MobileTimeline = () => {
                     </Paper>
                 ))
             );          
-        } else { return <CircularProgress size={100} color="secondary" thickness={2.6} style={{display: 'block', margin: '40px auto 0px auto'}}  /> }
+        } else {
+            return (
+                <CircularProgress
+                    size={100}
+                    color="secondary"
+                    thickness={2.6}
+                    style={{
+                        display: 'block',
+                        margin: '40px auto 0px auto',
+                    }}
+                />
+            );
+        }
     }
 
     return (

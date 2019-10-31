@@ -34,7 +34,7 @@ const mobileFontSizes = {
     body1: '0.75rem',
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
         marginTop: 60,
         marginBottom: 80,

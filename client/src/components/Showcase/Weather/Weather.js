@@ -1,4 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {
+    useEffect,
+    useState,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
@@ -9,7 +13,7 @@ import Search from './Search';
 import WeatherModule from './WeatherModule';
 import Description from './Description';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     weatherSection: {
         paddingTop: 50,
         display: 'flex',
@@ -93,7 +97,7 @@ const Weather = (props) => {
         props.grabWeather(filteredResult[0]);
     }, [weather]);
 
-    function updateModule(coords) {
+     const updateModule = (coords) => {
         setParsedForecast('');
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords[0].coord.lat}&lon=${coords[0].coord.lon}&units=imperial&APPID=4216d1350fe31af9bf5100bb34fa72e2`)
             .then(res => res.json())

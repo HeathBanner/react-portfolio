@@ -1,11 +1,23 @@
-import React, { Fragment, useContext } from 'react';
+import React, {
+    Fragment,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon, CircularProgress } from '@material-ui/core';
+import {
+    Grid,
+    Typography,
+    GridList,
+    GridListTile,
+    GridListTileBar,
+    IconButton,
+    Icon,
+    CircularProgress,
+} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.background.paper, 
     },

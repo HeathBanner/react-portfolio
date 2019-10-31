@@ -1,15 +1,25 @@
-import React, { useEffect, useContext } from 'react';
+import React, {
+  useEffect,
+  useContext
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { emphasize, makeStyles } from '@material-ui/core/styles';
-import { Typography, NoSsr, TextField, Paper, MenuItem, Button, Icon } from '@material-ui/core';
+import {
+  Typography,
+  NoSsr,
+  TextField,
+  Paper,
+  MenuItem,
+  Button,
+  Icon,
+} from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.up('lg')]: {
       width: '50%',

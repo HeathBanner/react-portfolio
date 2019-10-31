@@ -299,6 +299,96 @@ const Toolbar = (props) => {
 
             </Grid>
 
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                open={error.open}
+                autoHideDuration={6000}
+                onClose={closeError}
+            >
+                <SnackbarContent
+                    className={classes.error}
+                    message={
+                        <Typography className={classes.message}>
+
+                            <Icon style={{ marginRight: 10 }}>
+                                error
+                            </Icon>
+
+                            {error.message}
+
+                        </Typography>
+                    }
+                    action={
+                        <Button onClick={closeError}>
+                            <Icon>close</Icon>
+                        </Button>
+                    }
+                />
+            </Snackbar>
+
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={success.open}
+                    autoHideDuration={6000}
+                    onClose={closeSuccess}
+                >
+                    <SnackbarContent
+                        className={classes.success}
+                        message={
+                            <Typography className={classes.message}>
+
+                                <Icon style={{ marginRight: 10 }}>
+                                    check_circle
+                                </Icon>
+
+                                {success.message}
+                                
+                            </Typography>
+                        }
+                        action={
+                            <Button onClick={closeSuccess}>
+                                <Icon>close</Icon>
+                            </Button>
+                        }
+                    />
+                </Snackbar>
+
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={warning.open}
+                    autoHideDuration={6000}
+                    onClose={closeWarning}
+                >
+                    <SnackbarContent
+                        className={classes.warning}
+                        message={
+                            <Typography className={classes.message}>
+
+                                <Icon style={{ marginRight: 10 }}>
+                                    check_circle
+                                </Icon>
+
+                                {warning.message}
+                                
+                            </Typography>
+                        }
+                        action={
+                            <Button onClick={closeWarning}>
+                                <Icon>close</Icon>
+                            </Button>
+                        }
+                    />
+                </Snackbar>
+
         </Grid>
     );
 };

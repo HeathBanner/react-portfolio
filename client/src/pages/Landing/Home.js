@@ -10,9 +10,6 @@ import Why from '../../components/Home/Why';
 import Projects from '../../components/Home/Projects';
 import Contact from '../../components/Home/Contact';
 
-import BottomRight from './imgs/BottomRight.png';
-import BottomLeft from './imgs/BottomLeft.png';
-
 const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',

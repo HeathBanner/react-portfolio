@@ -1,13 +1,22 @@
-import React, { Fragment, useContext } from 'react';
+import React, {
+    Fragment,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Avatar, Typography, Fab, Icon } from '@material-ui/core';
+import {
+    Grid,
+    Avatar,
+    Typography,
+    Fab,
+    Icon,
+} from '@material-ui/core';
 
 import { Parallax } from 'react-parallax';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     skyliner: {
         [theme.breakpoints.up('sm')]: {
             height: '60vh',  

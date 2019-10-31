@@ -115,7 +115,7 @@ const NewArticle = () => {
     
             </Fragment>
         );
-    } else { return '' }
+    } else { return ''; }
 };
 
 export default NewArticle;

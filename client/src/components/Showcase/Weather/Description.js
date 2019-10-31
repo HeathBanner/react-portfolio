@@ -1,10 +1,12 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, {
+    useState,
+    useContext,
+    Fragment,
+} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    Paper,
     Popover,
-    Fade,
     Typography,
     Fab,
     Icon,
@@ -12,7 +14,7 @@ import {
 
 import { AppContext } from '../../../context/AuthContext';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     typography: {
         padding: theme.spacing(2),
     },    
@@ -129,6 +131,6 @@ const Description = () => {
 
         </Fragment>
     );
-}
+};
 
 export default Description;

@@ -1,13 +1,24 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, {
+    Fragment,
+    useState,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Avatar, Typography, Divider, Slide } from '@material-ui/core';
+import {
+    Grid,
+    Paper,
+    Avatar,
+    Typography,
+    Divider,
+    Slide,
+} from '@material-ui/core';
 
 import DescPopper from './Popper';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     headerContainer: {
         [theme.breakpoints.down('md')]: {
             paddingBottom: 0,

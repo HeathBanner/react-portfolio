@@ -1,18 +1,39 @@
-import React, { useContext, useState, Fragment } from 'react';
+import React, {
+  useContext,
+  useState,
+  Fragment,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { CircularProgress, Tooltip, Zoom, Drawer, Avatar, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import {
+  CircularProgress,
+  Tooltip,
+  Zoom,
+  Drawer,
+  Avatar,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Icon,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 import Moment from 'react-moment';
 import FormatDate from 'moment';
 
-export default function PersistentDrawerLeft(props) {
+const PersistentDrawerLeft = (props) => {
   
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
       position: 'relative',
@@ -211,7 +232,6 @@ export default function PersistentDrawerLeft(props) {
 
   drawerWidthDynam()
 
-
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -374,3 +394,5 @@ export default function PersistentDrawerLeft(props) {
       </Fragment>
   );
 };
+
+export default PersistentDrawerLeft;

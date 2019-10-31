@@ -59,7 +59,7 @@ const textOptions = [
     },
     {
         cb: 'inherit'
-    }
+    },
 ];
 
 const TextSize = (props) => {
@@ -71,7 +71,7 @@ const TextSize = (props) => {
     const handleOpen = (e) => {
         setAnchorEl(e.currentTarget);
     };
-
+    
     const handleClose = () => {
         setAnchorEl(null);
     };  

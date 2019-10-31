@@ -153,7 +153,7 @@ const ContactForm = () => {
 
                 <TextField 
                     variant="outlined"
-                    label="Your Name"
+                    label="Name"
                     name="Name"
                     required
                     value={info.name}
@@ -163,7 +163,7 @@ const ContactForm = () => {
 
                 <TextField 
                     variant="outlined"
-                    label="Your Email"
+                    label="johndoe@gmail.com"
                     name="Email"
                     type="email"
                     required
@@ -174,7 +174,8 @@ const ContactForm = () => {
 
                 <TextField 
                     variant="outlined"
-                    label="Your Phone Number"
+                    type='tel'
+                    label="555-555-5555"
                     name="Phone"
                     required
                     value={info.phone}

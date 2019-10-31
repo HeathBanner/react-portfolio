@@ -102,6 +102,6 @@ const Jumbotron = () => {
 
         </Grid>
     );
-}
+};
 
 export default Jumbotron;

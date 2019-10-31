@@ -1,8 +1,16 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, {
+    Fragment,
+    useContext,
+    useState
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
-import { TextField, Icon, Button } from '@material-ui/core';
+import {
+    TextField,
+    Icon,
+    Button,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Moment from 'moment';

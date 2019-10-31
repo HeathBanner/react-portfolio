@@ -3,7 +3,12 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Fab, Typography, Slide, Icon } from '@material-ui/core';
+import {
+    Fab,
+    Typography,
+    Slide,
+    Icon,
+} from '@material-ui/core';
 
 const linkData = {
     futureScaper: {
@@ -20,7 +25,7 @@ const linkData = {
     },
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         [theme.breakpoints.down('sm')]: {
             flexWrap: 'wrap',
@@ -103,7 +108,7 @@ const DescPopper = (props) => {
     
         );
     } else {
-        return ('')
+        return ('');
     }
 };
 

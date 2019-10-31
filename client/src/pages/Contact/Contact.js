@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import Nav from '../../components/Navigation/Nav';
 import ContactForm from '../../components/Contact/ContactForm';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         height: '100vh',
         display: 'flex',

@@ -1,4 +1,7 @@
-import React, { Fragment, useContext } from 'react';
+import React, {
+    Fragment,
+    useContext,
+} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Icon } from '@material-ui/core';
@@ -7,7 +10,7 @@ import { EditorContext } from '../../../../../context/EditorContext';
 
 import ColorPicker from './ColorPicker';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         width: 100,
         display: 'flex',

@@ -1,9 +1,13 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Divider, Typography } from '@material-ui/core';
+import {
+    Paper,
+    Divider,
+    Typography,
+} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         margin: '20px 0px',
         display: 'flex',
@@ -76,7 +80,7 @@ const DescPaper = () => {
             </Typography>
 
         </Paper>
-    )
+    );
 };
 
 export default DescPaper;

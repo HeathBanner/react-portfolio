@@ -3,13 +3,17 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Divider } from '@material-ui/core';
+import {
+    Paper,
+    Typography,
+    Divider,
+} from '@material-ui/core';
 
 import Moment from 'react-moment';
 import 'moment-timezone';
 import FormatDate from 'moment';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     moduleBox: {
         [theme.breakpoints.down('md')]: {
             width: '85%',
@@ -50,7 +54,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%'
     },
 }));
-
 
 const WeatherModule = (props) => {
     
@@ -145,6 +148,6 @@ const WeatherModule = (props) => {
 
         </Paper>
     );
-}
+};
 
 export default WeatherModule;

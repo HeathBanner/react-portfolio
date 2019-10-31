@@ -1,9 +1,18 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, {
+    useState,
+    useContext,
+    Fragment,
+} from 'react';
 
 import { EditorContext } from '../../../../../context/EditorContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Popover, Avatar, Button, Icon } from '@material-ui/core';
+import {
+    Popover,
+    Avatar,
+    Button,
+    Icon,
+} from '@material-ui/core';
 
 const colorPalette = [
     {

@@ -4,7 +4,6 @@ import { Grid } from '@material-ui/core';
 
 import { AppContext } from '../../context/AuthContext';
 
-import Nav from '../../components/Showcase/MtnDream/Navigation/Nav';
 import LGToolbar from '../../components/Showcase/MtnDream/Editor/LGToolbar';
 import MDToolbar from '../../components/Showcase/MtnDream/Editor/MDToolbar';
 import Preview from '../../components/Showcase/MtnDream/Editor/Preview';

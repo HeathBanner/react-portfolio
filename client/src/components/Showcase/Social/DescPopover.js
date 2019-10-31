@@ -1,11 +1,20 @@
-import React, { useState, useContext, Fragment } from 'react';
+import React, {
+    useState,
+    useContext,
+    Fragment,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Popover, Typography, Fab, Icon } from '@material-ui/core';
+import {
+    Popover,
+    Typography,
+    Fab,
+    Icon,
+} from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         margin: '20px 0px',
         display: 'flex',

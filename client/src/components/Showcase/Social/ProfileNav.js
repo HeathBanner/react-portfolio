@@ -1,9 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, {
+    useState,
+    useContext,
+} from 'react';
 
 import { AppContext } from '../../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Tabs, Tab, Typography } from '@material-ui/core';
+import {
+    Paper,
+    Tabs,
+    Tab,
+    Typography,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {

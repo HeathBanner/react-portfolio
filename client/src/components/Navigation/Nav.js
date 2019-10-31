@@ -213,7 +213,7 @@ const ScrollTop = (props) => {
       </div>
     </Zoom>
   );
-}
+};
 
 ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
@@ -290,7 +290,6 @@ const BackToTop = (props) => {
       {
         media.sm
           ?
-        
           <Drawer
             className={classes.drawer}
             anchor="left"
@@ -324,7 +323,6 @@ const BackToTop = (props) => {
             </List>
     
           </Drawer>
-
           :
         ''
       }    
