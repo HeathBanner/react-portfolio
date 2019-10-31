@@ -94,7 +94,6 @@ const Weather = (props) => {
             }
         })
         setParsedForecast(filteredResult);
-        props.grabWeather(filteredResult[0]);
     }, [weather]);
 
      const updateModule = (coords) => {
