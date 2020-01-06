@@ -6,7 +6,7 @@ import {
     Popover,
     Typography,
     Button,
-    Divider,
+    Divider
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -78,7 +78,7 @@ const Notification = (props) => {
 
     const classes = useStyles();
 
-    if (props.projects.GameBook) {
+    if (props.projects.exercise) {
         return (
             <Popover
                 id={props.id}
@@ -100,23 +100,23 @@ const Notification = (props) => {
                     className={classes.typography}
                     variant={props.media.xs ? 'body1' : 'h6'}
                 >
-                    The website is still in it's pre-Alpha stage.
-                    A sample of this application can be found by 
-                    clicking on the sample button.
+                    This application is still being built. You're more than welcome to take
+                    a peak at the code!
                 </Typography>
     
                 <Divider className={classes.dividers}/>
 
-                <Link
+                <a
                     className={classes.link}
-                    to="/showcase"
+                    href="https://github.com/HeathBanner/Exercise"
+                    target="_blank noopenner noreferrer"
                 >
                     <Button className={classes.button}>
                         <Typography>
-                            Sample
+                            Repository
                         </Typography>
                     </Button>
-                </Link>
+                </a>
             </Popover>
         );
     }   

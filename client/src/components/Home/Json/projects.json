@@ -1,0 +1,31 @@
+{
+    "currentYear": [
+        {
+            "title": "Exercise App",
+            "body": "This application was built with the intention of allowing the user to track their progress and stay better informed. You're given the option to select a workout or build your own from a list of workout routines provided. Each workout logged is calculated using actual calorie charts to determine the approximate amount burned. The Progress page will help visualize where you are in terms of your goal and see any gains or losses between reps of each workout",
+            "click": "exercise",
+            "repo": "https://github.com/HeathBanner/Exercise",
+            "website": ""
+        }
+    ],
+    "lastYear": [
+        {
+            "title": "Peritus IT",
+            "body": "This website was created for a client to help market their IT consulting company based in Charlotte, NC. By using a mobile first method, I was able to quickly release this website made from scratch. The contact form on the Contact page allows users to send information directly to the client's email",
+            "click": false,
+            "repo": "https://github.com/HeathBanner/peritusit",
+            "website": "https://peritusit.herokuapp.com/"
+        },
+        {
+            "title": "A Mountain Dream",
+            "body": "Mountain Dream is an application built to showcase a rental cabin in the mountains of Boone, NC. It uses basic parallax and transform animations. What will stand out is the blog editor for the future implementation of the blog section. The client will be able to maintain their blog without the need of programming. By replicating the basic functions of Google Docs they can create, edit and delete blog articles.",
+            "click": "mtnDream",
+            "repo": "https://github.com/HeathBanner/MtnDream",
+            "website": ""
+        }  
+    ],
+    "projectsInit": {
+        "exercise": false,
+        "mtnDream": false
+    }
+}
