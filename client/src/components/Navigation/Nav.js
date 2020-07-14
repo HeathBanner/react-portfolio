@@ -219,7 +219,7 @@ export default (props) => {
   const classes = useStyles();
   const media = useContext(AppContext);
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const window = props.window;
   const trigger = useScrollTrigger({
@@ -228,14 +228,14 @@ export default (props) => {
     threshold: 50,
   });
 
-  const toggleDrawer = (status) => event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setOpen(status);
-  };
+  // const toggleDrawer = (status) => event => {
+  //   if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+  //     return;
+  //   }
+  //   setOpen(status);
+  // };
 
-  const handleDrawerOpen = () => setOpen(true);
+  // const handleDrawerOpen = () => setOpen(true);
 
   return (
     <>
@@ -247,7 +247,7 @@ export default (props) => {
           className={trigger ? classes.toolBarTrigger : classes.toolBar}
         >
 
-          {
+          {/* {
             media.sm
               ?
             <IconButton
@@ -264,7 +264,7 @@ export default (props) => {
               media={media}
               trigger={trigger}  
             />
-          }
+          } */}
 
           <Link to="/" className={classes.homeLink}>
             <Typography
@@ -279,7 +279,7 @@ export default (props) => {
         </Toolbar>
       </AppBar>
 
-      {
+      {/* {
         media.sm
           ?
           <Drawer
@@ -317,7 +317,7 @@ export default (props) => {
           </Drawer>
           :
         ''
-      }    
+      }     */}
 
       <Toolbar
         classes={{
