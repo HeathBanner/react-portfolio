@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -26,31 +26,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const WideNav = (props) => {
+export default ({ links, trigger, media}) => {
     
     const classes = useStyles();
 
     return (
-        <Fragment>
-
-            {props.links.map((item) => {
+        <>
+            {links.map((item) => {
                 return (
                     <a
                         href={item.link}
-                        className={props.trigger ? classes.linksTrigger : classes.links}
+                        className={trigger ? classes.linksTrigger : classes.links}
                         key={item.text}
                     >
                         <Typography
-                            variant={props.media.xs ? 'body1' : 'h6'}
+                            variant={media.xs ? 'body1' : 'h6'}
                         >
                             {item.text}
                         </Typography>
                     </a>
                 );
             })}
-
-        </Fragment>
+        </>
     );
 };
-
-export default WideNav;

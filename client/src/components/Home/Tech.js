@@ -1,16 +1,12 @@
 import React, { useContext } from 'react';
+import { AppContext } from '../../context/AuthContext';
 
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Grid,
-    Typography,
-} from '@material-ui/core';
-
-import { AppContext } from '../../context/AuthContext';
+import { Grid, Typography } from '@material-ui/core';
 
 import ReactLogo from './imgs/React.png';
 import MaterialUI from './imgs/MaterialUI.png';
-import NodeLogo from './imgs/nodejs.png';
+import NetCore from './imgs/netcore.png';
 import MongoLogo from './imgs/mongodb.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Home = () => {
+export default () => {
 
     const classes = useStyles();
     const media = useContext(AppContext);
@@ -93,13 +89,13 @@ const Home = () => {
                 variant={media.xs ? 'body1' : 'h5'}
                 align="center"
             >
-                The most used back-end frameworks are Node and MongoDB
+                The most used back-end frameworks are .Net Core and MongoDB
             </Typography>
 
             <img
                 className={classes.imgs}
-                src={NodeLogo}
-                alt="Node JS logo"
+                src={NetCore}
+                alt=".Net Core logo"
             />
 
             <img
@@ -111,5 +107,3 @@ const Home = () => {
         </Grid>
     );
 };
-
-export default Home;

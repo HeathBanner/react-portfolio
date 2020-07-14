@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-
 import Nav from '../../components/Navigation/Nav';
 import Intro from '../../components/Home/Intro';
 import Tech from '../../components/Home/Tech';
 import Why from '../../components/Home/Why';
 import Projects from '../../components/Home/Projects';
 import Contact from '../../components/Home/Contact';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Home = () => {
+export default () => {
 
     const classes = useStyles();
 
@@ -80,5 +80,3 @@ const Home = () => {
         </Grid>
     );
 };
-
-export default Home;

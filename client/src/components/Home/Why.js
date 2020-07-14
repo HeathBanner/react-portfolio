@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
-
 import { AppContext } from '../../context/AuthContext';
 
 import Experience from './imgs/why/speed.svg';
 import Market from './imgs/why/focus.svg';
 import Improvement from './imgs/why/kaizen.svg';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Why = () => {
+export default () => {
 
     const classes = useStyles();
     const media  = useContext(AppContext);
@@ -102,7 +101,6 @@ const Why = () => {
                 sm={4}
                 item
             >
-
                 <img
                     className={classes.banners}
                     src={Market}
@@ -130,7 +128,6 @@ const Why = () => {
                 sm={4}
                 item
             >
-
                 <img
                     className={classes.banners}
                     src={Improvement}
@@ -158,5 +155,3 @@ const Why = () => {
         </Grid>
     );
 };
-
-export default Why;

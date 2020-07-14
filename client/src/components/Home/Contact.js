@@ -1,15 +1,10 @@
 import React, { useContext } from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import {
-    Grid,
-    Typography,
-    Icon,
-} from '@material-ui/core';
-
 import { AppContext } from '../../context/AuthContext';
 
 import Logo from './imgs/Logo.png';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Icon } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -60,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Contact = () => {
+export default () => {
 
     const classes = useStyles();
     const media = useContext(AppContext);
@@ -152,5 +147,3 @@ const Contact = () => {
         </Grid>
     );
 };
-
-export default Contact;

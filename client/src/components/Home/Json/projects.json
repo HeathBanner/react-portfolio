@@ -1,11 +1,11 @@
 {
     "currentYear": [
         {
-            "title": "Exercise App",
-            "body": "This application was built with the intention of allowing the user to track their progress and stay better informed. You're given the option to select a workout or build your own from a list of workout routines provided. Each workout logged is calculated using actual calorie charts to determine the approximate amount burned. The Progress page will help visualize where you are in terms of your goal and see any gains or losses between reps of each workout",
-            "click": "exercise",
-            "repo": "https://github.com/HeathBanner/Exercise",
-            "website": ""
+            "title": "Sothis Library",
+            "body": "Sothis was originally created with the intention of allowing college students to continously share their books with other students. This would only (hypothetically) require someone to purchase their first semester of books then continue to trade until they graduate. Helping future students save money is the vision.",
+            "click": "sothis",
+            "repo": "https://github.com/HeathBanner/BookShare",
+            "website": "https://sothislibrary.herokuapp.com/"
         }
     ],
     "lastYear": [

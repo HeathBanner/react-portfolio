@@ -65,33 +65,18 @@ export default ({ item, index, media, handleClick }) => {
                 {item.body}
             </Typography>
 
-            {
-                item.click
-                    ?
-                <div className={classes.links}>
-                    <Button
-                        className={classes.buttons}
-                        onClick={(e) => handleClick(e, item.click)}
-                    >
-                        <Typography>
-                            Website
-                        </Typography>
-                    </Button>
-                </div>
-                    :
-                <a
-                    href={item.website}
-                    className={classes.links}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <Button className={classes.buttons}>
-                        <Typography>
-                            Website
-                        </Typography>
-                    </Button>
-                </a>
-            }
+            <a
+                href={item.website}
+                className={classes.links}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <Button className={classes.buttons}>
+                    <Typography>
+                        Website
+                    </Typography>
+                </Button>
+            </a>
 
             <a
                 href={item.repo}

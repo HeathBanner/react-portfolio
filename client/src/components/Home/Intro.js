@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { AppContext } from '../../context/AuthContext';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Grid,
@@ -8,8 +10,6 @@ import {
     Button,
     Divider,
 } from '@material-ui/core';
-
-import { AppContext } from '../../context/AuthContext';
 
 import BG from './imgs/reset.jpg';
 import Logo from './imgs/Logo.png';
@@ -112,17 +112,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Intro = () => {
+export default () => {
 
     const classes = useStyles();
     const media = useContext(AppContext);
 
     return (
-        <Grid
-            className={classes.container}
-            item
-            xs={12}
-        >
+        <Grid className={classes.container} item xs={12}>
             <div className={classes.introContainer}>
                 
                 <img
@@ -166,5 +162,3 @@ const Intro = () => {
         </Grid>
     );
 };
-
-export default Intro;

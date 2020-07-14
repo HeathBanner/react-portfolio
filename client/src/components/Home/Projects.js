@@ -34,14 +34,14 @@ export default () => {
     const media = useContext(AppContext);
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const [projects, setProjects] = useState({ ...Json.projectsInit });
+    const [projects, setProjects] = useState(Json.projectsInit);
 
     const handleClick = (e, project) => {
         setProjects({ ...projects, [project]: true });
         setAnchorEl(anchorEl ? null : e.currentTarget);
     };
     const handleClose = () =>{
-        setProjects({ ...Json.projectsInit });
+        setProjects(Json.projectsInit);
         setAnchorEl(null);
     };
 

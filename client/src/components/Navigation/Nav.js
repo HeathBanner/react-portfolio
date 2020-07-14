@@ -1,8 +1,4 @@
-import React, {
-  Fragment,
-  useContext,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -192,12 +188,10 @@ const useStyles = makeStyles(theme => ({
 
 const links = [
   { link: '/', text: 'Home', icon: 'face' }, 
-  { link: '/showcase', text: 'Showcase', icon: 'code' }, 
   { link: '/contact', text: 'Contact', icon: 'contact_phone' },
 ];
 
 const ScrollTop = (props) => {
-  const { children } = props;
   const classes = useStyles();
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
@@ -209,7 +203,7 @@ const ScrollTop = (props) => {
   return (
     <Zoom in={props.trigger}>
       <div onClick={handleClick} role="presentation" className={classes.root}>
-        {children}
+        {props.children}
       </div>
     </Zoom>
   );
@@ -220,7 +214,7 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-const BackToTop = (props) => {
+export default (props) => {
 
   const classes = useStyles();
   const media = useContext(AppContext);
@@ -241,12 +235,10 @@ const BackToTop = (props) => {
     setOpen(status);
   };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const handleDrawerOpen = () => setOpen(true);
 
   return (
-    <Fragment>
+    <>
 
       <CssBaseline />
 
@@ -345,8 +337,6 @@ const BackToTop = (props) => {
         </Fab>
       </ScrollTop>
 
-    </Fragment>
+    </>
   );
 };
-
-export default BackToTop;
